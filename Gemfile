@@ -3,6 +3,9 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.1'
 gem 'rack', '1.3.3'
 
+gem 'mongo_mapper'
+gem 'bson_ext'
+
 gem 'capistrano'
 
 gem 'execjs'
