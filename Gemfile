@@ -3,10 +3,11 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.1'
 gem 'rack', '1.3.3'
 
-gem 'rails3-generators'
-
 gem 'mongo_mapper'
 gem 'bson_ext'
+
+gem 'haml'
+gem 'haml-rails'
 
 gem 'capistrano'
 
@@ -15,10 +16,12 @@ gem 'therubyracer'
 
 gem 'jquery-rails'
 
+gem 'rails3-generators'
+
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
   gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier',     '>= 1.0.3'
 end
 
 group :development do
@@ -27,4 +30,7 @@ end
 
 group :test do
   gem 'turn', :require => false
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'factory_girl'
 end
