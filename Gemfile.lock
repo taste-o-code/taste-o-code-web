@@ -49,12 +49,14 @@ GEM
       execjs
     coffee-script-source (1.1.2)
     columnize (0.3.4)
+    daemons (1.0.10)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.2.9)
       multi_json (~> 1.0)
     factory_girl (2.1.2)
       activesupport
+    gem_plugin (0.2.3)
     haml (3.1.3)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -82,6 +84,9 @@ GEM
       activemodel (~> 3.0)
       activesupport (~> 3.0)
       plucky (~> 0.3.8)
+    mongrel (1.2.0.pre2)
+      daemons (~> 1.0.10)
+      gem_plugin (~> 0.2.3)
     multi_json (1.0.3)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -183,6 +188,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   mongo_mapper
+  mongrel (>= 1.2.0.pre2)
   rack (= 1.3.3)
   rails (= 3.1.1)
   rails3-generators
