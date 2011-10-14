@@ -1,0 +1,7 @@
+development:
+  host: localhost
+  database: toc_dev
+
+test:
+  host: localhost
+  database: toc_test

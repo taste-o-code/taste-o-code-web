@@ -50,7 +50,7 @@ module TasteOCodeWeb
     config.assets.version = '1.0'
 
     config.generators do |g|
-      g.orm :mongo_mapper
+      g.orm :mongoid
       g.template_engine :haml
       g.test_framework :rspec, :fixture => false, :views => false
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
