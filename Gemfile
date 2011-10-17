@@ -18,6 +18,8 @@ gem 'jquery-rails'
 
 gem 'rails3-generators'
 
+gem 'devise'
+
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
   gem 'coffee-rails', '~> 3.1.1'
