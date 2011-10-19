@@ -17,6 +17,8 @@ set :branch, :production
 
 set :deploy_via, :remote_cache
 
+set :normalize_asset_timestamps, false
+
 
 namespace :deploy do
 
