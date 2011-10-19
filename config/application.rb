@@ -48,6 +48,9 @@ module TasteOCodeWeb
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Use SASS instead of SCSS
+    config.sass.preferred_syntax = :sass
+
     config.generators do |g|
       g.orm :mongoid
       g.template_engine :haml
