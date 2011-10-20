@@ -10,7 +10,6 @@ gem 'haml-rails', '~> 0.3.4'
 
 gem 'capistrano', '~> 2.9.0'
 
-gem 'execjs',       '~> 1.2.9'
 gem 'therubyracer', '~> 0.9.8'
 
 gem 'jquery-rails', '~> 1.0.16'
