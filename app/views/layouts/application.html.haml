@@ -9,15 +9,16 @@
     %div.header
       %p.title Taste-o-Code
       / Devise stuff.
-      %ul.hmenu
+      %div.user-div
         - if user_signed_in?
-          %li= link_to(current_user.name, edit_user_registration_path, :class => 'name')
+          %span= image_tag(gravatar_link(current_user.email), :alt => 'Avatar')
+          %span= link_to(current_user.name, edit_user_registration_path, :class => 'name')
         - else
-          %li= link_to('Login', new_user_session_path)
+          %span= link_to('Login', new_user_session_path)
         - if user_signed_in?
-          %li= link_to('Logout', destroy_user_session_path, :method => 'delete')
+          %span= link_to('Logout', destroy_user_session_path, :method => 'delete')
         - else
-          %li= link_to('Sign Up', new_user_registration_path)
+          %span= link_to('Sign Up', new_user_registration_path)
       
     - flash.each do |name, msg|
       = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
