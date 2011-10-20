@@ -1,29 +1,28 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
-gem 'rack', '1.3.3'
+gem 'rails', '~> 3.1.1'
 
-gem 'mongoid'
-gem 'bson_ext'
+gem 'mongoid',  '~> 2.3.1'
+gem 'bson_ext', '~> 1.4.1'
 
-gem 'haml'
-gem 'haml-rails'
+gem 'haml',       '~> 3.1.3'
+gem 'haml-rails', '~> 0.3.4'
 
-gem 'capistrano'
+gem 'capistrano', '~> 2.9.0'
 
-gem 'execjs'
-gem 'therubyracer'
+gem 'execjs',       '~> 1.2.9'
+gem 'therubyracer', '~> 0.9.8'
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 1.0.16'
 
-gem 'rails3-generators'
+gem 'rails3-generators', '~> 0.17.4'
 
-gem 'devise'
+gem 'devise', '~> 1.4.9'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
   gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier',     '>= 1.0.3'
+  gem 'uglifier',     '~> 1.0.3'
 end
 
 group :development do
