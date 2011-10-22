@@ -1,3 +1,6 @@
+require 'digest/md5'
+
+
 class User
 
   include Mongoid::Document
@@ -55,6 +58,11 @@ class User
 
   def identity_url
     @identity_url ||= open_id_identities.first.try(:identity_url)
+  end
+
+  def gravatar
+    hash = Digest::MD5.hexdigest(self.email.strip.downcase)
+    return "http://www.gravatar.com/avatar/#{hash}?s=40"
   end
 
   private 

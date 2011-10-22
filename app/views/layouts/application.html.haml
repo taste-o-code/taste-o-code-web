@@ -11,7 +11,7 @@
       / Devise stuff.
       %div.user-div
         - if user_signed_in?
-          %span= image_tag(gravatar_link(current_user.email), :alt => 'Avatar')
+          %span= image_tag(current_user.gravatar, :alt => 'Avatar')
           %span= link_to(current_user.name, edit_user_registration_path, :class => 'name')
         - else
           %span= link_to('Login', new_user_session_path)
