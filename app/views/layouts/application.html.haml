@@ -6,8 +6,11 @@
     = csrf_meta_tags
   %body
 
-    %div.header
-      %p.title Taste-o-Code
+    %div#header
+      %div.title= link_to 'Taste-o-Code', root_path
+
+      %div#nav=navigation
+
       / Devise stuff.
       %div.user-div
         - if user_signed_in?
@@ -22,6 +25,7 @@
       
     - flash.each do |name, msg|
       = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
-    
-    = yield
+
+    %div#content
+      = yield
     

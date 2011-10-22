@@ -51,6 +51,7 @@ GEM
     coffee-script-source (1.1.2)
     columnize (0.3.4)
     daemons (1.0.10)
+    database_cleaner (0.6.7)
     devise (1.4.9)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -195,6 +196,7 @@ DEPENDENCIES
   bson_ext (~> 1.4.1)
   capistrano (~> 2.9.0)
   coffee-rails (~> 3.1.1)
+  database_cleaner
   devise (~> 1.4.9)
   devise_openid_authenticatable (~> 1.0.0)
   factory_girl

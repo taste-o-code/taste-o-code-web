@@ -2,9 +2,11 @@
   margin: 0px
   padding: 0px
   font-family: San-Serif
-  
-.header
+
+#header
   $header-height: 60px
+
+  min-width: 900px
   height: $header-height
   background-color: #434343
   color: #FFF
@@ -16,6 +18,10 @@
     font-weight: bold
     display: inline
     float: left
+
+    a
+      text-decoration: none
+      color: white
     
   .user-div
     line-height: $header-height - 5px
@@ -34,6 +40,34 @@
       a
         color: #FFF
 
+  #nav
+    float: left
+    padding: 18px 45px
+    font-size: 18px
+    font-weight: bold
+
+    a
+      text-decoration: none
+      color: white
+
+    ul
+      list-style: none
+
+      .active
+        text-decoration: underline
+
+      &:hover .active
+        text-decoration: none
+
+      li
+        display: inline-block
+        list-style: none
+        padding: 0 10px
+
+        &:hover
+          a, .active
+            text-decoration: underline
+
 #flash_notice, #flash_alert
   padding: 5px 5px
   margin: 10px 0
@@ -45,3 +79,6 @@
 #flash_alert
   backgound-color: #FCC
   border: solid 1px #C66
+
+#content
+  min-height: 600px

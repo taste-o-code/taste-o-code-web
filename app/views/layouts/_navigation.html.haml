@@ -1,0 +1,7 @@
+%ul
+  - navigation_items.each do |item, options|
+    %li
+      - if current_page?(options)
+        %span.active= item
+      - else
+        = link_to item, url_for(options)

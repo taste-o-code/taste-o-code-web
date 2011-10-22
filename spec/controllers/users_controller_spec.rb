@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe HomeController do
+describe UsersController do
   pending "add some examples to (or delete) #{__FILE__}"
 end
