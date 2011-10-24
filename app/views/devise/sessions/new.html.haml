@@ -1,6 +1,3 @@
-= javascript_include_tag 'sign_in'
-= stylesheet_link_tag 'sign_in'
-
 %h2 Sign in
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   %div= f.label :email
