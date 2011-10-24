@@ -32,7 +32,7 @@ class User
   validates_length_of :password, :within => Devise::password_length, :allow_blank => true
 
   # Class methods
-  class << self 
+  class << self
     def find_by_identity_url(identity_url)
       User.where(:open_id_identities.matches => {:identity_url => identity_url}).first
     end
@@ -55,7 +55,7 @@ class User
     fields = fields.inject({}) do |h, (k,v)|
       h[k] = v.is_a?(Array) ? v.first : v
       h
-    end      
+    end
 
     self.name = fields[NICKNAME] || fields[FULLNAME] || [fields[AX_FIRST_NAME], fields[AX_LAST_NAME]].compact.join(' ')
     self.email = fields[EMAIL] || fields[AX_EMAIL]
@@ -68,6 +68,10 @@ class User
   def gravatar
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
     return "http://www.gravatar.com/avatar/#{hash}?s=40"
+  end
+
+  def update_with_password(params={})
+    self.update_without_password(params)
   end
 
 end
