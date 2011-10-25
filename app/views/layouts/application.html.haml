@@ -12,21 +12,20 @@
 
         %div#nav=navigation
 
-        / Devise stuff.
         %div.user-div
           - if user_signed_in?
-            %span= image_tag(current_user.gravatar(40), :alt => 'Avatar')
+            %span= image_tag(current_user.gravatar, :alt => 'Avatar')
             %span= link_to(current_user.name, edit_user_registration_path, :class => 'name')
-          - else
-            %span= link_to('Login', new_user_session_path)
-          - if user_signed_in?
             %span= link_to('Logout', destroy_user_session_path, :method => 'delete')
           - else
-            %span= link_to('Sign Up', new_user_registration_path)
+            %span= link_to('Login', new_user_session_path, :id => 'login')
+            %span= link_to('Register', new_user_registration_path)
 
-    - flash.each do |name, msg|
-      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+    - unless flash.blank?
+      %div#flash
+        - flash.each do |name, msg|
+          = content_tag :div, msg, :class => "#{name}" if msg.is_a?(String)
 
-    %div#content
-      = yield
-
+    %div#main
+      %div#content
+        = yield

@@ -3,27 +3,31 @@
   padding: 0px
   font-family: Sans-Serif
 
-#flash_notice, #flash_alert
-  padding: 5px 5px
-  margin: 10px 0
-
-#flash_notice
-  background-color: #CFC
-  border: solid 1px #6c6
-
-#flash_alert
-  backgound-color: #FCC
-  border: solid 1px #C66
-
-#content
-  min-height: 600px
-  background-color: #F3F3F3
-
 $max-page-width: 1200px
 $min-page-width: 1000px
+$content-margin: 30px
 
-#header, #content
+#header, #main, #flash
   max-width: $max-page-width
   min-width: $min-page-width
-  margin: auto
+  margin: 0 auto
 
+#main
+  min-height: 800px
+  padding: $content-margin 0
+  background-color: #F3F3F3
+
+  #content
+    margin: 0 $content-margin
+
+#flash > div
+  padding: 5px 5px
+  margin: 10px 0
+  border: 1px solid #bbb
+  text-align: center
+
+  &.notice
+    background-color: #CFC
+
+  &.alert
+    background-color: #FEE
