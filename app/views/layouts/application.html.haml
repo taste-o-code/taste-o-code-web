@@ -16,7 +16,7 @@
         %div.user-div
           - if user_signed_in?
             %span= image_tag(current_user.gravatar(40), :alt => 'Avatar')
-            %span= link_to(current_user.name, edit_user_registration_path, :class => 'name')
+            %span= link_to(current_user.name, user_path(current_user.name), :class => 'name')
           - else
             %span= link_to('Login', new_user_session_path)
           - if user_signed_in?

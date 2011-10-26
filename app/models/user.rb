@@ -17,8 +17,9 @@ class User
          :openid_authenticatable
 
   field :name
+  field :fullname
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :fullname
   attr_writer :identity_url
 
   embeds_many :open_id_identities
@@ -65,9 +66,9 @@ class User
     @identity_url ||= open_id_identities.first.try(:identity_url)
   end
 
-  def gravatar
+  def gravatar(size)
     hash = Digest::MD5.hexdigest(self.email.strip.downcase)
-    return "http://www.gravatar.com/avatar/#{hash}?s=40"
+    return "http://www.gravatar.com/avatar/#{hash}?s=#{size}"
   end
 
   def update_with_password(params={})
