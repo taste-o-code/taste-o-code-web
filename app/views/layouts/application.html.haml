@@ -21,11 +21,14 @@
             %span= link_to('Login', new_user_session_path, :id => 'login')
             %span= link_to('Register', new_user_registration_path)
 
-    - unless flash.blank?
+    %div#main
       %div#flash
         - flash.each do |name, msg|
-          = content_tag :div, msg, :class => "#{name}" if msg.is_a?(String)
+          - unless msg.blank?
+            %div(class = name)
+              = msg
+              %span.close
+                Close
 
-    %div#main
       %div#content
         = yield

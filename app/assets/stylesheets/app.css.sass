@@ -7,7 +7,7 @@ $max-page-width: 1200px
 $min-page-width: 1000px
 $content-margin: 30px
 
-#header, #main, #flash
+#header, #main
   max-width: $max-page-width
   min-width: $min-page-width
   margin: 0 auto
@@ -20,14 +20,25 @@ $content-margin: 30px
   #content
     margin: 0 $content-margin
 
-#flash > div
-  padding: 5px 5px
-  margin: 10px 0
-  border: 1px solid #bbb
-  text-align: center
+  #flash
+    $flash-margin: $content-margin / 2
 
-  &.notice
-    background-color: #CFC
+    margin: -$flash-margin auto $flash-margin
+    width: 40%
 
-  &.alert
-    background-color: #FEE
+    > div
+      padding: 7px 10px
+      margin: 0 0 $flash-margin
+      border: 1px solid #bbb
+      text-align: center
+
+      &.notice
+        background-color: #CFC
+
+      &.alert
+        background-color: #FEE
+
+      .close
+        float: right
+        color: #999
+        cursor: pointer
