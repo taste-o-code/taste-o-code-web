@@ -14,12 +14,14 @@
 
         %div.user-div
           - if user_signed_in?
-            %span= image_tag(current_user.gravatar(40), :alt => 'Avatar')
-            %span= link_to(current_user.name, user_path(current_user.name), :class => 'name')
-            %span= link_to('Logout', destroy_user_session_path, :method => 'delete')
+            = image_tag(current_user.gravatar(35), :size => '35x35', :alt => 'Avatar')
+            %div
+              = link_to(current_user.name, user_path(current_user.name), :class => 'name')
+              = link_to('Logout', destroy_user_session_path, :method => 'delete')
           - else
-            %span= link_to('Login', new_user_session_path, :id => 'login')
-            %span= link_to('Register', new_user_registration_path)
+            %div
+              = link_to('Login', new_user_session_path, :id => 'login')
+              = link_to('Register', new_user_registration_path)
 
     %div#main
       %div#flash

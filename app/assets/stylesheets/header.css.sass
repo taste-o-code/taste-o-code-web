@@ -6,6 +6,8 @@ $header-height: 60px
 #header
 
   color: #FFF
+  height: 100%
+  position: relative
 
   .title
     margin-left: 20px
@@ -20,30 +22,37 @@ $header-height: 60px
       color: white
 
   .user-div
-    line-height: $header-height - 5px
-    margin-right: 10px
-    display: inline-block
-    float: right
+    position: absolute
+    right: 0px
+    padding: 12px 10px 0 0
 
-    span
-      display: inline-block
-      margin-right: 10px
-      vertical-align: middle
+    img
+      margin: 0 10px
+      border: 1px solid #DDD
 
-      .name
-        font-weight: bold
+    div
+      float: right
+      margin-top: 10px
 
       a
+        margin: 0 6px
         color: #FFF
+        text-decoration: none
+
+        &:hover
+          text-decoration: underline
+
+        &.name
+          font-weight: bold
 
   #nav
     float: left
-    padding: 14px 60px
+    margin: 17px 40px
     font-size: 24px
 
     a
       text-decoration: none
-      color: #DDD
+      color: #CCC
 
       &:hover
         text-decoration: underline
