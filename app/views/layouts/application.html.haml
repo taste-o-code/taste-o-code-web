@@ -28,9 +28,8 @@
         - flash.each do |name, msg|
           - unless msg.blank?
             %div(class = name)
-              = msg
-              %span.close
-                Close
+              %span.message= msg
+              %span.close Close
 
       %div#content
         = yield
