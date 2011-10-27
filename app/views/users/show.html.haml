@@ -3,18 +3,19 @@
   %span#profile_avatar
     = image_tag(@user.gravatar(150), :alt => 'Avatar')
   %span#profile_info
-    %span#name= @user.name
-    %span#edit= link_to("(edit)", edit_user_registration_path) if current_user == @user
+    %div#first-line
+      %span#name= @user.name
+      %span#edit= link_to("(edit)", edit_user_registration_path) if current_user == @user
     %table#fields
       %tr.field
         %td Full name:
         %td= @user.fullname
       %tr.field
         %td Email:
-        %td *******@****
+        %td ************
       %tr.field
         %td Favorite quote:
-        %td Hello, world
+        %td Hello, world.
 
 
 - else

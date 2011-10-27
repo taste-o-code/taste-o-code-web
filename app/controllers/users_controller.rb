@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.where(:name => params[:id])[0]
+    @user = User.where(:name => params[:id]).first
   end
 
 end

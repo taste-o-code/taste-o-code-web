@@ -1,5 +1,3 @@
-require 'digest/md5'
-
 
 class User
 
@@ -51,14 +49,14 @@ class User
 
   # Instance methods
   def openid_fields=(fields)
-    # Some AX providers can return multiple values per key
+    # Some AX providers can return multiple values per key.
     # Leave only first element from all arrays.
     fields = fields.inject({}) do |h, (k,v)|
       h[k] = v.is_a?(Array) ? v.first : v
       h
     end
 
-    self.name = fields[NICKNAME] || fields[FULLNAME] || [fields[AX_FIRST_NAME], fields[AX_LAST_NAME]].compact.join(' ')
+    self.name ||= fields[NICKNAME] || fields[FULLNAME] || [fields[AX_FIRST_NAME], fields[AX_LAST_NAME]].compact.join(' ')
     self.email = fields[EMAIL] || fields[AX_EMAIL]
   end
 
@@ -72,7 +70,29 @@ class User
   end
 
   def update_with_password(params={})
-    self.update_without_password(params)
+    current_password = params.delete(:current_password)
+
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+
+    # Check current password only when user changes password.
+    result = if params[:password].blank? or valid_password?(current_password)
+        update_attributes(params)
+    else
+        self.attributes = params
+        self.valid?
+        self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+        false
+    end
+
+    clean_up_passwords
+    result
+  end
+
+  def has_no_password?
+    self.encrypted_password.blank?
   end
 
 end
