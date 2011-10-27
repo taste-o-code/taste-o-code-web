@@ -11,16 +11,17 @@
       %div#header
         %div.title= link_to 'Taste-o-Code', root_path
 
-        %div#nav=navigation
+        -#%div#nav=navigation
 
         %div.user-div
           - if user_signed_in?
-            = image_tag(current_user.gravatar(35), :size => '35x35', :alt => 'Avatar')
-            %div
+            %div.links
               = link_to(current_user.name, user_path(current_user.name), :class => 'name')
               = link_to('Logout', destroy_user_session_path, :method => 'delete')
+            %div.avatar
+              = image_tag(current_user.gravatar(35), :size => '35x35', :alt => 'Avatar')
           - else
-            %div
+            %div.links
               = link_to('Login', new_user_session_path, :id => 'login')
               = link_to('Register', new_user_registration_path)
 
