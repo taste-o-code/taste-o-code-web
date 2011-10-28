@@ -4,7 +4,7 @@ TasteOCodeWeb::Application.routes.draw do
 
   root :to => "home#show"
 
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show, :edit, :update]
 
   resources :languages, :only => [:index, :show]
 

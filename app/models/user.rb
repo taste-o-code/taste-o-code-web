@@ -16,8 +16,10 @@ class User
 
   field :name
   field :fullname
+  field :location
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :fullname
+  attr_accessible :name, :email, :password, :password_confirmation,
+                  :remember_me, :fullname, :location
   attr_writer :identity_url
 
   embeds_many :open_id_identities
@@ -93,6 +95,10 @@ class User
 
   def has_no_password?
     self.encrypted_password.blank?
+  end
+
+  def to_param
+    name
   end
 
 end
