@@ -19,8 +19,11 @@ class User
   field :location
 
   attr_accessible :name, :email, :password, :password_confirmation,
-                  :remember_me, :fullname, :location
+                  :remember_me, :fullname, :location, :login
   attr_writer :identity_url
+  # Virtual attribute for authenticating by either name or email
+  # This is in addition to a real persisted field like 'name'
+  attr_accessor :login
 
   embeds_many :open_id_identities
 
@@ -100,6 +103,13 @@ class User
 
   def to_param
     name
+  end
+
+  protected
+
+  def self.find_for_database_authentication(conditions)
+    login = conditions.delete(:login)
+    self.any_of({ :name => login }, { :email => login }).first
   end
 
 end

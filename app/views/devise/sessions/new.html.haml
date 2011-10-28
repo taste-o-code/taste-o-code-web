@@ -1,7 +1,7 @@
 %h2 Sign in
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %div= f.label :email
-  = f.email_field :email
+  %div= f.label :login, "Name or email"
+  = f.text_field :login
 
   %div= f.label :password
   = f.password_field :password
