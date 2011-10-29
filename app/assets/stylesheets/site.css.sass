@@ -1,6 +1,5 @@
 $max-page-width: 1200px
 $min-page-width: 1000px
-$content-margin: 30px
 
 .row
   max-width: $max-page-width
@@ -16,6 +15,8 @@ a
   text-decoration: none
 
 #main
+  $content-margin: 30px
+
   min-height: 900px
   padding: $content-margin 0
   background-color: #F3F3F3
@@ -25,26 +26,12 @@ a
     margin: 0 $content-margin
 
   #flash
-    $flash-margin: $content-margin / 2
+    .close
+      cursor: pointer
 
-    margin: -$flash-margin auto $flash-margin
-    width: 40%
-
-    > div
-      padding: 8px 65px 7px 15px
-      position: relative
-      margin: 0 0 $flash-margin
-      border: 1px solid #bbb
-
-      &.notice
+    .alert-box
+      &.flash-alert
         background-color: #CFC
 
-      &.alert
+      &.flash-notice
         background-color: #FEE
-
-      .close
-        position: absolute
-        right: 11px
-        top: 7px
-        color: #999
-        cursor: pointer
