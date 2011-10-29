@@ -1,68 +1,73 @@
 $header-height: 60px
 
-#header_background, #footer_background
+#header, #footer
   background-color: #434343
   height: $header-height
 
 #header
   color: #FFF
-  height: 100%
-  position: relative
+  line-height: 60px
 
-  .title
-    margin-left: 20px
-    font-size: 30px
-    line-height: $header-height
-    font-weight: bold
-    display: inline
-    float: left
+  .row
+    height: 100%
 
-    a
-      text-decoration: none
-      color: white
+    .header-wrapper
+      margin: 0 15px
+      height: 100%
 
-  .user-div
-    float: right
-    padding: 12px 10px 0 0
+      h1
+        font-size: 30px
+        font-weight: bold
+        margin: -2px 0 0
+        line-height: inherit
 
-    .avatar
-      margin: 0 10px
-      float: right
-      img
-        border: 1px solid #DDD
+        a
+          color: white
 
-    .links
-      float: right
-      margin-top: 10px
+      .user
+        float: right
+        height: 100%
+        font-size: 15px
 
-      a
-        margin: 0 6px
-        color: #FFF
-        text-decoration: none
+        img.avatar
+          float: right
+          margin: 10px
+          border: 1px solid #BFBFBF
 
-        &:hover
-          text-decoration: underline
+        .links
+          float: right
 
-        &.name
-          font-weight: bold
+          a
+            margin: 0 6px
+            color: #FFF
 
-  #nav
-    float: left
-    margin: 17px 40px
-    font-size: 24px
+            &:hover
+              text-decoration: underline
 
-    a
-      text-decoration: none
-      color: #CCC
+            &.name
+              font-weight: bold
 
-      &:hover
-        text-decoration: underline
-        color: white
+      .nav
+        font-size: 24px
+        margin-left: 20px
 
-    ul
-      list-style: none
+        ul
+          float: left
+          display: block
+          margin: 0
 
-      li
-        display: inline
-        list-style: none
-        padding: 0 15px
+          li
+            float: left
+            display: block
+            margin: 0
+
+            a, span
+              display: block
+              height: 100%
+              padding: 0 15px
+
+            a
+              color: #BFBFBF
+
+            span, a:hover
+              color: white

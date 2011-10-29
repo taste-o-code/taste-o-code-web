@@ -1,4 +1,5 @@
 !!! html
+
 %html
   %head
     %title Taste-o-Code
@@ -7,25 +8,25 @@
     = csrf_meta_tags
   %body
 
-    %div#header_background
-      %div#header
-        %div.title= link_to 'Taste-o-Code', root_path
+    %div#header.container
+      %div.row
+        %div.header-wrapper
+          %h1.left= link_to 'Taste-o-Code', root_path
 
-        %div#nav=navigation
+          %div.nav.left= navigation
 
-        %div.user-div
-          - if user_signed_in?
-            %div.links
-              = link_to(current_user.name, user_path(current_user.id), :class => 'name')
-              = link_to('Logout', destroy_user_session_path, :method => 'delete')
-            %div.avatar
-              = image_tag(current_user.gravatar(35), :size => '35x35', :alt => 'Avatar')
-          - else
-            %div.links
-              = link_to('Login', new_user_session_path, :id => 'login')
-              = link_to('Register', new_user_registration_path)
+          %div.user.right
+            - if user_signed_in?
+              %div.links
+                = link_to(current_user.name, user_path(current_user.id), :class => 'name')
+                = link_to('Logout', destroy_user_session_path, :method => 'delete')
+              = image_tag(current_user.gravatar(35), :size => '35x35', :alt => 'Avatar', :class => 'avatar')
+            - else
+              %div.links
+                = link_to('Login', new_user_session_path, :id => 'login')
+                = link_to('Register', new_user_registration_path)
 
-    %div#main
+    %div#main.row
       %div#flash
         - flash.each do |name, msg|
           - unless msg.blank?
@@ -36,4 +37,4 @@
       %div#content
         = yield
 
-    %div#footer_background
+    %div#footer.container
