@@ -1,26 +1,23 @@
-%h2 Sign in
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %div= f.label :email
-  = f.text_field :email
+%div.four.column.centered
+  %h3 Sign in
 
-  %div= f.label :password
-  = f.password_field :password
+  = form_for resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'sign-in nice' } do |f|
+    = f.email_field :email, :class => 'input-text placeholder', :placeholder => 'Email'
+    = f.password_field :password, :class => 'input-text placeholder', :placeholder => 'Password'
 
-  - if devise_mapping.rememberable?
-    %div
-      = f.check_box :remember_me
-      = f.label :remember_me
+    %div.remember-submit
+      = f.submit 'Sign in', :class => 'white nice button radius'
 
-  %div= f.submit 'Sign in'
+      = label_tag :user_remember_me, :class => 'remember' do
+        = f.check_box(:remember_me)
+        Remember me
 
-%br/
+    %div.clearfix
 
-= form_for(resource, :as => resource_name, :url => session_path(resource_name), |
-  :html => {:id => 'openid_form'}) do |f| |
-  = f.hidden_field :identity_url
+  = form_for resource, :as => resource_name, :url => session_path(resource_name), :html => { :id => 'openid_form' } do |f|
+    = f.hidden_field :identity_url
 
-%div#google
+  %p
+    %div#google
 
-%br/
-
-= render :partial => 'devise/shared/links'
+  = render :partial => 'devise/shared/links'

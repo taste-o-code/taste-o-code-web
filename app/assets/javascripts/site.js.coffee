@@ -7,3 +7,6 @@ $('#user_bar.logged-in').live 'hover', (event) ->
     $(this).find('ul').show()
   else
     $(this).find('ul').hide()
+
+$ ->
+  $('textarea, input').placeholder()
