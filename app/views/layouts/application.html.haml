@@ -10,11 +10,12 @@
 
     = render :partial => 'layouts/header'
 
-    %div#main.row
-      %div#content
-        = render :partial => 'layouts/flash', :locals => { :flash => flash }
+    %div#main
+      %div.row
+        %div#content
+          = render :partial => 'layouts/flash', :locals => { :flash => flash }
 
-        %div.row
-          = yield
+          %div.row
+            = yield
 
     %div#footer.container

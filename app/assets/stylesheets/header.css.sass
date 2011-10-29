@@ -1,8 +1,9 @@
 $header-height: 60px
 $header-background: #434343
+$user-menu-background: #575757
 
-#header, #footer
-  background-color: $header-background
+#header
+  background-color: #434343
   height: $header-height
 
 #header
@@ -26,15 +27,31 @@ $header-background: #434343
         a
           color: #FFF
 
-      .user
-        float: right
+      #user_bar
         height: 100%
         font-size: 15px
         position: relative
         padding-right: 15px
+        float: right
 
         a
           color: #FFF
+
+      .logged-out
+        margin-right: -15px
+
+        a
+          display: block
+          height: 100%
+          padding: 0 15px
+          float: left
+
+          &:hover
+            background-color: $user-menu-background
+
+      .logged-in
+        &:hover
+          background-color: $user-menu-background
 
         img.avatar
           float: right
@@ -44,28 +61,33 @@ $header-background: #434343
         .name
           float: right
 
-          ul
-            position: absolute
-            top: $header-height
-            background-color: $header-background
-            right: 0
-            line-height: normal
-            padding-bottom: 6px
-            display: none
-            border:
-              width: 0 1px 1px
-              style: solid
-              color: rgba(0, 0, 0, 0.2)
-              radius: 0 0 6px 6px
+        ul
+          position: absolute
+          top: $header-height
+          background-color: $user-menu-background
+          right: 0
+          line-height: normal
+          padding-bottom: 6px
+          display: none
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
+          border:
+            width: 0 1px 1px
+            style: solid
+            color: rgba(0, 0, 0, 0.2)
+            radius: 0 0 6px 6px
 
-            width: 100%
+          width: 100%
 
-            li
-              margin: 0
+          li
+            margin: 0
 
-              a
-                padding: 4px 15px
-                display: block
+            a
+              padding: 3px 15px
+              margin: 3px 0
+              display: block
+
+              &:hover
+                background-color: $header-background
 
       .nav
         font-size: 24px

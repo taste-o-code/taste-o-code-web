@@ -3,38 +3,39 @@ $min-page-width: 1000px
 
 body
   font-size: 15px
+  background-color: #434343
 
 .row
   max-width: $max-page-width
   min-width: $min-page-width
 
-.right
-  float: right
-
-.left
-  float: left
-
 a
   text-decoration: none
 
 #main
-  $content-margin: 30px
+  background-color: #FFF
 
-  min-height: 900px
-  padding: $content-margin 0
-  background-color: #F3F3F3
-  box-shadow: 0 0 10px #888
+  > .row
+    $content-margin: 30px
 
-  #content
-    margin: 0 $content-margin
+    min-height: 900px
+    padding: $content-margin 0
+    background-color: #F3F3F3
+    box-shadow: 0 0 10px #888
 
-  #flash
-    .close
-      cursor: pointer
+    #content
+      margin: 0 $content-margin
 
-    .alert-box
-      &.flash-notice
-        background-color: #CFC
+    #flash
+      .close
+        cursor: pointer
 
-      &.flash-alert
-        background-color: #FEE
+      .alert-box
+        &.flash-notice
+          background-color: #CFC
+
+        &.flash-alert
+          background-color: #FEE
+
+#footer
+  height: 60px
