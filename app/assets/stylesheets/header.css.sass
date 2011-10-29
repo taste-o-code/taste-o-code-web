@@ -1,12 +1,14 @@
 $header-height: 60px
+$header-background: #434343
 
 #header, #footer
-  background-color: #434343
+  background-color: $header-background
   height: $header-height
 
 #header
   color: #FFF
   line-height: 60px
+  position: relative
 
   .row
     height: 100%
@@ -22,30 +24,48 @@ $header-height: 60px
         line-height: inherit
 
         a
-          color: white
+          color: #FFF
 
       .user
         float: right
         height: 100%
         font-size: 15px
+        position: relative
+        padding-right: 15px
+
+        a
+          color: #FFF
 
         img.avatar
           float: right
           margin: 10px
           border: 1px solid #BFBFBF
 
-        .links
+        .name
           float: right
 
-          a
-            margin: 0 6px
-            color: #FFF
+          ul
+            position: absolute
+            top: $header-height
+            background-color: $header-background
+            right: 0
+            line-height: normal
+            padding-bottom: 6px
+            display: none
+            border:
+              width: 0 1px 1px
+              style: solid
+              color: rgba(0, 0, 0, 0.2)
+              radius: 0 0 6px 6px
 
-            &:hover
-              text-decoration: underline
+            width: 100%
 
-            &.name
-              font-weight: bold
+            li
+              margin: 0
+
+              a
+                padding: 4px 15px
+                display: block
 
       .nav
         font-size: 24px
@@ -70,4 +90,4 @@ $header-height: 60px
               color: #BFBFBF
 
             span, a:hover
-              color: white
+              color: #FFF
