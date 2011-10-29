@@ -191,6 +191,9 @@ GEM
       multi_json (>= 1.0.2)
     warden (1.0.6)
       rack (>= 1.0)
+    zurb-foundation (2.0.2)
+      jquery-rails (~> 1.0)
+      rails (~> 3.1.0)
 
 PLATFORMS
   ruby
@@ -218,3 +221,4 @@ DEPENDENCIES
   therubyracer (~> 0.9.8)
   turn
   uglifier (~> 1.0.3)
+  zurb-foundation (~> 2.0.2)
