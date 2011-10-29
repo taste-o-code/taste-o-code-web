@@ -3,12 +3,10 @@ $header-background: #434343
 $user-menu-background: #575757
 
 #header
+  color: #FFF
   background-color: #434343
   height: $header-height
-
-#header
-  color: #FFF
-  line-height: 60px
+  line-height: $header-height
   position: relative
 
   .row
@@ -22,7 +20,7 @@ $user-menu-background: #575757
         font-size: 30px
         font-weight: bold
         margin: -2px 0 0
-        line-height: inherit
+        line-height: $header-height
 
         a
           color: #FFF
@@ -53,13 +51,16 @@ $user-menu-background: #575757
         &:hover
           background-color: $user-menu-background
 
-        img.avatar
-          float: right
-          margin: 10px
-          border: 1px solid #BFBFBF
+        .name, .avatar
+          float: left
 
-        .name
-          float: right
+        .avatar
+          height: 35px
+          width: 35px
+          margin: 10px 15px
+
+          img
+            border: 1px solid #BFBFBF
 
         ul
           position: absolute

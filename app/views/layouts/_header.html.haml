@@ -7,12 +7,12 @@
 
       - if user_signed_in?
         %div#user_bar.logged-in
+          %div.avatar= image_tag current_user.gravatar(35), :size => '35x35', :alt => 'avatar'
           %div.name= current_user.name
-          = image_tag(current_user.gravatar(35), :size => '35x35', :alt => 'Avatar', :class => 'avatar')
           %ul
-            %li= link_to('Profile', user_path(current_user.id))
-            %li= link_to('Logout', destroy_user_session_path, :method => 'delete')
+            %li= link_to 'Profile', user_path(current_user)
+            %li= link_to 'Logout', destroy_user_session_path, :method => 'delete'
       - else
         %div#user_bar.logged-out
-          = link_to('Login', new_user_session_path, :id => 'login')
-          = link_to('Register', new_user_registration_path)
+          = link_to 'Login', new_user_session_path, :id => 'login'
+          = link_to 'Register', new_user_registration_path
