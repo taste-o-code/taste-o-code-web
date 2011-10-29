@@ -3,6 +3,7 @@ class User
 
   include Mongoid::Document
 
+  field :email
   field :name
   field :fullname
   field :location
