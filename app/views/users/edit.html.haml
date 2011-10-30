@@ -6,13 +6,12 @@
 %span#profile_info
   %div#first_line
   = form_for(@user, :url => { :action => 'update' }) do |f|
-    %table#fields
-      %tr.field
-        %td= f.label :name, 'Name:'
-        %td= f.text_field :name, :placeholder => 'Name...'
-      %tr.field
-        %td= f.label :location, 'Location:'
-        %td= f.text_field :location, :placeholder => 'Location...'
-      %tr.field
-        %td
-        %td= f.submit "Update"
+    %div.field
+      %div.field-name= f.label :name, 'Name:'
+      %div= f.text_field :name, :placeholder => 'Name...'
+    %div.field
+      %div.field-name= f.label :location, 'Location:'
+      %div= f.text_field :location, :placeholder => 'Location...'
+    %div.field
+      %div.field-name
+      %div= f.submit "Update"
