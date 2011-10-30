@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :authenticate_user, :except => [:show, :index]
   before_filter :check_edit_permission, :only => [:edit, :update]
 
   def index
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
-      redirect_to user_path(@user)
+      redirect_to :action => :edit, :id => params[:id]
     else
       render :action => 'edit'
     end
@@ -26,6 +26,12 @@ class UsersController < ApplicationController
       @user = current_user
     else
       redirect_to :action => :show, :id => params[:id]
+    end
+  end
+
+  def authenticate_user
+    unless user_signed_in?
+      redirect_to :root
     end
   end
 
