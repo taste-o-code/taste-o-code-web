@@ -4,7 +4,6 @@ class User
   include Mongoid::Document
 
   field :name
-  field :fullname
   field :location
 
   auto_increment :id
@@ -23,12 +22,11 @@ class User
   NICKNAME      = 'nickname'
 
   attr_accessible :name, :email, :password, :password_confirmation,
-                  :remember_me, :fullname, :location
+                  :remember_me, :location
 
   attr_writer :identity_url
 
   validates_presence_of   :name
-  validates_uniqueness_of :name, :case_sensitive => false
   validates_format_of     :name, :with => /[\w' ]{2,30}/, :message => "Name consists of 2-30 symbols. Symbols a-z,A-Z,_,0-9."
 
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true

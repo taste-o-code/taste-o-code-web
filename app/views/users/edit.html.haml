@@ -5,12 +5,11 @@
     %div= link_to 'Change avatar', 'http://gravatar.com', :target => '_blank'
 %span#profile_info
   %div#first_line
-    %span#name= @user.name
   = form_for(@user, :url => { :action => 'update' }) do |f|
     %table#fields
       %tr.field
-        %td= f.label :fullname, 'Full name:'
-        %td= f.text_field :fullname, :placeholder => 'Full name...'
+        %td= f.label :name, 'Name:'
+        %td= f.text_field :name, :placeholder => 'Name...'
       %tr.field
         %td= f.label :location, 'Location:'
         %td= f.text_field :location, :placeholder => 'Location...'
