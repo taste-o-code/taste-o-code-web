@@ -93,6 +93,9 @@ GEM
       activemodel (~> 3.1)
       mongo (~> 1.4)
       tzinfo (~> 0.3.22)
+    mongoid_auto_increment (0.0.8)
+      bson_ext
+      mongoid
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
@@ -204,6 +207,7 @@ DEPENDENCIES
   haml-rails (~> 0.3.4)
   jquery-rails (~> 1.0.16)
   mongoid (~> 2.3.1)
+  mongoid_auto_increment (~> 0.0.8)
   mongrel (>= 1.2.0.pre2)
   rails (~> 3.1.1)
   rails3-generators (~> 0.17.4)

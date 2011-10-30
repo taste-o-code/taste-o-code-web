@@ -5,11 +5,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.where(:name => params[:id]).first
+    @user = User.find(params[:id].to_i)
   end
 
   def edit
-    @user = User.where(:name => params[:id]).first
+    @user = User.find(params[:id].to_i)
     # Forbid to edit other users.
     unless user_signed_in? and @user == current_user
       redirect_to :root
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.where(:name => params[:id]).first
+    @user = User.find(params[:id].to_i)
     if @user.update_attributes(params[:user])
       redirect_to user_path(@user)
     else

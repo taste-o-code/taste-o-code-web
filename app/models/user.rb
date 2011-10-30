@@ -3,10 +3,11 @@ class User
 
   include Mongoid::Document
 
-  field :email
   field :name
   field :fullname
   field :location
+
+  auto_increment :id
 
   embeds_many :open_id_identities
 
@@ -22,17 +23,13 @@ class User
   NICKNAME      = 'nickname'
 
   attr_accessible :name, :email, :password, :password_confirmation,
-                  :remember_me, :fullname, :location, :login
+                  :remember_me, :fullname, :location
 
   attr_writer :identity_url
 
-  # Virtual attribute for authenticating by either name or email
-  # This is in addition to a real persisted field like 'name'
-  attr_accessor :login
-
   validates_presence_of   :name
   validates_uniqueness_of :name, :case_sensitive => false
-  validates_format_of     :name, :with => /\w{2,30}/, :message => "Name consists of 2-30 symbols. Symbols a-z,A-Z,_,0-9."
+  validates_format_of     :name, :with => /[\w' ]{2,30}/, :message => "Name consists of 2-30 symbols. Symbols a-z,A-Z,_,0-9."
 
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true
   validates_format_of     :email, :with => Devise::email_regexp, :allow_blank => true, :if => :email_changed?
@@ -55,12 +52,6 @@ class User
     def openid_required_fields
       [AX_FIRST_NAME, AX_LAST_NAME, AX_EMAIL, FULLNAME, NICKNAME, EMAIL]
     end
-
-    def find_for_database_authentication(conditions)
-      login = conditions.delete(:login)
-      self.any_of({ :name => login }, { :email => login }).first
-    end
-
   end
 
 
@@ -106,10 +97,6 @@ class User
 
   def has_no_password?
     self.encrypted_password.blank?
-  end
-
-  def to_param
-    name
   end
 
 end
