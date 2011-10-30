@@ -18,6 +18,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id].to_i)
+    # Forbid to edit other users.
+    unless user_signed_in? and @user == current_user
+      redirect_to :root
+      return
+    end
     if @user.update_attributes(params[:user])
       redirect_to user_path(@user)
     else
