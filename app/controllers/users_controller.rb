@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    logger.info "In update method"
     if @user.update_attributes(params[:user])
       redirect_to :action => :show, :id => params[:id]
     else
