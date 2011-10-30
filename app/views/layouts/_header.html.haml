@@ -7,12 +7,32 @@
 
       - if user_signed_in?
         %div#user_bar.logged-in
-          %div.avatar= image_tag current_user.gravatar(35), :size => '35x35', :alt => 'avatar'
-          %div.name= current_user.name
-          %ul
-            %li= link_to 'Profile', user_path(current_user)
-            %li= link_to 'Logout', destroy_user_session_path, :method => 'delete'
+          %div.dropdown-trigger.hover-trigger
+            %div.avatar= image_tag current_user.gravatar(35), :size => '35x35', :alt => 'avatar'
+            %div.name= current_user.name
+            %div.header-dropdown
+              %ul
+                %li= link_to 'Profile', user_path(current_user)
+                %li= link_to 'Logout', destroy_user_session_path, :method => 'delete'
       - else
         %div#user_bar.logged-out
-          = link_to 'Login', new_user_session_path, :id => 'login'
-          = link_to 'Register', new_user_registration_path
+          %ul
+            %li
+              %div.dropdown-trigger.click-trigger
+                Login
+                %div.header-dropdown
+                  = form_for :user, :url => session_path(:user), :remote => true, :format => :json,
+                             :html => { :class => 'nice', :id => 'login_form' } do |f|
+                    = f.email_field :email, :class => 'input-text placeholder', :placeholder => 'Email'
+                    = f.password_field :password, :class => 'input-text placeholder', :placeholder => 'Password'
+
+                    = label_tag :user_remember_me, :class => 'remember' do
+                      = f.check_box(:remember_me)
+                      Remember me
+
+                    = f.submit 'Login', :class => 'blue nice button radius small'
+                    %div.loader
+                      = image_tag 'login-loader.gif', :size => '24x24'
+
+            %li
+              = link_to 'Join', new_user_registration_path, :id => 'join'

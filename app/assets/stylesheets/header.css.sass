@@ -1,6 +1,6 @@
 $header-height: 60px
 $header-background: #434343
-$user-menu-background: #575757
+$header-alt-background: #575757
 
 #header
   color: #FFF
@@ -25,50 +25,22 @@ $user-menu-background: #575757
         a
           color: #FFF
 
-      #user_bar
+      .dropdown-trigger
         height: 100%
-        font-size: 15px
         position: relative
-        padding-right: 15px
-        float: right
+        padding: 0 15px
+        cursor: pointer
 
-        a
-          color: #FFF
+        &.opened, &:hover
+          background-color: $header-alt-background
 
-      .logged-out
-        margin-right: -15px
-
-        a
-          display: block
-          height: 100%
-          padding: 0 15px
-          float: left
-
-          &:hover
-            background-color: $user-menu-background
-
-      .logged-in
-        &:hover
-          background-color: $user-menu-background
-
-        .name, .avatar
-          float: left
-
-        .avatar
-          height: 35px
-          width: 35px
-          margin: 10px 15px
-
-          img
-            border: 1px solid #BFBFBF
-
-        ul
+        .header-dropdown
+          line-height: normal
           position: absolute
           top: $header-height
-          background-color: $user-menu-background
           right: 0
-          line-height: normal
-          padding-bottom: 6px
+          cursor: auto
+          background-color: $header-alt-background
           display: none
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
           border:
@@ -77,18 +49,82 @@ $user-menu-background: #575757
             color: rgba(0, 0, 0, 0.2)
             radius: 0 0 6px 6px
 
-          width: 100%
+        &.opened .header-dropdown
+          display: block
+
+      #user_bar
+        height: 100%
+        float: right
+
+        a
+          color: #FFF
+
+        &.logged-in
+          .name, .avatar
+            float: left
+
+          .avatar
+            height: 35px
+            width: 35px
+            margin: 10px 15px 0 0
+
+            img
+              border: 1px solid #BFBFBF
+
+          .header-dropdown
+            width: 100%
+            padding-bottom: 6px
+
+            ul
+              margin: 0
+
+              li
+                margin: 0
+
+                a
+                  padding: 3px 15px
+                  margin: 3px 0
+                  display: block
+
+                  &:hover
+                    background-color: $header-background
+
+        &.logged-out
+          position: relative
 
           li
+            float: left
+            display: block
             margin: 0
 
-            a
-              padding: 3px 15px
-              margin: 3px 0
-              display: block
+          form
+            width: 200px
+            margin: 0
+            padding: 15px 10px 12px
 
-              &:hover
-                background-color: $header-background
+            input.input-text
+              width: 192px
+
+            label.remember
+              margin: 0 0 5px
+
+            input[type=submit]
+              width: 100%
+              margin: 0
+              font-size: 15px
+              padding: 11px 0
+
+            .loader
+              display: none
+              width: 24px
+              margin: 5px auto 0
+
+          a#join
+            display: block
+            padding: 0 15px
+
+            &:hover
+              background-color: $header-alt-background
 
       .nav
         font-size: 24px
