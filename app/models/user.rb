@@ -5,6 +5,7 @@ class User
 
   field :name
   field :location
+  field :facebook_id
 
   auto_increment :id
 
@@ -12,7 +13,7 @@ class User
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
-         :openid_authenticatable
+         :openid_authenticatable, :omniauthable
 
   AX_FIRST_NAME = 'http://axschema.org/namePerson/first'
   AX_LAST_NAME  = 'http://axschema.org/namePerson/last'
@@ -22,7 +23,7 @@ class User
   NICKNAME      = 'nickname'
 
   attr_accessible :name, :email, :password, :password_confirmation,
-                  :remember_me, :location
+                  :remember_me, :location, :facebook_id
 
   attr_writer :identity_url
 
@@ -49,6 +50,14 @@ class User
 
     def openid_required_fields
       [AX_FIRST_NAME, AX_LAST_NAME, AX_EMAIL, FULLNAME, NICKNAME, EMAIL]
+    end
+
+    def find_for_facebook_oauth(data, signed_in_resource=nil)
+      user = User.where({'facebook_id' => data['id']}).first
+      user || User.create(:email => data['email'],
+                          :name => data['name'],
+                          :location => data['location']['name'],
+                          :facebook_id => data['id'])
     end
   end
 

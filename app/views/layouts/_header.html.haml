@@ -15,6 +15,11 @@
                 %li= link_to 'Profile', user_path(current_user)
                 %li= link_to 'Logout', destroy_user_session_path, :method => 'delete'
       - else
+        / I will move this form to more suitable place later. It is 2 am and I want to sleep :(
+        = form_for :user, :url => session_path(:user),
+                   :html => { :id => 'openid_form', :style => 'margin: 0px' } do |f|
+          = f.hidden_field :identity_url
+
         %div#user_bar.logged-out
           %ul
             %li
@@ -33,6 +38,12 @@
                     = f.submit 'Login', :class => 'blue nice button radius small'
                     %div.loader
                       = image_tag 'login-loader.gif', :size => '24x24'
+                  %div.providers-icons
+                    = image_tag 'google_small.png', :class => 'google', :title => 'Google'
+                    = link_to image_tag('facebook_small.png', :class => 'facebook', :title => 'Facebook'),
+                      user_omniauth_authorize_path(:facebook)
+
+
 
             %li
               = link_to 'Join', new_user_registration_path, :id => 'join'

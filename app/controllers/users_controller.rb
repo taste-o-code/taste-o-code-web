@@ -13,9 +13,9 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
-      redirect_to :action => :show, :id => params[:id]
+      render :action => :show
     else
-      render :action => 'edit'
+      render :action => :edit
     end
   end
 
