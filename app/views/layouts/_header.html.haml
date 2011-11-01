@@ -35,7 +35,7 @@
                       = f.check_box(:remember_me)
                       Remember me
 
-                    = f.submit 'Login', :class => 'blue nice button radius small'
+                    = f.submit 'Login', :class => 'blue nice button radius small', :disable_with => 'Loading...'
                     %div.loader
                       = image_tag 'login-loader.gif', :size => '24x24'
                   %div.providers-icons
