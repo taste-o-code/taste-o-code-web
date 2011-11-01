@@ -1,3 +1,5 @@
+require 'openid/store/filesystem'
+
 OA_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/omniauth.yml")
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
@@ -200,6 +202,8 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :facebook, OA_CONFIG['facebook']['app_id'],
                              OA_CONFIG['facebook']['app_secret']
+  config.omniauth :open_id,  OpenID::Store::Filesystem.new('/tmp'),
+                  :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

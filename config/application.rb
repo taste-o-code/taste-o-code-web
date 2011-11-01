@@ -51,10 +51,6 @@ module TasteOCodeWeb
     # Use SASS instead of SCSS
     config.sass.preferred_syntax = :sass if config.respond_to?(:sass)
 
-    # If you're using Rails 3, you'll need to do this, 
-    # to ensure that Rack::OpenID sits above Warden in the Rack middleware stack:
-    config.middleware.insert_before(Warden::Manager, Rack::OpenID)
-
     config.generators do |g|
       g.orm :mongoid
       g.template_engine :haml

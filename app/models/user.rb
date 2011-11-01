@@ -5,25 +5,17 @@ class User
 
   field :name
   field :location
-  field :facebook_id
 
   auto_increment :id
 
-  embeds_many :open_id_identities
+  embeds_many :authentications
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
-         :openid_authenticatable, :omniauthable
-
-  AX_FIRST_NAME = 'http://axschema.org/namePerson/first'
-  AX_LAST_NAME  = 'http://axschema.org/namePerson/last'
-  AX_EMAIL      = 'http://axschema.org/contact/email'
-  EMAIL         = 'email'
-  FULLNAME      = 'fullname'
-  NICKNAME      = 'nickname'
+         :omniauthable
 
   attr_accessible :name, :email, :password, :password_confirmation,
-                  :remember_me, :location, :facebook_id
+                  :remember_me, :location
 
   attr_writer :identity_url
 
@@ -35,44 +27,15 @@ class User
 
   validates_length_of :password, :within => Devise::password_length, :allow_blank => true
 
-
-  class << self
-
-    def find_by_identity_url(identity_url)
-      User.where(:open_id_identities.matches => { :identity_url => identity_url }).first
+  def apply_omniauth(omniauth)
+    info = omniauth['user_info']
+    self.email = omniauth['user_info']['email'] if email.blank? and not info['email'].blank?
+    if self.name.blank?
+      name = [info['nickname'], info['name'], [info['first_name'], info['last_name']].join(' ')].detect(&:present?)
+      self.name = name
     end
-
-    def build_from_identity_url(identity_url)
-      user = User.new
-      user.open_id_identities << OpenIdIdentity.new(:identity_url => identity_url)
-      user
-    end
-
-    def openid_required_fields
-      [AX_FIRST_NAME, AX_LAST_NAME, AX_EMAIL, FULLNAME, NICKNAME, EMAIL]
-    end
-
-    def find_for_facebook_oauth(data, signed_in_resource=nil)
-      user = User.where({'facebook_id' => data['id']}).first
-      user || User.create(:email => data['email'],
-                          :name => data['name'],
-                          :location => data['location']['name'],
-                          :facebook_id => data['id'])
-    end
-  end
-
-
-  def openid_fields=(fields)
-    # Some AX providers can return multiple values per key.
-    # Leave only first element from all arrays.
-    fields = fields.inject({}) { |h, (k,v)| h.merge k => v.is_a?(Array) ? v.first : v }
-
-    self.name ||= fields[NICKNAME] || fields[FULLNAME] || [fields[AX_FIRST_NAME], fields[AX_LAST_NAME]].compact.join(' ')
-    self.email = fields[EMAIL] || fields[AX_EMAIL]
-  end
-
-  def identity_url
-    @identity_url ||= open_id_identities.first.try(:identity_url)
+    authentications.build(:provider => omniauth['provider'],
+                          :uid => omniauth['uid'])
   end
 
   def gravatar(size)

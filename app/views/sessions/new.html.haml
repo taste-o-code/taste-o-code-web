@@ -15,9 +15,10 @@
     %div.clearfix
 
   %p
-    = image_tag 'google_64.png', :class => 'google', :title => 'Google'
-    = link_to image_tag('facebook_64.png', :class => 'facebook', :title => 'Facebook'),
-      user_omniauth_authorize_path(:facebook)
+    - [:google, :facebook].each do |provider|
+      = link_to image_tag("#{provider}_64.png", :title => provider.capitalize),
+        user_omniauth_authorize_path(provider)
+
 
 
   = render :partial => 'devise/shared/links'

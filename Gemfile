@@ -18,8 +18,8 @@ gem 'jquery-rails', '~> 1.0.16'
 gem 'rails3-generators', '~> 0.17.4'
 
 gem 'devise', '~> 1.4.9'
-gem 'devise_openid_authenticatable', '~> 1.0.0'
 gem 'oa-oauth', :require => 'omniauth/oauth'
+gem 'oa-openid', :require => 'omniauth/openid'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
