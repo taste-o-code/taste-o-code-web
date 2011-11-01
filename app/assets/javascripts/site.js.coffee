@@ -11,11 +11,6 @@ $('#header .dropdown-trigger.hover-trigger').live 'hover', (event) ->
 $('#header .dropdown-trigger.click-trigger').live('click', (event) ->
   if event.target == this then $(this).toggleClass 'opened'
   event.stopPropagation()
-).live('hover', (event) ->
-  if event.type == 'mouseleave'
-    $(this).data 'timeout', setTimeout($.proxy((-> $(this).removeClass('opened')), this), 800)
-  else
-    clearTimeout $(this).data('timeout')
 )
 
 $('body').live 'click', (event) -> $('#header .dropdown-trigger.click-trigger').removeClass('opened')

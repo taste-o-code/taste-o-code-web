@@ -26,7 +26,7 @@
               %div.dropdown-trigger.click-trigger
                 Login
                 %div.header-dropdown
-                  = form_for :user, :url => session_path(:user), :remote => true, :format => :json,
+                  = form_for :user, :url => session_path(:user, :format => :json), :remote => true,
                              :html => { :class => 'nice', :id => 'login_form' } do |f|
                     = f.email_field :email, :class => 'input-text placeholder', :placeholder => 'Email'
                     = f.password_field :password, :class => 'input-text placeholder', :placeholder => 'Password'
