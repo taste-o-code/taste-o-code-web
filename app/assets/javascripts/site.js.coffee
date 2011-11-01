@@ -22,7 +22,7 @@ $('form#login_form').live 'ajax:success', (evt, data, status, xhr) ->
   if data.success
     $(this).find('input:submit').remove()
     $('<div/>', { class: 'alert-box success', }).html(data.message).prependTo(this)
-    setTimeout (-> window.location.href = data.redirect), 1000
+    setTimeout (-> window.location.reload()), 1000
   else
     $('<div/>', { class: 'alert-box error', }).html(data.message).prependTo(this)
 
