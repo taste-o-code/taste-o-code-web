@@ -25,10 +25,10 @@ $('form#login_form').live 'ajax:success', (evt, data, status, xhr) ->
     setTimeout (-> window.location.href = data.redirect), 1000
   else
     $('<div/>', { class: 'alert-box error', }).html(data.message).prependTo(this)
-    $(this).find('input:submit').show()
+    $(this).find('input:submit').show().removeAttr('disabled')
 
 $('form#login_form').live 'submit', (event) ->
-  $(this).find('input:submit').hide()
+  $(this).find('input:submit').hide().attr('disabled', 'disabled')
   $(this).find('.loader').show()
 
 
