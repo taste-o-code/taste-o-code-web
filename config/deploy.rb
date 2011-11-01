@@ -34,7 +34,7 @@ namespace :deploy do
 
   desc "Symlink config files"
   task :symlink_configs, :roles => :app do
-    %w[mongoid.yml, omniauth.yml].each do |f|
+    %w[mongoid.yml omniauth.yml].each do |f|
       run "ln -sf #{shared_path}/config/#{f} #{current_release}/config/#{f}"
     end
   end
