@@ -19,13 +19,13 @@ $('body').live 'click', (event) -> $('#header .dropdown-trigger.click-trigger').
 # Login form response handler
 $('form#login_form').live 'ajax:success', (evt, data, status, xhr) ->
   $(this).find('.loader').hide()
-  $(this).find('input:submit').show()
   $('form#login_form .alert-box').remove()
   if data.success
-    $('<div/>', { class: 'alert-box success', }).html(data.message).prependTo(this)
+    $('<div/>', { class: 'alert-box success', }).html(data.message).appendTo(this)
     setTimeout (-> window.location.href = data.redirect), 1000
   else
     $('<div/>', { class: 'alert-box error', }).html(data.message).prependTo(this)
+    $(this).find('input:submit').show()
 
 $('form#login_form').live 'submit', (event) ->
   $(this).find('input:submit').hide()
