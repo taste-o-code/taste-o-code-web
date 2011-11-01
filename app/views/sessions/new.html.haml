@@ -2,8 +2,8 @@
   %h3 Sign in
 
   = form_for resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'sign-in nice' } do |f|
-    = f.email_field :email, :class => 'input-text placeholder', :placeholder => 'Email'
-    = f.password_field :password, :class => 'input-text placeholder', :placeholder => 'Password'
+    = f.email_field :email, :class => 'input-text', :placeholder => 'Email'
+    = f.password_field :password, :class => 'input-text', :placeholder => 'Password'
 
     %div.remember-submit
       = f.submit 'Sign in', :class => 'white nice button radius'

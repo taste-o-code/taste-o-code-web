@@ -24,16 +24,14 @@
                 %div.header-dropdown
                   = form_for :user, :url => session_path(:user, :format => :json), :remote => true,
                              :html => { :class => 'nice', :id => 'login_form' } do |f|
-                    = f.email_field :email, :class => 'input-text placeholder', :placeholder => 'Email'
-                    = f.password_field :password, :class => 'input-text placeholder', :placeholder => 'Password'
+                    = f.email_field :email, :class => 'input-text', :placeholder => 'Email'
+                    = f.password_field :password, :class => 'input-text', :placeholder => 'Password'
 
                     = label_tag :user_remember_me, :class => 'remember' do
                       = f.check_box(:remember_me)
                       Remember me
 
-                    = f.submit 'Login', :class => 'blue nice button radius small'
-                    %div.loader
-                      = image_tag 'login-loader.gif', :size => '24x24'
+                    = f.submit 'Login', :class => 'blue nice button radius small', :disable_with => 'Loading...'
                   %div.providers-icons
                     - [:google, :facebook].each do |provider|
                       = link_to image_tag("#{provider}_32.png", :title => provider.capitalize),
