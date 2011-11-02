@@ -1,10 +1,11 @@
 $header-height: 60px
 $header-background: #434343
 $header-alt-background: #575757
+$header-nav-color: #BFBFBF
 
 #header
-  color: #FFF
-  background-color: #434343
+  color: white
+  background-color: $header-background
   height: $header-height
   line-height: $header-height
   position: relative
@@ -23,7 +24,7 @@ $header-alt-background: #575757
         line-height: $header-height
 
         a
-          color: #FFF
+          color: white
 
       .dropdown-trigger
         height: 100%
@@ -57,7 +58,7 @@ $header-alt-background: #575757
         float: right
 
         a
-          color: #FFF
+          color: white
 
         &.logged-in
           .name, .avatar
@@ -69,7 +70,7 @@ $header-alt-background: #575757
             margin: 10px 15px 0 0
 
             img
-              border: 1px solid #BFBFBF
+              border: 1px solid $header-nav-color
 
           .header-dropdown
             width: 100%
@@ -97,18 +98,14 @@ $header-alt-background: #575757
             display: block
             margin: 0
 
-          .providers-icons
-            text-align: center
-            width: 200px
-            margin: 0
-            padding: 0px 10px
-            img
-              padding: 0px 10px
+          .header-dropdown
+            font-size: 14px
+            padding: 10px
 
           form
             width: 200px
             margin: 0
-            padding: 15px 10px 7px
+            padding: 9px 0 2px
 
             input.input-text
               width: 192px
@@ -121,6 +118,34 @@ $header-alt-background: #575757
               margin: 0
               font-size: 15px
               padding: 11px 0
+
+          .auth-providers
+            border-top: 2px solid $header-nav-color
+            margin-top: 17px
+            padding-top: 16px
+            position: relative
+
+            .or
+              background-color: $header-alt-background
+              color: $header-nav-color
+              font-weight: bold
+              left: 86px
+              padding: 0 5px
+              position: absolute
+              top: -8px
+
+            span
+              float: left
+              line-height: 32px
+
+            .auth-providers-links
+              float: left
+              margin-left: 10px
+
+              a
+                display: block
+                float: left
+                margin: 0 2px
 
           a#join
             display: block
@@ -149,7 +174,7 @@ $header-alt-background: #575757
               padding: 0 15px
 
             a
-              color: #BFBFBF
+              color: $header-nav-color
 
             span, a:hover
-              color: #FFF
+              color: white

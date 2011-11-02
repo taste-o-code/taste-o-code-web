@@ -15,4 +15,8 @@ module ApplicationHelper
     NAVIGATION_ITEMS
   end
 
+  def auth_providers_links(icons_size = 64)
+    render :partial => '/layouts/auth_providers_links', :locals => { :icons_size => icons_size }
+  end
+
 end

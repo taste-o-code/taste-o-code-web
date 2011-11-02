@@ -22,6 +22,7 @@
               %div.dropdown-trigger.click-trigger
                 Login
                 %div.header-dropdown
+                  Use regular account
                   = form_for :user, :url => session_path(:user, :format => :json), :remote => true,
                              :html => { :class => 'nice', :id => 'login_form' } do |f|
                     = f.email_field :email, :class => 'input-text', :placeholder => 'Email'
@@ -32,10 +33,13 @@
                       Remember me
 
                     = f.submit 'Login', :class => 'blue nice button radius small', :disable_with => 'Loading...'
-                  %div.providers-icons
-                    - [:google, :facebook].each do |provider|
-                      = link_to image_tag("#{provider}_32.png", :title => provider.capitalize),
-                        user_omniauth_authorize_path(provider)
+
+                  %div.auth-providers
+                    %div.or OR
+                    %span Login with
+                    = auth_providers_links 32
+                    %div.clearfix
+
 
             %li
               = link_to 'Join', new_user_registration_path, :id => 'join'

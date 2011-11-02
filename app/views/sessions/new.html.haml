@@ -14,11 +14,6 @@
 
     %div.clearfix
 
-  %p
-    - [:google, :facebook].each do |provider|
-      = link_to image_tag("#{provider}_64.png", :title => provider.capitalize),
-        user_omniauth_authorize_path(provider)
-
-
+  %p= auth_providers_links
 
   = render :partial => 'devise/shared/links'
