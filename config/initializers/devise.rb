@@ -202,8 +202,13 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :facebook, OA_CONFIG['facebook']['app_id'],
                              OA_CONFIG['facebook']['app_secret']
+  config.omniauth :twitter,  OA_CONFIG['twitter']['consumer_key'],
+                             OA_CONFIG['twitter']['consumer_secret']
   config.omniauth :open_id,  OpenID::Store::Filesystem.new('/tmp'),
                   :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
+  config.omniauth :open_id, OpenID::Store::Filesystem.new('/tmp'),
+                  :name => 'yahoo', :identifier => 'https://me.yahoo.com'
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

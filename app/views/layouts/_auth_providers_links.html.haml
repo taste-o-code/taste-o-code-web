@@ -1,4 +1,4 @@
 %div.auth-providers-links
-  - [:google, :facebook].each do |provider|
+  - [:google, :facebook, :yahoo, :twitter].each do |provider|
     = link_to image_tag("#{provider}_#{icons_size}.png", :title => provider.capitalize,
                         :size => "#{icons_size}x#{icons_size}"), user_omniauth_authorize_path(provider)
