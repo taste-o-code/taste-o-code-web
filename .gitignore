@@ -8,3 +8,4 @@ config/omniauth.yml
 .rvmrc
 .idea
 .*.swp
+public/assets
