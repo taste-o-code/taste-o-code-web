@@ -1,4 +1,7 @@
 class OmniauthAuthenticationsController < ApplicationController
+
+  skip_before_filter :verify_authenticity_token, :only => [:create]
+
   def create
     omniauth = request.env["omniauth.auth"]
     user = User.where(:authentications.matches => {:provider => omniauth['provider'],
