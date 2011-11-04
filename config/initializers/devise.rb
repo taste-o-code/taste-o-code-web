@@ -1,4 +1,5 @@
 require 'openid/store/filesystem'
+require 'openid/fetchers'
 
 OA_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/omniauth.yml")
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
@@ -208,6 +209,8 @@ Devise.setup do |config|
                   :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
   config.omniauth :open_id, OpenID::Store::Filesystem.new('/tmp'),
                   :name => 'yahoo', :identifier => 'https://me.yahoo.com'
+
+  OpenID.fetcher.ca_file = '/etc/ssl/certs/ca-certificates.crt'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
