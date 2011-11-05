@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+langs = YAML.load_file("#{Rails.root.to_s}/db/langs.yml")
+langs.each{|lang| Language.create(lang)}
