@@ -15,7 +15,6 @@
                 %li= link_to 'Profile', user_path(current_user)
                 %li= link_to 'Logout', destroy_user_session_path, :method => 'delete'
       - else
-
         %div#user_bar.logged-out
           %ul
             %li
@@ -38,8 +37,6 @@
                     %div.or OR
                     %span With
                     = auth_providers_links 32
-                    %div.clearfix
-
 
             %li
               = link_to 'Join', new_user_registration_path, :id => 'join'

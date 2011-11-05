@@ -18,13 +18,12 @@ $('body').live 'click', (event) -> $('#header .dropdown-trigger.click-trigger').
 
 # Login form response handler
 $('form#login_form').live 'ajax:success', (evt, data, status, xhr) ->
-  $(this).find('.alert-box').remove()
+  $(this).siblings('.alert-box').remove()
   if data.success
-    $(this).find('input:submit').remove()
-    $('<div/>', { class: 'alert-box success', }).html(data.message).prependTo(this)
+    $(this).parent().html $('<div/>', { class: 'alert-box success', }).html(data.message)
     setTimeout (-> window.location.reload()), 1000
   else
-    $('<div/>', { class: 'alert-box error', }).html(data.message).prependTo(this)
+    $('<div/>', { class: 'alert-box error', }).html(data.message).insertBefore this
 
 
 # Processing placeholders for all inputs
