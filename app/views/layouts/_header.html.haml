@@ -22,7 +22,7 @@
               %div.dropdown-trigger.click-trigger
                 Login
                 %div.header-dropdown
-                  Use regular account
+                  With regular account
                   = form_for :user, :url => session_path(:user, :format => :json), :remote => true,
                              :html => { :class => 'nice', :id => 'login_form' } do |f|
                     = f.email_field :email, :class => 'input-text', :placeholder => 'Email'
@@ -36,7 +36,7 @@
 
                   %div.auth-providers
                     %div.or OR
-                    %span Use
+                    %span With
                     = auth_providers_links 32
                     %div.clearfix
 

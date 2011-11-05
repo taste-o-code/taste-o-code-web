@@ -98,18 +98,20 @@ $header-nav-color: #BFBFBF
             display: block
             margin: 0
 
+          $login-form-width: 180px
+
           .header-dropdown
             font-size: 14px
             padding: 10px
-            width: 200px
+            width: $login-form-width
 
           form
-            width: 200px
+            width: $login-form-width
             margin: 0
             padding: 9px 0 2px
 
             input.input-text
-              width: 192px
+              width: $login-form-width - 8px
 
             label.remember
               margin: 0 0 5px
@@ -131,7 +133,7 @@ $header-nav-color: #BFBFBF
               background-color: $header-alt-background
               color: $header-nav-color
               font-weight: bold
-              left: 86px
+              left: 76px
               padding: 0 5px
               position: absolute
               top: -8px
@@ -139,15 +141,16 @@ $header-nav-color: #BFBFBF
             span
               float: left
               line-height: 32px
+              margin-left: 2px
 
             .auth-providers-links
               float: left
-              margin-left: 10px
+              margin-left: 5px
 
               a
                 display: block
                 float: left
-                margin: 0 2px
+                margin: 0 0 0 4px
 
           a#join
             display: block
