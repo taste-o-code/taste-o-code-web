@@ -1,17 +1,20 @@
-%div.four.column.centered
-  %h3 Sign in
+%div.centered.login-form
+  %h3 Login
 
-  = form_for resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'sign-in nice' } do |f|
+  Login with regular account
+  = form_for resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'nice' } do |f|
     = f.email_field :email, :class => 'input-text', :placeholder => 'Email'
     = f.password_field :password, :class => 'input-text', :placeholder => 'Password'
 
     %div.remember-submit
-      = f.submit 'Sign in', :class => 'white nice button radius'
+      = f.submit 'Login', :class => 'white nice button radius'
 
       = label_tag :user_remember_me, :class => 'remember' do
         = f.check_box(:remember_me)
         Remember me
 
-    %div.clearfix
+  Or use your account from
+  = auth_providers_links
 
-  %p= auth_providers_links
+  %div.note
+    Please, don't use this form to add new OpenID providers to your Taste-o-Code account if you already have one.

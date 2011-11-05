@@ -1,21 +1,20 @@
-%h2 Sign up
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  %p
-    = f.label :name
-    %br/
-    = f.text_field :name
-  %p
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %p
-    = f.label :password
-    %br/
-    = f.password_field :password
-  %p
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %p= f.submit "Sign up"
-= render :partial => "devise/shared/links"
+%div.centered.signup-form
+  %h3 Sign up
+
+  Sign up with your account from
+  = auth_providers_links
+
+  Or create a new one
+  = form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => 'nice' } do |f|
+    = devise_error_messages!
+
+    = f.text_field :name, :class => 'input-text', :placeholder => 'Name'
+    = f.email_field :email, :class => 'input-text', :placeholder => 'Email'
+    = f.password_field :password, :class => 'input-text', :placeholder => 'Password'
+    = f.password_field :password_confirmation, :class => 'input-text', :placeholder => 'Password confirmation'
+
+    %div.submit
+      = f.submit "Sign up", :class => 'white nice button radius'
+
+  %div.note
+    Please, don't use this form to add new OpenID providers to your Taste-o-Code account if you already have one.
