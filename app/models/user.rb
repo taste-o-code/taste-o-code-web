@@ -9,12 +9,9 @@ class User
 
   embeds_many :authentications
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable,
-         :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
 
-  attr_accessible :name, :email, :password, :password_confirmation,
-                  :remember_me, :location
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :location
 
   attr_writer :identity_url
 
@@ -25,6 +22,7 @@ class User
 
   validates_length_of :password, :within => Devise::password_length, :allow_blank => true
 
+
   def apply_omniauth(omniauth)
     info = omniauth['user_info']
     self.email = omniauth['user_info']['email'] if email.blank? and not info['email'].blank?
@@ -32,8 +30,7 @@ class User
       name = [info['nickname'], info['name'], [info['first_name'], info['last_name']].join(' ')].detect(&:present?)
       self.name = name
     end
-    authentications.build(:provider => omniauth['provider'],
-                          :uid => omniauth['uid'])
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
   def gravatar(size)
@@ -61,10 +58,6 @@ class User
 
     clean_up_passwords
     result
-  end
-
-  def has_no_password?
-    self.encrypted_password.blank?
   end
 
 end
