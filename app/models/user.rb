@@ -15,7 +15,11 @@ class User
 
   attr_writer :identity_url
 
-  validates :name, :presence => true, :format => { :with => /^[\w\-' ]+$/ }, :length => (2..30)
+  validates :name, :presence => true, :length => { :maximum => 30 },
+            :format => {
+                :with => /^[\w\-' ]+$/,
+                :message => "can contain only letters, digits, spaces, hyphens and apostrophes."
+            }
 
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true
   validates_format_of     :email, :with => Devise::email_regexp, :allow_blank => true, :if => :email_changed?

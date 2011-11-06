@@ -4,7 +4,7 @@ describe User do
 
   describe 'validations' do
     it { should validate_presence_of :name }
-    it { should validate_length_of(:name).within(2..30) }
+    it { should validate_length_of(:name).with_maximum(30) }
 
     ['John Doe', 'john-doe', 'john_doe', 'john123', "John A'Doe"].each do |name|
       it { should validate_format_of(:name).to_allow(name) }
