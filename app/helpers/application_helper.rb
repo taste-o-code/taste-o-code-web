@@ -19,4 +19,11 @@ module ApplicationHelper
     render :partial => '/layouts/auth_providers_links', :locals => { :icons_size => icons_size }
   end
 
+  def error_message(model, field)
+    unless model.errors[field].blank?
+      message = "#{field.to_s.capitalize} #{model.errors[field].first}"
+      content_tag('div', message, :class => 'field-error')
+    end
+  end
+
 end

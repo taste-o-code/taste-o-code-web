@@ -25,6 +25,7 @@ class User
   validates_format_of     :email, :with => Devise::email_regexp, :allow_blank => true, :if => :email_changed?
 
   validates_length_of :password, :within => Devise::password_length, :allow_blank => true
+  validates_confirmation_of :password
 
 
   def apply_omniauth(omniauth)

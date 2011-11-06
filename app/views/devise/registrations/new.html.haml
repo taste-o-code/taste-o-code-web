@@ -6,10 +6,14 @@
 
   Or create a new one
   = form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => 'nice' } do |f|
-    = devise_error_messages!
 
+    = error_message resource, :name
     = f.text_field :name, :class => 'input-text', :placeholder => 'Name'
+
+    = error_message resource, :email
     = f.email_field :email, :class => 'input-text', :placeholder => 'Email'
+
+    = error_message resource, :password
     = f.password_field :password, :class => 'input-text', :placeholder => 'Password'
     = f.password_field :password_confirmation, :class => 'input-text', :placeholder => 'Password confirmation'
 
