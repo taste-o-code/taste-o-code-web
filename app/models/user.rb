@@ -1,4 +1,3 @@
-
 class User
 
   include Mongoid::Document
@@ -19,8 +18,7 @@ class User
 
   attr_writer :identity_url
 
-  validates_presence_of   :name
-  validates_format_of     :name, :with => /[\w' ]{2,30}/, :message => "Name consists of 2-30 symbols. Symbols a-z,A-Z,_,0-9."
+  validates :name, :presence => true, :format => { :with => /^[\w\-' ]+$/ }, :length => (2..30)
 
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true
   validates_format_of     :email, :with => Devise::email_regexp, :allow_blank => true, :if => :email_changed?
