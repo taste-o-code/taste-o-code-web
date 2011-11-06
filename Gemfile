@@ -21,6 +21,7 @@ gem 'devise', '~> 1.4.9'
 gem 'oa-oauth', :require => 'omniauth/oauth'
 gem 'oa-openid', :require => 'omniauth/openid'
 
+
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
   gem 'coffee-rails', '~> 3.1.1'
@@ -29,15 +30,24 @@ group :assets do
   gem 'zurb-foundation', '~> 2.0.2'
 end
 
+
 group :development do
   gem 'mongrel', '>= 1.2.0.pre2'
   gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
+
+gem 'rspec-rails', :group => [:test, :development]
+
 group :test do
-  gem 'turn', :require => false
-  gem 'rspec'
-  gem 'rspec-rails'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'guard-bundler'
+  gem 'rb-inotify', :require => false
+
+  gem 'mongoid-rspec'
   gem 'database_cleaner'
 end
