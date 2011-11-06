@@ -18,7 +18,7 @@ class User
   validates :name, :presence => true, :length => { :maximum => 30 },
             :format => {
                 :with => /^[\w\-' ]+$/,
-                :message => "can contain only letters, digits, spaces, hyphens and apostrophes."
+                :message => "can contain only letters, digits, spaces, hyphens, underscores and apostrophes."
             }
 
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true
