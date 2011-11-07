@@ -1,17 +1,15 @@
-%br/
-- if @user
-  %span#profile_avatar
-    = image_tag(@user.gravatar(150), :alt => 'Avatar')
-  %span#profile_info
-    %div#first_line
-      %span#name= @user.name
-      %span#edit= link_to("(edit)", edit_user_path) if current_user == @user
-
-    %div.field
-      %div.field-name Location:
-      %div= @user.location
-
-- else
-  User
-  = params[:id]
-  not found
+%div.seven.columns.centered.profile
+  %div.avatar= image_tag @user.gravatar(150), :alt => 'Avatar'
+  %div.info
+    %div.headline
+      %h3= @user.name
+      - if current_user == @user
+        = link_to("(edit)", edit_user_path, :class => 'edit')
+    %div.fields
+      - [:location, :about].each do |field|
+        %div.field
+          %div.name= "#{field.to_s.humanize}:"
+          - if @user[field].presence
+            %div.value= @user[field]
+          - else
+            %div.value.unknown Unknown

@@ -1,17 +1,26 @@
-%br/
-%span#profile_avatar
-  %div#avatar_holder
-    = image_tag(@user.gravatar(150), :alt => 'Avatar')
-    %div= link_to 'Change avatar', 'http://gravatar.com', :target => '_blank'
-%span#profile_info
-  %div#first_line
-  = form_for(@user, :url => { :action => 'update' }) do |f|
-    %div.field
-      %div.field-name= f.label :name, 'Name:'
-      %div= f.text_field :name, :placeholder => 'Name...'
-    %div.field
-      %div.field-name= f.label :location, 'Location:'
-      %div= f.text_field :location, :placeholder => 'Location...'
-    %div.field
-      %div.field-name
-      %div= f.submit "Update"
+%div.seven.columns.centered.profile
+  %div.avatar
+    = image_tag @user.gravatar(150), :alt => 'Avatar'
+    = link_to 'Change avatar', 'http://gravatar.com', :target => '_blank'
+
+  %div.info
+    %div.headline
+      %h3 Edit Profile
+
+    = form_for @user, :html => { :class => 'nice' } do |f|
+      = f.label :name, 'Name:'
+      %div.field-wrapper
+        = f.text_field :name, :placeholder => 'Unknown', :class => 'input-text'
+        = error_message @user, :name
+
+      = f.label :location, 'Location:'
+      %div.field-wrapper
+        = f.text_field :location, :placeholder => 'Unknown', :class => 'input-text'
+        = error_message @user, :location
+
+      = f.label :about, 'About:'
+      %div.field-wrapper
+        = f.text_area :about, :placeholder => 'Unknown', :class => 'input-text', :rows => 8
+        = error_message @user, :about
+
+      = f.submit 'Save', :class => 'blue nice button radius'

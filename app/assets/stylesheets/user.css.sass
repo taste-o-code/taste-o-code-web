@@ -1,39 +1,89 @@
-$profile-info-width: 60%
-#profile_avatar
-  display: inline-block
-  width: 95% - $profile-info-width
-  text-align: right
+.profile
+  margin-top: 30px
 
-  #avatar_holder
-    text-align: center
-    display: inline-block
+  .avatar
+    float: left
+    width: 30%
 
-#profile_info
-  margin-left: 20px
-  display: inline-block
-  width: $profile-info-width
-  vertical-align: top
-
-  #name
-    font-weight: bold
-    font-size: 20px
-
-  #first_line
-    margin-bottom: 10px
-
-  #edit
     a
-      text-decoration: none
-      vertical-align: top
+      display: block
+      margin-top: 2px
+      text-align: center
+      width: 150px
 
-  .field
-    margin-bottom: 10px
+  .info
+    float: left
+    width: 70%
+    margin-top: -4px
 
-    div
-      display: inline-block
+    .headline
+      border-bottom: 2px solid #BFBFBF
+      margin-bottom: 20px
+      padding-bottom: 10px
 
-    .field-name
-      width: 200px
+      h3
+        display: inline
+        vertical-align: middle
 
+      a.edit
+        font-size: 18px
+        margin-left: 5px
+        vertical-align: middle
+
+    .fields
+      font-size: 16px
+
+      .field
+        width: 100%
+        float: left
+        clear: both
+        margin-bottom: 10px
+
+        div
+          float: left
+
+          &.name
+            width: 100px
+            font-style: italic
+
+          &.value
+            width: 350px
+
+          &.unknown
+            font-style: italic
+
+  form
     label
-      font-size: 15px
+      width: 100px
+      display: block
+      float: left
+      font-size: 16px
+
+    $error-color: #FE4B4B
+
+    $field-width: 350px
+
+    .field-wrapper
+      float: left
+      width: $field-width
+      margin-bottom: 15px
+
+      input, textarea
+        width: $field-width - 8px
+        margin-bottom: 0
+
+      .field_with_errors
+        width: 100%
+
+        input, textared
+          width: $field-width - 10px
+          border: 2px solid $error-color
+
+      .field-error
+        color: $error-color
+        margin-top: 5px
+
+    input[type="submit"]
+      display: block
+      float: right
+      margin: 20px 120px 0
