@@ -30,7 +30,6 @@ GEM
     activesupport (3.1.1)
       multi_json (~> 1.0)
     addressable (2.2.6)
-    ansi (1.4.0)
     archive-tar-minitar (0.5.2)
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
@@ -230,6 +229,10 @@ GEM
       ffi (= 1.0.9)
       json_pure
       rubyzip
+    simplecov (0.5.4)
+      multi_json (~> 1.0.3)
+      simplecov-html (~> 0.5.3)
+    simplecov-html (0.5.3)
     spork (0.8.5)
     sprockets (2.0.3)
       hike (~> 1.2)
@@ -242,8 +245,6 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    turn (0.8.3)
-      ansi
     tzinfo (0.3.31)
     uglifier (1.0.4)
       execjs (>= 0.3.0)
@@ -285,6 +286,7 @@ DEPENDENCIES
   rspec-rails
   ruby-debug19
   sass-rails (~> 3.1.4)
+  simplecov
   therubyracer (~> 0.9.8)
   uglifier (~> 1.0.3)
   zurb-foundation (~> 2.0.2)

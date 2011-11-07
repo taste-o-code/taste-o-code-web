@@ -9,3 +9,4 @@ config/omniauth.yml
 .idea
 .*.swp
 public/assets
+coverage/
