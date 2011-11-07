@@ -21,11 +21,17 @@ class User
                 :message => "can contain only letters, digits, spaces, hyphens, underscores and apostrophes."
             }
 
-  validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => true
-  validates_format_of     :email, :with => Devise::email_regexp, :allow_blank => true, :if => :email_changed?
+  validates :email,
+            :presence => { :unless => :omniauth_user? },
+            :uniqueness => { :case_sensitive => false, :allow_blank => true },
+            :format => { :with => Devise::email_regexp,
+                         :allow_blank => true,
+                         :if => :email_changed? }
 
-  validates_length_of :password, :within => Devise::password_length, :allow_blank => true
-  validates_confirmation_of :password
+  validates :password,
+            :presence => { :unless => :omniauth_user?, :on => :create },
+            :length => { :minimum => 6, :allow_blank => true },
+            :confirmation => true
 
 
   def apply_omniauth(omniauth)
@@ -63,6 +69,10 @@ class User
 
     clean_up_passwords
     result
+  end
+
+  def omniauth_user?
+    not authentications.blank?
   end
 
 end
