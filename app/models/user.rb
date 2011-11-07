@@ -12,7 +12,7 @@ class User
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :location
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :location, :about
 
   attr_writer :identity_url
 
