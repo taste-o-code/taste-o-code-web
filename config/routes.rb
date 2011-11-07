@@ -1,7 +1,6 @@
 TasteOCodeWeb::Application.routes.draw do
 
-  match '/users/auth/:provider/callback' => 'omniauth_authentications#create'
-
+  match '/users/auth/:provider/callback' => 'omniauth#callback'
   devise_for :users, :controllers => { :sessions => :sessions }
 
   root :to => "home#show"
