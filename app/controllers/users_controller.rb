@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def check_edit_permission
     if params[:id] == current_user.id.to_s
-      @user = current_user
+      @user = User.find(current_user.id)
     else
       redirect_to({ :action => :show, :id => params[:id] }, :alert => 'You can edit only your own profile.')
     end
