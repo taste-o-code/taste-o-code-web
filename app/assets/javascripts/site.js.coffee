@@ -24,8 +24,3 @@ $('form#login_form').live 'ajax:success', (evt, data, status, xhr) ->
     setTimeout (-> window.location.reload()), 1000
   else
     $('<div/>', { class: 'alert-box error', }).html(data.message).insertBefore this
-
-
-# Processing placeholders for all inputs
-$ ->
-  $('textarea, input').placeholder()
