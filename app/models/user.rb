@@ -4,6 +4,7 @@ class User
 
   field :name
   field :location
+  field :about
 
   auto_increment :id
 
