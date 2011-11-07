@@ -28,15 +28,29 @@ Spork.prefork do
     config.mock_with :rspec
 
     config.include Mongoid::Matchers
+    config.include Devise::TestHelpers, :type => :controller
 
     require 'database_cleaner'
-    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.orm      = :mongoid
+
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
   end
 
+  Capybara.javascript_driver = :webkit
+
+  OmniAuth.config.test_mode = true
 end
 
 Spork.each_run do
-  DatabaseCleaner.clean
   FactoryGirl.reload
 end
