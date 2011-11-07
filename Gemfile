@@ -42,6 +42,7 @@ gem 'rspec-rails', :group => [:test, :development]
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'simplecov', :require => false
 
   gem 'guard-rspec'
   gem 'guard-spork'
