@@ -23,4 +23,6 @@
         = f.text_area :about, :placeholder => 'Unknown', :class => 'input-text', :rows => 8
         = error_message @user, :about
 
-      = f.submit 'Save', :class => 'blue nice button radius'
+      %div.buttons
+        = f.submit 'Save', :class => 'blue nice button radius'
+        %div.back= link_to 'Close', users_path(@user)
