@@ -27,4 +27,4 @@
 
       %div.buttons
         = f.submit 'Save', :class => 'blue nice button radius'
-        %div.back= link_to 'Close', users_path(@user)
+        = link_to 'Close', user_path(@user), :class => 'back'
