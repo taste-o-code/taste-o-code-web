@@ -34,6 +34,9 @@ class User
             :length => { :minimum => 6, :allow_blank => true },
             :confirmation => true
 
+  validates_length_of :location, :maximum => 100
+  validates_length_of :about, :maximum => 1000
+
 
   def apply_omniauth(omniauth)
     info = omniauth['user_info']

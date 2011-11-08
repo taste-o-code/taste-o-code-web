@@ -28,6 +28,25 @@ describe User do
       usr.should_not be_valid
     end
 
+    it 'should validate "location" field' do
+      usr = Factory(:user)
+      usr.location = "Minsk, Belarus"
+      usr.should be_valid
+      usr.location *= 50
+      usr.should_not be_valid
+    end
+    it 'should validate "about" field' do
+      about =
+        <<EOS
+Bla! My name is Bla Bla. I'm a bla-bla of Blaaaa.
+I like bbla and bllaa. Bla-bla-blaa. Bla!
+EOS
+      usr = Factory(:user)
+      usr.about = about
+      usr.should be_valid
+      usr.about *= 50
+      usr.should_not be_valid
+    end
   end
 
 end

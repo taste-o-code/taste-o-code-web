@@ -15,12 +15,14 @@
 
       = f.label :location, 'Location:'
       %div.field-wrapper
-        = f.text_field :location, :placeholder => 'Unknown', :class => 'input-text'
+        = f.text_field :location, :placeholder => 'Unknown',
+                       :class => 'input-text', :maxlength => 100
         = error_message @user, :location
 
       = f.label :about, 'About:'
       %div.field-wrapper
-        = f.text_area :about, :placeholder => 'Unknown', :class => 'input-text', :rows => 8
+        = f.text_area :about, :placeholder => 'Unknown', :rows => 8,
+                      :class => 'input-text', :maxlength => 1000
         = error_message @user, :about
 
       = f.submit 'Save', :class => 'blue nice button radius'
