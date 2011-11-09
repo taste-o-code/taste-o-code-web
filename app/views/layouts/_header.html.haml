@@ -7,7 +7,7 @@
 
       - if user_signed_in?
         %div#user_bar.logged-in
-          %div.dropdown-trigger.hover-trigger
+          %div#user_trigger.dropdown-trigger.hover-trigger
             %div.avatar= image_tag current_user.gravatar(35), :size => '35x35', :alt => 'avatar'
             %div.name= current_user.name
             %div.header-dropdown
@@ -18,7 +18,7 @@
         %div#user_bar.logged-out
           %ul
             %li
-              %div.dropdown-trigger.click-trigger
+              %div#login_trigger.dropdown-trigger.click-trigger
                 Login
                 %div.header-dropdown
                   With regular account
