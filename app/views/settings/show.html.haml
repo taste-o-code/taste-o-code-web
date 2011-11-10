@@ -1,0 +1,40 @@
+%div.settings
+
+  %div.headline
+    %h3 Settings
+
+  = form_for @user, :url => settings_path, :html => { :class => 'nice' } do |f|
+    = f.label :email, 'Email:'
+    %div.field-wrapper
+      = f.text_field :email, :class => 'input-text'
+      = error_message @user, :email
+    %div.buttons
+      = f.submit 'Save', :class => 'blue nice button radius'
+
+  - unless @user.encrypted_password.blank?
+    = form_for @user, :url => change_password_path, :html => { :class => 'nice' } do |f|
+      %div.headline
+        %h4 Change password
+      = f.label :current_password, "Current password:"
+      %div.field-wrapper
+        = f.password_field :current_password, :class => 'input-text'
+        = error_message @user, :current_password
+
+      = f.label :password, "New password:"
+      %div.field-wrapper
+        = f.password_field :password, :class => 'input-text'
+        = error_message @user, :password
+
+      = f.label :password_confirmation, "Repeat password:"
+      %div.field-wrapper
+        = f.password_field :password_confirmation, :class => 'input-text'
+        = error_message @user, :password_confirmation
+
+      %div.buttons
+        = f.submit 'Change', :class => 'blue nice button radius'
+
+  %div.providers
+    %div.headline
+      %h4 Add logins to your account
+    = auth_providers_links
+

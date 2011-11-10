@@ -12,7 +12,7 @@ class User
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :location, :about
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :location, :about, :current_password
 
   attr_writer :identity_url
 
@@ -53,22 +53,18 @@ class User
     "http://www.gravatar.com/avatar/#{hash}?s=#{size}"
   end
 
-  def update_with_password(params={})
+  def change_password(params={})
     current_password = params.delete(:current_password)
+    new_password = params[:password]
 
-    if params[:password].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation) if params[:password_confirmation].blank?
-    end
-
-    # Check current password only when user changes password.
-    result = if params[:password].blank? or valid_password?(current_password)
-      update_attributes(params)
-    else
-      self.attributes = params
-      self.valid?
+    result = if new_password.blank?
+      self.errors.add(:password, :blank)
+      false
+    elsif current_password.blank? or not valid_password?(current_password)
       self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
       false
+    else
+      update_attributes(params)
     end
 
     clean_up_passwords

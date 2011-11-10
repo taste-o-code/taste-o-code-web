@@ -13,6 +13,7 @@
             %div.header-dropdown
               %ul
                 %li= link_to 'Profile', user_path(current_user)
+                %li= link_to 'Settings', settings_path
                 %li= link_to 'Logout', destroy_user_session_path, :method => 'delete'
       - else
         %div#user_bar.logged-out

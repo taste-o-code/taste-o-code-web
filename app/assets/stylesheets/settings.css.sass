@@ -1,0 +1,57 @@
+.settings
+  margin: 0px auto
+  $settings-width: 350px
+  width: $settings-width
+
+  .headline
+    border-bottom: 2px solid #BFBFBF
+    margin-bottom: 20px
+    padding-bottom: 10px
+    clear: both
+
+    h3, h4
+      display: inline
+      vertical-align: middle
+
+  form
+    display: inline-block
+    $field-width: 190px
+    label
+      width: $settings-width - $field-width
+      display: block
+      float: left
+      font-size: 16px
+      line-height: 25px
+
+    $error-color: #FE4B4B
+
+
+    .field-wrapper
+      float: left
+      width: $field-width
+      margin-bottom: 15px
+
+      input, textarea
+        width: $field-width - 8px
+        margin-bottom: 0
+
+      .field_with_errors
+        width: 100%
+
+        input, textarea
+          width: $field-width - 10px
+          border: 2px solid $error-color
+
+      .field-error
+        color: $error-color
+        margin-top: 5px
+
+    .buttons
+      float: right
+
+      input[type="submit"]
+        display: block
+        width: 108px
+
+  .auth-providers-links
+    text-align: center
