@@ -23,7 +23,6 @@ class SettingsController < ApplicationController
       sign_in @user, :bypass => true
       redirect_to({ :action => :show }, :notice => 'Your password was changed.')
     else
-      logger.info "Fail :("
       render :action => :show
     end
   end
