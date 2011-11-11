@@ -12,7 +12,7 @@
       = f.submit 'Save', :class => 'blue nice button radius'
 
   - unless @user.encrypted_password.blank?
-    = form_for @user, :url => change_password_path, :html => { :class => 'nice' } do |f|
+    = form_for @user, :url => settings_path, :html => { :class => 'nice' } do |f|
       %div.headline
         %h4 Change password
       = f.label :current_password, "Current password:"

@@ -21,7 +21,7 @@ module ApplicationHelper
 
   def error_message(model, field)
     unless model.errors[field].blank?
-      message = "#{field.to_s.capitalize.gsub(/_/,' ')} #{model.errors[field].first}"
+      message = "#{field.to_s.humanize} #{model.errors[field].first}"
       content_tag('div', message, :class => 'field-error')
     end
   end

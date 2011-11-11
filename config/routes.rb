@@ -11,8 +11,6 @@ TasteOCodeWeb::Application.routes.draw do
 
   resource :settings, :only => [:show, :update]
 
-  match '/settings/change_password', :to => 'settings#change_password', :as => :change_password
-
   match '/home', :to => 'home#show', :as => :home
 
   match '/about', :to => 'about#show', :as => :about

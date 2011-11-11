@@ -55,16 +55,16 @@ class User
 
   def change_password(params={})
     current_password = params.delete(:current_password)
-    new_password = params[:password]
 
-    result = if new_password.blank?
+    result = if params[:password].blank?
       self.errors.add(:password, :blank)
       false
     elsif current_password.blank? or not valid_password?(current_password)
       self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
       false
     else
-      update_attributes(params)
+      # Update only passwords.
+      update_attributes params.extract!(:password, :password_confirmation)
     end
 
     clean_up_passwords
