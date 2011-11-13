@@ -9,6 +9,7 @@ class User
   auto_increment :id
 
   embeds_many :authentications
+  embeds_many :user_languages
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
 
