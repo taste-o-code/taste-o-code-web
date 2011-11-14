@@ -8,8 +8,11 @@ class User
 
   auto_increment :id
 
-  embeds_many :authentications
-  embeds_many :user_languages
+  embeds_many             :authentications
+  has_many                :submissions
+  has_and_belongs_to_many :languages
+  has_and_belongs_to_many :solved_tasks, :class_name => 'Task', :inverse_of => nil
+  has_and_belongs_to_many :unsubdued_tasks, :class_name => 'Task', :inverse_of => nil
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
 
