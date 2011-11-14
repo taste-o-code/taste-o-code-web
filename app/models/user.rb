@@ -10,7 +10,7 @@ class User
 
   embeds_many             :authentications
   has_many                :submissions
-  has_and_belongs_to_many :languages
+  has_and_belongs_to_many :languages, :inverse_of => nil
   has_and_belongs_to_many :solved_tasks, :class_name => 'Task', :inverse_of => nil
   has_and_belongs_to_many :unsubdued_tasks, :class_name => 'Task', :inverse_of => nil
 
