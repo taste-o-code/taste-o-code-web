@@ -2,9 +2,13 @@ class User
 
   include Mongoid::Document
 
-  field :name
-  field :location
-  field :about
+  INITIAL_POINTS = 30
+
+  field :name, type: String
+  field :location, type: String
+  field :about, type: String
+  field :total_points, type: Integer
+  field :available_points, type: Integer
 
   auto_increment :id
 
@@ -41,6 +45,33 @@ class User
   validates_length_of :location, :maximum => 100
   validates_length_of :about, :maximum => 1000
 
+  validates_numericality_of :total_points,
+                            :greater_than => 0,
+                            :only_integer => true
+  validates_numericality_of :available_points,
+                            :greater_than_or_equal_to => 0,
+                            :only_integer => true
+
+  after_initialize :init
+
+  def init
+    self.total_points ||= INITIAL_POINTS
+    self.available_points ||= INITIAL_POINTS
+  end
+
+  def buy_language(lang)
+    if self.available_points >= lang.price and not has_language?(lang)
+      self.available_points -= lang.price
+      self.languages << lang
+      save
+    else
+      false
+    end
+  end
+
+  def has_language?(lang)
+    self.languages.member? lang
+  end
 
   def apply_omniauth(omniauth)
     info = omniauth['user_info']

@@ -7,12 +7,15 @@ TasteOCodeWeb::Application.routes.draw do
 
   resources :users, :only => [:index, :show, :edit, :update]
 
-  resources :languages, :only => [:index, :show]
+  resources :languages, :only => [:index, :show] do
+    post 'buy', :on => :member
+  end
 
   resource :settings, :only => [:show, :update]
 
   match '/home', :to => 'home#show', :as => :home
 
   match '/about', :to => 'about#show', :as => :about
+
 
 end
