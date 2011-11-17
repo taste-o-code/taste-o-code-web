@@ -1,3 +1,112 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.home
+  .separator
+    clear: both
+    font-size: 30px
+
+  #available_points
+    text-align: center
+    margin-bottom: 10px
+    #points
+      color: black
+      display: inline
+      margin: 0px
+      font-size: 25px
+      font-weight: bold
+
+
+  .language
+    $block-height: 70px
+    $block-width: 320px
+    width: $block-width
+    height: $block-height
+    background-color: #EDEDED
+    float: left
+    display: block-inline
+    margin: 20px 30px
+    position: relative
+    cursor: pointer
+
+    &:hover
+      background-color: #E0E0E0
+
+    .middle
+      display: inline-block
+      position: relative
+      top: 50%
+
+    .name
+      font-size: 25px
+      font-weight: bold
+      margin-top: -12px
+      margin-left: 20px
+      float: left
+      color: #000
+
+    .price
+      float: right
+      margin-top: -10px
+      margin-right: 10px
+
+    .score
+      margin-right: 10px
+      float: right
+      margin-top: -10px
+
+      .solved, .unsolved
+        margin: 0px
+        display: inline
+
+      .solved
+        font-size: 25px
+        color: #000
+
+      .unsolved
+        font-size: 20px
+
+    .progress
+      position: relative
+      bottom: 0px
+      height: 8px
+      background-color: #E0E0E0
+      position: absolute
+      width: 100%
+
+      .solved
+        background-color: #6AA84F
+        height: 100%
+
+  #buy_dialog
+    visibility: hidden
+    top: 50%
+    margin:
+      top: -200px
+      left: -150px
+    min-width: 250px
+    width: auto
+    padding: 20px
+    text-align: center
+
+    p
+      margin: 0px
+      display: inline
+
+    #language_to_buy, #price
+      font-weight: bold
+
+    span
+      display: block
+      color: black
+      font-size: 20px
+      margin-bottom: 20px
+
+    #buy_button
+      float: left
+      font-size: 20px
+
+    #cancel_button
+      float: right
+      cursor: pointer
+      border-bottom: 1px dashed #2A85E8
+      font-size: 20px
+      margin-top: 9px
+

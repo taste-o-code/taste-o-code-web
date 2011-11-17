@@ -73,6 +73,28 @@ class User
     self.languages.member? lang
   end
 
+  def solved_tasks_for_lang(lang)
+    lang.tasks & self.solved_tasks
+  end
+
+  def unsubdued_tasks_for_lang(lang)
+    lang.tasks & self.unsubdued_tasks
+  end
+
+  def percent_solved_for_lang(lang)
+    result = solved_tasks_for_lang(lang).count / lang.tasks.count.to_f
+    100 * (result.nan? ? 1 : result)
+  end
+
+  def clear_progress
+    self.solved_tasks.clear
+    self.unsubdued_tasks.clear
+    self.languages.clear
+    self.total_points = INITIAL_POINTS
+    self.available_points = INITIAL_POINTS
+    save
+  end
+
   def apply_omniauth(omniauth)
     info = omniauth['user_info']
     self.email = omniauth['user_info']['email'] if email.blank? and not info['email'].blank?

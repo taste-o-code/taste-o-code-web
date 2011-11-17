@@ -1,1 +1,40 @@
-%p Find me in app/views/home/show.html.haml
+%div.home
+
+  - if user_signed_in?
+    %div#available_points
+      Available:
+      %p#points= current_user.available_points
+
+  %div#purchased_langs
+    - if user_signed_in?
+      - @user_langs.each do |lang|
+        %div.language{ :id => lang.id }
+          %div.name.middle= lang.name
+          %div.score.middle
+            %p.solved= current_user.solved_tasks_for_lang(lang).count
+            %p.unsolved= "/ #{lang.tasks.count}"
+          %div.progress
+            %p.solved{ :style => "width: #{current_user.percent_solved_for_lang lang}%;"}
+
+  %div.separator Try new languages!
+  %div#non_purchased_langs
+    - @langs.each do |lang|
+      %div.language{ :id => lang.id }
+        %div.name.middle= lang.name
+        %div.price.middle
+          = lang.price
+          points
+
+  %div#buy_dialog.reveal-modal
+    %span
+      Buy
+      %p#language_to_buy
+      for
+      %p#price
+      ?
+    %a#buy_button.nice.radius.button Sure!
+    %a#cancel_button May be later
+    = form_tag buy_languages_path, :remote => true,
+    :id => 'buy_form', :format => :json do
+      = hidden_field_tag :id
+      

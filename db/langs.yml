@@ -30,3 +30,54 @@
     - http://www.ruby-lang.org/en/
 
 
+# Stubs
+
+- id: haskell
+  name: Haskell
+  price: 30
+  description: Haskell
+  links:
+    - a
+
+- id: clojure
+  name: Clojure
+  price: 20
+  description: Clojure
+  links:
+    - a
+
+- id: prolog
+  name: Prolog
+  price: 30
+  description: Prolog
+  links:
+    - a
+
+- id: csharp
+  name: C#
+  price: 10
+  description: C#
+  links:
+    - a
+
+- id: erlang
+  name: Erlang
+  price: 30
+  description: Erlang
+  links:
+    - a
+
+- id: scala
+  name: Scala
+  price: 20
+  description: Scala
+  links:
+    - a
+
+- id: fortran
+  name: Fortran
+  price: 20
+  description: Fortranx
+  links:
+    - a
+

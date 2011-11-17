@@ -14,7 +14,13 @@ class LanguagesController < ApplicationController
   def buy
     lang = Language.find(params[:id])
     success = current_user.buy_language(lang)
-    render :json => { :success => success }
+    respond_to do |format|
+      format.json do
+        response = { :success => success }
+        response[:tasks_count] = lang.tasks.count if success
+        render :json => response
+      end
+    end
   end
 
 end

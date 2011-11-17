@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
+      @user.clear_progress
       redirect_to({:action => :show, :id => @user.id}, :notice => 'Your profile successfully updated.')
     else
       render :action => :edit
