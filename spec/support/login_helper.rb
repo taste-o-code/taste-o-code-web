@@ -17,4 +17,11 @@ module LoginHelper
     find('form#login_form')
   end
 
+  def create_and_login_user(options = {})
+    Factory(:user, options).tap do |user|
+      visit new_user_session_path
+      login_user :user => user
+    end
+  end
+
 end

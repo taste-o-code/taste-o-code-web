@@ -29,6 +29,7 @@ Spork.prefork do
 
     config.include Mongoid::Matchers
     config.include Devise::TestHelpers, :type => :controller
+    config.include FlashMatcher, :type => :request
 
     require 'database_cleaner'
     DatabaseCleaner.orm      = :mongoid
@@ -49,6 +50,7 @@ Spork.prefork do
   Capybara.javascript_driver = :webkit
 
   OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock :google, :uid => '123456'
 end
 
 Spork.each_run do
