@@ -19,7 +19,7 @@ describe User do
     it { should validate_confirmation_of(:password) }
 
     it 'should not validate password for omniauth only accounts' do
-      usr = Factory(:user, :password => nil, :authentications => [Authentication.new])
+      usr = Factory(:user, :password => nil, :omniauth_identities => [OmniauthIdentity.new])
       usr.should be_valid
     end
 

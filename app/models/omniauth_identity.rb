@@ -1,4 +1,4 @@
-class Authentication
+class OmniauthIdentity
 
   include Mongoid::Document
 

@@ -12,7 +12,7 @@ class User
 
   auto_increment :id
 
-  embeds_many             :authentications
+  embeds_many             :omniauth_identities
   has_many                :submissions
   has_and_belongs_to_many :languages, :inverse_of => nil
   has_and_belongs_to_many :solved_tasks, :class_name => 'Task', :inverse_of => nil
@@ -80,7 +80,7 @@ class User
       name = [info['nickname'], info['name'], [info['first_name'], info['last_name']].join(' ')].detect(&:present?)
       self.name = name
     end
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+    omniauth_identities.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
   def gravatar(size)
@@ -107,7 +107,7 @@ class User
   end
 
   def omniauth_user?
-    not authentications.blank?
+    not omniauth_identities.blank?
   end
 
 end

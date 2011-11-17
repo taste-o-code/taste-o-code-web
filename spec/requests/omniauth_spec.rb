@@ -25,8 +25,8 @@ describe OmniauthController, :type => :request do
     end
 
     it "should not add identity if it's already attached to a different account" do
-      authentication = Authentication.new :provider => 'google', :uid => OmniAuth.config.mock_auth[:google]['uid']
-      winner = Factory :user, :name => 'Winner', :authentications => [authentication]
+      authentication = OmniauthIdentity.new :provider => 'google', :uid => OmniAuth.config.mock_auth[:google]['uid']
+      winner = Factory :user, :name => 'Winner', :omniauth_identities => [authentication]
 
       loser = create_and_login_user :name => 'Loser'
 
