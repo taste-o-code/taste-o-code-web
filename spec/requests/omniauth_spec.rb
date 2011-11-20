@@ -35,7 +35,7 @@ describe OmniauthController, :type => :request do
       lambda do
         visit settings_path
         find('#content a[href="/users/auth/google"]').click
-      end.should change{ user.reload.omniauth_identities.size }.by(1)
+      end.should change{ user.reload.omniauth_identities.size }.from(0).to(1)
 
       find('#user_bar .name').should have_content(user.name)
       page.should have_flash(:notice, 'Successfully added openid identity.')
