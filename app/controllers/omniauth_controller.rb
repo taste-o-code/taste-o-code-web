@@ -27,7 +27,7 @@ class OmniauthController < ApplicationController
           sign_in(:user, user)
           redirect_to back_url, :notice => 'Signed in successfully.'
         else
-          msg = "Email #{omniauth['user_info']['email']} is already taken.
+          msg = "Email #{omniauth['info']['email']} is already taken.
                  In case it is your account, try to login and add #{omniauth['provider']} login in settings."
           redirect_to :root, :flash => { :alert => msg }
         end

@@ -96,8 +96,8 @@ class User
   end
 
   def apply_omniauth(omniauth)
-    info = omniauth['user_info']
-    self.email = omniauth['user_info']['email'] if email.blank? and not info['email'].blank?
+    info = omniauth['info']
+    self.email = info['email'] if email.blank? and not info['email'].blank?
     if self.name.blank?
       name = [info['nickname'], info['name'], [info['first_name'], info['last_name']].join(' ')].detect(&:present?)
       self.name = name

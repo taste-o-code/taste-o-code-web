@@ -5,7 +5,7 @@ describe OmniauthController, :type => :request do
   include LoginHelper
 
   context 'if user is not logged in' do
-    it 'should sing in user with google openid' do
+    it 'should sign in user with google openid' do
       visit new_user_session_path
       find('#content a[href="/users/auth/google"]').click
 

@@ -205,9 +205,9 @@ Devise.setup do |config|
                              OA_CONFIG['facebook']['app_secret']
   config.omniauth :twitter,  OA_CONFIG['twitter']['consumer_key'],
                              OA_CONFIG['twitter']['consumer_secret']
-  config.omniauth :open_id,  OpenID::Store::Filesystem.new('/tmp'),
+  config.omniauth :openid,  :store => OpenID::Store::Filesystem.new('/tmp'),
                   :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
-  config.omniauth :open_id, OpenID::Store::Filesystem.new('/tmp'),
+  config.omniauth :openid, :store => OpenID::Store::Filesystem.new('/tmp'),
                   :name => 'yahoo', :identifier => 'https://me.yahoo.com'
 
   OpenID.fetcher.ca_file = '/etc/ssl/certs/ca-certificates.crt'

@@ -50,7 +50,9 @@ Spork.prefork do
   Capybara.javascript_driver = :webkit
 
   OmniAuth.config.test_mode = true
-  OmniAuth.config.add_mock :google, :uid => '123456'
+  # We can delete :info hash when https://github.com/intridea/omniauth/commit/885bb1639e0ec0b1b268338891b11b17929ffaef released.
+  OmniAuth.config.add_mock :google, :uid => '123456',
+                           :info => {:name => 'Bob Example'}
 end
 
 Spork.each_run do

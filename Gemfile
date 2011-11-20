@@ -17,10 +17,10 @@ gem 'jquery-rails', '~> 1.0.16'
 
 gem 'rails3-generators', '~> 0.17.4'
 
-gem 'devise', '~> 1.4.9'
-gem 'oa-oauth', :require => 'omniauth/oauth'
-gem 'oa-openid', :require => 'omniauth/openid'
-
+gem 'devise', '~> 1.5.0'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-openid'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
