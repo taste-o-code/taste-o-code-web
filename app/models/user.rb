@@ -60,9 +60,9 @@ class User
   end
 
   def buy_language(lang)
-    if self.available_points >= lang.price and not has_language?(lang)
+    if available_points >= lang.price and not has_language?(lang)
       self.available_points -= lang.price
-      self.languages << lang
+      languages << lang
       save
     else
       false
@@ -70,15 +70,15 @@ class User
   end
 
   def has_language?(lang)
-    self.languages.member? lang
+    languages.include? lang
   end
 
   def solved_tasks_for_lang(lang)
-    lang.tasks & self.solved_tasks
+    lang.tasks & solved_tasks
   end
 
   def unsubdued_tasks_for_lang(lang)
-    lang.tasks & self.unsubdued_tasks
+    lang.tasks & unsubdued_tasks
   end
 
   def percent_solved_for_lang(lang)
@@ -87,26 +87,22 @@ class User
   end
 
   def clear_progress
-    self.solved_tasks.clear
-    self.unsubdued_tasks.clear
-    self.languages.clear
-    self.total_points = INITIAL_POINTS
-    self.available_points = INITIAL_POINTS
+    [solved_tasks, unsubdued_tasks, languages].map &:clear
+    self.available_points = self.total_points = INITIAL_POINTS
     save
   end
 
   def apply_omniauth(omniauth)
     info = omniauth['info']
     self.email = info['email'] if email.blank? and not info['email'].blank?
-    if self.name.blank?
-      name = [info['nickname'], info['name'], [info['first_name'], info['last_name']].join(' ')].detect(&:present?)
-      self.name = name
+    if name.blank?
+      self.name = [info['nickname'], info['name'], [info['first_name'], info['last_name']].join(' ')].detect(&:present?)
     end
     omniauth_identities.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
   def gravatar(size)
-    hash = Digest::MD5.hexdigest(self.email.strip.downcase)
+    hash = Digest::MD5.hexdigest(email.strip.downcase)
     "http://www.gravatar.com/avatar/#{hash}?s=#{size}"
   end
 
@@ -114,10 +110,10 @@ class User
     current_password = params.delete(:current_password)
 
     result = if params[:password].blank?
-      self.errors.add(:password, :blank)
+      errors.add(:password, :blank)
       false
     elsif current_password.blank? or not valid_password?(current_password)
-      self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      errors.add(:current_password, current_password.blank? ? :blank : :invalid)
       false
     else
       # Update only passwords.
@@ -129,7 +125,7 @@ class User
   end
 
   def omniauth_user?
-    not omniauth_identities.blank?
+    omniauth_identities.present?
   end
 
 end
