@@ -30,14 +30,12 @@ group :assets do
   gem 'zurb-foundation', '~> 2.0.2'
 end
 
-
 group :development do
   gem 'mongrel', '>= 1.2.0.pre2'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'pry'
   gem 'pry-rails'
 end
-
 
 gem 'rspec-rails', :group => [:test, :development]
 

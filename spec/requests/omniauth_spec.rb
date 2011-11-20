@@ -5,7 +5,16 @@ describe OmniauthController, :type => :request do
   include LoginHelper
 
   context 'if user is not logged in' do
-    it 'should sign in user with google openid' do
+    it 'should create new account and sign in user' do
+      visit new_user_session_path
+      find('#content a[href="/users/auth/google"]').click
+
+      page.should have_content('Successfully created new account.')
+    end
+
+    it 'should sign in existing user' do
+      user = Factory :user_with_omniauth_identity
+
       visit new_user_session_path
       find('#content a[href="/users/auth/google"]').click
 
@@ -25,15 +34,14 @@ describe OmniauthController, :type => :request do
     end
 
     it "should not add identity if it's already attached to a different account" do
-      authentication = OmniauthIdentity.new :provider => 'google', :uid => OmniAuth.config.mock_auth[:google]['uid']
-      winner = Factory :user, :name => 'Winner', :omniauth_identities => [authentication]
+      first_user = Factory :user_with_omniauth_identity, :name => 'First'
 
-      loser = create_and_login_user :name => 'Loser'
+      second_user = create_and_login_user :name => 'Second'
 
       visit settings_path
       find('#content a[href="/users/auth/google"]').click
 
-      find('#user_bar .name').should have_content('Loser')
+      find('#user_bar .name').should have_content('Second')
       page.should have_flash(:alert, 'This openid identity is already attached to a different account.')
     end
   end

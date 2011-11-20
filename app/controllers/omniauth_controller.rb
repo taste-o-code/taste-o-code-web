@@ -25,7 +25,7 @@ class OmniauthController < ApplicationController
         user.apply_omniauth(omniauth)
         if user.save
           sign_in(:user, user)
-          redirect_to back_url, :notice => 'Signed in successfully.'
+          redirect_to back_url, :notice => 'Successfully created new account.'
         else
           msg = "Email #{omniauth['info']['email']} is already taken.
                  In case it is your account, try to login and add #{omniauth['provider']} login in settings."
