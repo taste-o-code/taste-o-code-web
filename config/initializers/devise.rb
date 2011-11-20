@@ -2,9 +2,23 @@ require 'openid/store/filesystem'
 require 'openid/fetchers'
 
 OA_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/omniauth.yml")
-# Use this hook to configure devise mailer, warden hooks and so forth. The first
-# four configuration values can also be set straight in your models.
+
 Devise.setup do |config|
+
+  # ==> OmniAuth
+
+  config.omniauth :facebook, OA_CONFIG['facebook']['app_id'], OA_CONFIG['facebook']['app_secret']
+
+  config.omniauth :twitter, OA_CONFIG['twitter']['consumer_key'], OA_CONFIG['twitter']['consumer_secret']
+
+  config.omniauth :openid, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id',
+                  :store => OpenID::Store::Filesystem.new('/tmp')
+
+  config.omniauth :openid, :name => 'yahoo', :identifier => 'https://me.yahoo.com',
+                  :store => OpenID::Store::Filesystem.new('/tmp')
+
+  OpenID.fetcher.ca_file = '/etc/ssl/certs/ca-certificates.crt'
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
@@ -197,21 +211,6 @@ Devise.setup do |config|
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
 
-  # ==> OmniAuth
-  # Add a new OmniAuth provider. Check the wiki for more information on setting
-  # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  config.omniauth :facebook, OA_CONFIG['facebook']['app_id'],
-                             OA_CONFIG['facebook']['app_secret']
-  config.omniauth :twitter,  OA_CONFIG['twitter']['consumer_key'],
-                             OA_CONFIG['twitter']['consumer_secret']
-  config.omniauth :openid,  :store => OpenID::Store::Filesystem.new('/tmp'),
-                  :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
-  config.omniauth :openid, :store => OpenID::Store::Filesystem.new('/tmp'),
-                  :name => 'yahoo', :identifier => 'https://me.yahoo.com'
-
-  OpenID.fetcher.ca_file = '/etc/ssl/certs/ca-certificates.crt'
-
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
@@ -221,4 +220,5 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
 end
