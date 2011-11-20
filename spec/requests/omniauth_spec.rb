@@ -5,18 +5,24 @@ describe OmniauthController, :type => :request do
   include LoginHelper
 
   context 'if user is not logged in' do
-    it 'should create new account and sign in user' do
+    it 'should create new account and sign in user if openid identity is not used by any existing user' do
       visit new_user_session_path
-      find('#content a[href="/users/auth/google"]').click
 
+      lambda do
+        find('#content a[href="/users/auth/google"]').click
+      end.should change(User, :count).from(0).to(1)
+
+      User.first.omniauth_identities.size.should == 1
       page.should have_content('Successfully created new account.')
     end
 
     it 'should sign in existing user' do
       user = Factory :user_with_omniauth_identity
 
-      visit new_user_session_path
-      find('#content a[href="/users/auth/google"]').click
+      lambda do
+        visit new_user_session_path
+        find('#content a[href="/users/auth/google"]').click
+      end.should_not change(User, :count)
 
       page.should have_content('Signed in successfully.')
     end
@@ -26,8 +32,10 @@ describe OmniauthController, :type => :request do
     it 'should add new openid identity to the account' do
       user = create_and_login_user
 
-      visit settings_path
-      find('#content a[href="/users/auth/google"]').click
+      lambda do
+        visit settings_path
+        find('#content a[href="/users/auth/google"]').click
+      end.should change{ user.reload.omniauth_identities.size }.by(1)
 
       find('#user_bar .name').should have_content(user.name)
       page.should have_flash(:notice, 'Successfully added openid identity.')
@@ -41,6 +49,7 @@ describe OmniauthController, :type => :request do
       visit settings_path
       find('#content a[href="/users/auth/google"]').click
 
+      second_user.reload.omniauth_identities.size.should == 0
       find('#user_bar .name').should have_content('Second')
       page.should have_flash(:alert, 'This openid identity is already attached to a different account.')
     end
