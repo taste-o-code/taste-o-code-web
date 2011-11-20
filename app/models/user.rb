@@ -74,11 +74,11 @@ class User
   end
 
   def solved_tasks_for_lang(lang)
-    lang.tasks & solved_tasks
+    solved_tasks.where(language_id: lang.id).to_a
   end
 
   def unsubdued_tasks_for_lang(lang)
-    lang.tasks & unsubdued_tasks
+    unsubdued_tasks.where(language_id: lang.id).to_a
   end
 
   def percent_solved_for_lang(lang)

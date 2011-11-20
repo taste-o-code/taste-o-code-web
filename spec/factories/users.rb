@@ -17,4 +17,8 @@ FactoryGirl.define do
     omniauth_identities [Factory.build(:omniauth_identity)]
   end
 
+  factory :user_with_languages, :parent => :user do |user|
+    user.after_create {|u| u.languages = [Factory(:language), Factory(:language)]}
+  end
+
 end
