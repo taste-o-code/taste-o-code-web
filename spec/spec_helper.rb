@@ -32,17 +32,13 @@ Spork.prefork do
     config.include FlashMatcher, :type => :request
 
     require 'database_cleaner'
-    DatabaseCleaner.orm = :mongoid
 
     config.before(:suite) do
+      DatabaseCleaner.orm = :mongoid
       DatabaseCleaner.strategy = :truncation
     end
 
     config.before(:each) do
-      DatabaseCleaner.start
-    end
-
-    config.after(:each) do
       DatabaseCleaner.clean
     end
   end
