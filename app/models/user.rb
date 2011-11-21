@@ -70,7 +70,7 @@ class User
   end
 
   def has_language?(lang)
-    languages.include? lang
+    language_ids.include? lang.id
   end
 
   def solved_tasks_for_lang(lang)

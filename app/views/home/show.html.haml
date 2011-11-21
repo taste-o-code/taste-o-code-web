@@ -19,11 +19,13 @@
   %div.separator Try new languages!
   %div#non_purchased_langs
     - @langs.each do |lang|
-      %div.language{ :id => lang.id }
+      %div.language{ :id => lang.id, 'data-price' => lang.price}
         %div.name.middle= lang.name
         %div.price.middle
           = lang.price
           points
+        - if user_signed_in? and lang.price <= current_user.available_points
+          %div.buy.middle Buy!
 
   %div#buy_dialog.reveal-modal
     %span
@@ -34,7 +36,5 @@
       ?
     %a#buy_button.nice.radius.button Sure!
     %a#cancel_button May be later
-    = form_tag buy_languages_path, :remote => true,
-    :id => 'buy_form', :format => :json do
+    = form_tag buy_languages_path, :remote => true, :id => 'buy_form', :format => :json do
       = hidden_field_tag :id
-      

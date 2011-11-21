@@ -17,7 +17,9 @@ class LanguagesController < ApplicationController
     respond_to do |format|
       format.json do
         response = { :success => success }
-        response[:tasks_count] = lang.tasks.count if success
+        response.merge!({tasks_count: lang.tasks.count,
+                         available_points: current_user.available_points,
+                         lang: lang.id}) if success
         render :json => response
       end
     end
