@@ -31,15 +31,16 @@ describe User do
   end
 
   describe 'has_language method' do
-    user = Factory(:user_with_languages)
-    present_lang = user.languages.first
-    non_present_lang = Factory(:language)
 
     it 'should has language' do
+      user = Factory(:user_with_languages)
+      present_lang = user.languages.first
       user.has_language?(present_lang).should be_true
     end
 
     it 'should not has language' do
+      user = Factory(:user_with_languages)
+      non_present_lang = Factory(:language)
       user.has_language?(non_present_lang).should be_false
     end
   end
@@ -80,11 +81,9 @@ describe User do
   describe 'tasks methods' do
     it 'should return solved tasks' do
       user = Factory(:user_with_languages)
-      # Take first tasks from every language
       solved_tasks = user.languages.map{ |l| l.tasks.first }
       user.solved_tasks = solved_tasks
       user.save
-      # Task we want to get from user.
       goal_task = solved_tasks.first
       tasks_for_lang = user.solved_tasks_for_lang(goal_task.language)
       tasks_for_lang.should eq([goal_task])
@@ -92,11 +91,9 @@ describe User do
 
     it 'should return unsubdued tasks' do
       user = Factory(:user_with_languages)
-      # Take first tasks from every language
       unsubdued_tasks = user.languages.map{ |l| l.tasks.first }
       user.unsubdued_tasks = unsubdued_tasks
       user.save
-      # Task we want to get from user.
       goal_task = unsubdued_tasks.first
       tasks_for_lang = user.unsubdued_tasks_for_lang(goal_task.language)
       tasks_for_lang.should eq([goal_task])
@@ -104,13 +101,12 @@ describe User do
 
     it 'should return percent tasks solved' do
       user = Factory(:user_with_languages)
-      # Take first tasks from every language
       solved_tasks = user.languages.map{ |l| l.tasks.first }
       user.solved_tasks = solved_tasks
       user.save
       lang = user.languages.first
       expected = 1.0 / lang.tasks.count * 100
-      user.percent_solved_for_lang(lang).should be_within(20).of(expected)
+      user.percent_solved_for_lang(lang).should be_within(1).of(expected)
     end
   end
 end
