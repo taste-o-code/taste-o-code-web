@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(params[:user])
       @user.clear_progress
-      redirect_to({:action => :show, :id => @user.id}, :notice => 'Your profile successfully updated.')
+      redirect_to @user, :notice => 'Your profile successfully updated.'
     else
       render :action => :edit
     end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     if params[:id] == current_user.id.to_s
       @user = User.find(current_user.id)
     else
-      redirect_to({ :action => :show, :id => params[:id] }, :alert => 'You can edit only your own profile.')
+      redirect_to user_path(params[:id]), :alert => 'You can edit only your own profile.'
     end
   end
 
