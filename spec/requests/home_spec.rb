@@ -12,8 +12,7 @@ describe HomeController, :type => :request do
 
   it 'should go to lang page after clicking on lang', :js => true do
     find("##{@lang.id}").click
-
-    current_path.should == language_path(@lang)
+    current_path.should eq(language_path(@lang))
   end
 
   it 'should buy language', :js => true do
