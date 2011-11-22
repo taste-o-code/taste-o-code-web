@@ -23,4 +23,4 @@ $('form#login_form').live 'ajax:success', (evt, data, status, xhr) ->
     $(this).parent().html $('<div/>', { class: 'alert-box success', }).html(data.message)
     setTimeout (-> window.location.reload()), 1000
   else
-    $('<div/>', { class: 'alert-box error', }).html(data.message).insertBefore this
+    $('<div/>', { class: 'alert-box error' }).html(data.message).insertBefore this
