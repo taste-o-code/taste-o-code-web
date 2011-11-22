@@ -19,7 +19,8 @@ $ ->
     $(this).trigger 'reveal:close'
 
   moveLanguage = (lang, tasksCount) ->
-    lang.slideUp 'slow', ->
+    duration = 1000
+    lang.fadeOut duration, ->
       $('#purchased_langs').prepend lang
       lang.find(el).remove() for el in ['.price', '.buy']
       scores = $('<div/>')
@@ -29,8 +30,8 @@ $ ->
       progress = $('<div/>')
         .addClass('progress')
         .append($('<p/>').addClass('solved').css('width', '0%'))
-      lang.append(scores).append(progress)
-      lang.slideDown('slow')
+      lang.append(scores).append progress
+      lang.fadeIn duration
 
   removeBuyButtons = (availablePoints) ->
     $('#non_purchased_langs .language')
