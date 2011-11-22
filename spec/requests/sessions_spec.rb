@@ -51,7 +51,7 @@ describe SessionsController, :type => :request do
       form = open_ajax_login_form
       form.should be_visible
 
-      login_user :user => user, :form => form
+      login_user user, :form => form
       page.should have_content('Reloading')
 
       current_path.should == about_path

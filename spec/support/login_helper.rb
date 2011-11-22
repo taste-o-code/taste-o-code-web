@@ -1,7 +1,7 @@
 module LoginHelper
 
-  def login_user(options = {})
-    user = options.fetch(:user) { Factory(:user) }
+  def login_user(user = nil, options = {})
+    user ||= Factory(:user)
     login(user.email, user.password, options[:form])
   end
 
@@ -20,8 +20,12 @@ module LoginHelper
   def create_and_login_user(options = {})
     Factory(:user, options).tap do |user|
       visit new_user_session_path
-      login_user :user => user
+      login_user user
     end
+  end
+
+  def openid_link(provider = :google)
+    find("#content a[href='/users/auth/#{provider}']")
   end
 
 end

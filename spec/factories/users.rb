@@ -15,6 +15,7 @@ FactoryGirl.define do
 
   factory :user_with_omniauth_identity, :parent => :user do |user|
     omniauth_identities [Factory.build(:omniauth_identity)]
+    password nil
   end
 
   factory :user_with_languages, :parent => :user do |user|

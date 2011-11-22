@@ -6,10 +6,9 @@ describe OmniauthController, :type => :request do
 
   context 'if user is not logged in' do
     it 'should create new account and sign in user if openid identity is not used by any existing user' do
-      visit new_user_session_path
-
       lambda do
-        find('#content a[href="/users/auth/google"]').click
+        visit new_user_session_path
+        openid_link.click
       end.should change(User, :count).from(0).to(1)
 
       User.first.omniauth_identities.size.should == 1
@@ -21,7 +20,7 @@ describe OmniauthController, :type => :request do
 
       lambda do
         visit new_user_session_path
-        find('#content a[href="/users/auth/google"]').click
+        openid_link.click
       end.should_not change(User, :count)
 
       page.should have_content('Signed in successfully.')
@@ -34,7 +33,7 @@ describe OmniauthController, :type => :request do
 
       lambda do
         visit settings_path
-        find('#content a[href="/users/auth/google"]').click
+        openid_link.click
       end.should change{ user.reload.omniauth_identities.size }.from(0).to(1)
 
       find('#user_bar .name').should have_content(user.name)
@@ -47,7 +46,7 @@ describe OmniauthController, :type => :request do
       second_user = create_and_login_user :name => 'Second'
 
       visit settings_path
-      find('#content a[href="/users/auth/google"]').click
+      openid_link.click
 
       second_user.reload.omniauth_identities.size.should == 0
       find('#user_bar .name').should have_content('Second')
