@@ -10,7 +10,7 @@ describe SessionsController, :type => :request do
       login_user
 
       current_path.should == root_path
-      page.should have_content('Signed in successfully.')
+      page.should have_flash(:notice, 'Signed in successfully.')
     end
 
     it 'should not login user with incorrect password' do
@@ -20,7 +20,7 @@ describe SessionsController, :type => :request do
       login user.email, '654321'
 
       current_path.should == new_user_session_path
-      page.should have_content('Invalid email or password.')
+      page.should have_flash(:alert, 'Invalid email or password.')
     end
 
     it 'should not login user with incorrect email' do
@@ -28,7 +28,7 @@ describe SessionsController, :type => :request do
       login 'correct@example.com', '123456'
 
       current_path.should == new_user_session_path
-      page.should have_content('Invalid email or password.')
+      page.should have_flash(:alert, 'Invalid email or password.')
     end
 
     it 'should reject logged in user redirecting him to root' do
@@ -38,7 +38,7 @@ describe SessionsController, :type => :request do
       visit new_user_session_path
 
       current_path.should == root_path
-      page.should have_content('You are already signed in.')
+      page.should have_flash(:alert, 'You are already signed in.')
     end
   end
 
@@ -84,7 +84,7 @@ describe SessionsController, :type => :request do
       click_link 'Logout'
 
       current_path.should == root_path
-      page.should have_content('Signed out successfully.')
+      page.should have_flash(:notice, 'Signed out successfully.')
     end
   end
 

@@ -12,7 +12,7 @@ describe OmniauthController, :type => :request do
       end.should change(User, :count).from(0).to(1)
 
       User.first.omniauth_identities.size.should == 1
-      page.should have_content('Successfully created new account.')
+      page.should have_flash(:notice, 'Successfully created new account.')
     end
 
     it 'should sign in existing user' do
@@ -23,7 +23,7 @@ describe OmniauthController, :type => :request do
         openid_link.click
       end.should_not change(User, :count)
 
-      page.should have_content('Signed in successfully.')
+      page.should have_flash(:notice, 'Signed in successfully.')
     end
   end
 
