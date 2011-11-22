@@ -19,7 +19,19 @@ FactoryGirl.define do
   end
 
   factory :user_with_languages, :parent => :user do |user|
-    user.after_create {|u| u.languages = [Factory(:language), Factory(:language)]}
+    user.after_create { |u| u.languages = [Factory(:language), Factory(:language)] }
+  end
+
+end
+
+Factory.define :task do; end
+
+FactoryGirl.define do
+
+  factory :language do |lang|
+    sequence(:name) { |n| "Language #{n}" }
+    sequence(:id) { |n| "lang_#{n}" }
+    lang.after_create { |l| 2.times { Factory(:task, language: l) } }
   end
 
 end
