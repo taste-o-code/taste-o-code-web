@@ -1,7 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 $ ->
   $('.language').on 'click', (event) ->
     return if $(event.target).hasClass 'buy'
@@ -37,16 +33,14 @@ $ ->
       lang.slideDown('slow')
 
   removeBuyButtons = (availablePoints) ->
-    $('.language .buy').each (_, el) ->
-      price = window.parseInt($(el).parent('.language').attr('data-price'), 10)
-      $(el).remove() if price > availablePoints
+    $('#non_purchased_langs .language')
+      .filter( -> $(this).attr('data-price') > availablePoints )
+      .find('.buy').remove()
 
-
-
-  $('#buy_form').on 'ajax:success', (_, data) ->
+  $('#buy_form').on 'ajax:success', (evt, data) ->
     if data.success
       lang = $('#' + data.lang)
-      $('#points').text(data.available_points)
+      $('#points').text data.available_points
       moveLanguage lang, data.tasks_count
       removeBuyButtons data.available_points
     else
