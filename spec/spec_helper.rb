@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'spork'
 
-if ENV["COV"]
+if ENV['SCOV']
   require 'simplecov'
   SimpleCov.start 'rails'
-  puts "Running coverage tool\n"
+  puts 'Running simplecov'
 end
 
 Spork.prefork do
