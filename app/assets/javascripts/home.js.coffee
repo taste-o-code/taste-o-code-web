@@ -1,5 +1,5 @@
 $ ->
-  $('.language').on 'click', (event) ->
+  $('.home-page .language').on 'click', (event) ->
     return if $(event.target).hasClass 'buy'
     url = '/languages/' + this.id;
     window.location = url
@@ -11,11 +11,11 @@ $ ->
     $('#buy_form #id').val lang.attr('id')
     $('#buy_dialog').reveal({animation: 'fade'})
 
-  $('#buy_button').on 'click', ->
+  $('.home-page #buy_button').on 'click', ->
     $(this).trigger 'reveal:close'
     $('#buy_form').submit()
 
-  $('#cancel_button').on 'click', ->
+  $('.home-page #cancel_button').on 'click', ->
     $(this).trigger 'reveal:close'
 
   moveLanguage = (lang, tasksCount) ->
@@ -38,7 +38,7 @@ $ ->
       .filter( -> $(this).attr('data-price') > availablePoints )
       .find('.buy').remove()
 
-  $('#buy_form').on 'ajax:success', (evt, data) ->
+  $('.home-page #buy_form').on 'ajax:success', (evt, data) ->
     if data.success
       lang = $('#' + data.lang)
       $('#points').text data.available_points
