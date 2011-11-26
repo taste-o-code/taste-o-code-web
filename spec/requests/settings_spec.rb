@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SettingsController, :type => :request do
+describe SettingsController do
 
   include LoginHelper
 

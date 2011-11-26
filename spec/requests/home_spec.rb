@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe HomeController, :type => :request do
+describe HomeController do
 
   include LoginHelper
 

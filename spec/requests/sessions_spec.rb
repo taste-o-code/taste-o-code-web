@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SessionsController, :type => :request do
+describe SessionsController do
 
   include LoginHelper
 

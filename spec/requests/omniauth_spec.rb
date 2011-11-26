@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OmniauthController, :type => :request do
+describe OmniauthController do
 
   include LoginHelper
 

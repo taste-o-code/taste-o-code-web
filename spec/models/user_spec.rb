@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User, :type => :model do
+describe User do
 
   describe 'validations' do
     it { should validate_presence_of :name }
