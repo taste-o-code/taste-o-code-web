@@ -14,7 +14,7 @@ guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch(%r{^spec/support/(.+)\.rb$})
 end
 
-guard 'rspec', :version => 2, :cli => '--colour --drb' do
+guard 'rspec', :version => 2, :cli => '--colour --drb --format Fuubar' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
   watch('spec/spec_helper.rb')                        { "spec" }

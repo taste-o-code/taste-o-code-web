@@ -44,13 +44,15 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'launchy'
-  gem 'simplecov', :require => false
-
-  gem 'guard-rspec'
-  gem 'guard-spork'
-  gem 'guard-bundler'
-  gem 'rb-inotify', :require => false
 
   gem 'mongoid-rspec'
   gem 'database_cleaner'
+
+  gem 'simplecov', :require => false
+  gem 'fuubar',    :require => false
+
+  gem 'guard-rspec',   :require => false
+  gem 'guard-spork',   :require => false
+  gem 'guard-bundler', :require => false
+  gem 'rb-inotify',    :require => false
 end
