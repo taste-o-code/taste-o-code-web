@@ -29,7 +29,7 @@ class OmniauthController < ApplicationController
         else
           msg = "Email #{omniauth['info']['email']} is already taken.
                  In case it is your account, try to login and add #{omniauth['provider']} login in settings."
-          redirect_to :root, :flash => { :alert => msg }
+          redirect_to new_user_session_path, :flash => { :alert => msg }
         end
       end
     end

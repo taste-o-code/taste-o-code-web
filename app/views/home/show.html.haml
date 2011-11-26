@@ -30,11 +30,11 @@
   %div#buy_dialog.reveal-modal
     %span
       Buy
-      %p#language_to_buy
+      %p#lang_name
       for
-      %p#price
+      %p#lang_price
       ?
     %a#buy_button.nice.radius.button Sure!
     %a#cancel_button May be later
     = form_tag buy_languages_path, :remote => true, :id => 'buy_form', :format => :json do
-      = hidden_field_tag :id
+      = hidden_field_tag :lang_id

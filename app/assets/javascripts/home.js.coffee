@@ -6,9 +6,9 @@ $ ->
 
   $('#non_purchased_langs .buy').on 'click', ->
     lang = $(this).parent('.language')
-    $('#language_to_buy').html lang.find('.name').html()
-    $('#price').html lang.find('.price').html()
-    $('#buy_form #id').val lang.attr('id')
+    $('#lang_name').html lang.find('.name').html()
+    $('#lang_price').html lang.find('.price').html()
+    $('#buy_form #lang_id').val lang.attr('id')
     $('#buy_dialog').reveal({animation: 'fade'})
 
   $('.home-page #buy_button').on 'click', ->

@@ -27,9 +27,10 @@ Spork.prefork do
   RSpec.configure do |config|
     config.mock_with :rspec
 
-    config.include Mongoid::Matchers, :type => :model
+    config.include Mongoid::Matchers,   :type => :model
     config.include Devise::TestHelpers, :type => :controller
-    config.include FlashMatcher, :type => :request
+    config.include LoginHelper,         :type => :request
+    config.include FlashMatcher,        :type => :request
 
     require 'database_cleaner'
 
@@ -47,7 +48,7 @@ Spork.prefork do
 
   OmniAuth.config.test_mode = true
   # We can delete :info hash when https://github.com/intridea/omniauth/commit/885bb1639e0ec0b1b268338891b11b17929ffaef released.
-  OmniAuth.config.add_mock :google, :uid => '123456', :info => { :name => 'Bob Example' }
+  OmniAuth.config.add_mock :google, :uid => '123456', :info => { :name => 'Bob Example', :email => 'bob@example.com' }
 
 end
 

@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe SessionsController do
 
-  include LoginHelper
-
   context 'login from login page' do
     it 'should login user with correct email and password' do
       visit new_user_session_path

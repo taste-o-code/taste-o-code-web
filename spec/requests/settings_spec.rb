@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe SettingsController do
 
-  include LoginHelper
-
   context 'settings form' do
     it 'should allow user to change his email' do
       user = create_and_login_user :email => 'old@example.com'

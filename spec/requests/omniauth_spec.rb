@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe OmniauthController do
 
-  include LoginHelper
-
   context 'if user is not logged in' do
     it 'should create new account and sign in user if openid identity is not used by any existing user' do
       lambda do
@@ -24,6 +22,19 @@ describe OmniauthController do
       end.should_not change(User, :count)
 
       page.should have_flash(:notice, 'Signed in successfully.')
+    end
+
+    it 'should not allow openid identity with email that is already associated with a different account' do
+      email = OmniAuth.config.mock_auth[:google]['info']['email']
+      first_user = Factory :user, :email => email
+
+      lambda do
+        visit new_user_session_path
+        openid_link.click
+      end.should_not change(User, :count)
+
+      current_path.should == new_user_session_path
+      page.should have_flash(:alert, "Email #{email} is already taken.")
     end
   end
 

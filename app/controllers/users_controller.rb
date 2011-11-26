@@ -8,9 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    unless @user = User.first(:conditions => { :id => params[:id].to_i })
-      redirect_to({ :action => :index }, :alert => "There is no user with id #{params[:id]}.")
-    end
+    @user = User.find params[:id].to_i
   end
 
   def update

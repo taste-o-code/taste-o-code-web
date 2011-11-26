@@ -3,6 +3,8 @@ FactoryGirl.define do
   factory :user do
     sequence(:name) { |i| "John Doe #{i}" }
     sequence(:email) { |i| "john#{i}@example.com" }
+    location 'Minsk, Belarus'
+    about 'Poor factory user...'
     password '123456'
   end
 
@@ -31,6 +33,8 @@ FactoryGirl.define do
   factory :language do |lang|
     sequence(:name) { |n| "Language #{n}" }
     sequence(:id) { |n| "lang_#{n}" }
+    description 'Description and some interesting facts about language.'
+    links { |l| ["example.org/wiki/#{l.name}", "example.org/languages/#{l.name.parameterize}"] }
     lang.after_create { |l| 2.times { Factory(:task, language: l) } }
   end
 
