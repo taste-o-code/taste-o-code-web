@@ -29,16 +29,29 @@ describe SettingsController, :type => :request do
       user.reload.email.should == email
       page.should have_content("Email can't be blank")
     end
+  end
 
-    it 'should not show password form for user who registered via openid' do
+  context 'password form' do
+    it 'should be displayed for regular user' do
+      user = create_and_login_user
+
+      visit settings_path
+
+      page.should have_field('Current password')
+      page.should have_field('New password')
+      page.should have_field('Repeat password')
+    end
+
+    it 'should not be displayed for user who registered via openid' do
       user = Factory :user_with_omniauth_identity
       visit new_user_session_path
       openid_link.click
 
       visit settings_path
 
-      page.should_not have_content('Change password')
-      page.should_not have_selector('#user_password')
+      page.should_not have_field('Current password')
+      page.should_not have_field('New password')
+      page.should_not have_field('Repeat password')
     end
   end
 

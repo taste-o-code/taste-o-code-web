@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
 
   describe 'validations' do
     it { should validate_presence_of :name }
@@ -15,7 +15,7 @@ describe User do
     end
 
     it { should validate_presence_of :password }
-    it { should validate_length_of(:password) }
+    it { should validate_length_of(:password).with_minimum(6) }
     it { should validate_confirmation_of(:password) }
 
     it 'should not validate password for omniauth only accounts' do
@@ -28,10 +28,11 @@ describe User do
       usr.should_not be_valid
     end
 
+    it { should validate_length_of(:location).with_maximum(100) }
+    it { should validate_length_of(:about).with_maximum(1000) }
   end
 
   describe 'has_language method' do
-
     it 'should has language' do
       user = Factory(:user_with_languages)
       present_lang = user.languages.first

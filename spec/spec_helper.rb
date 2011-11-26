@@ -27,7 +27,7 @@ Spork.prefork do
   RSpec.configure do |config|
     config.mock_with :rspec
 
-    config.include Mongoid::Matchers
+    config.include Mongoid::Matchers, :type => :model
     config.include Devise::TestHelpers, :type => :controller
     config.include FlashMatcher, :type => :request
 
