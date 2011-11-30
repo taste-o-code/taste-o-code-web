@@ -4,7 +4,7 @@ gem 'rails', '~> 3.1.1'
 
 gem 'mongoid',  '~> 2.3.1'
 gem 'mongoid_auto_increment', '~> 0.0.8'
-gem 'bson_ext', '~> 1.4.0'
+gem 'bson_ext'
 
 gem 'haml',       '~> 3.1.3'
 gem 'haml-rails', '~> 0.3.4'
