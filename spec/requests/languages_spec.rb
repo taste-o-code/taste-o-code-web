@@ -30,7 +30,7 @@ describe LanguagesController do
       @lang = Factory :language, price: 0
 
       @user.buy_language @lang
-      visit url_for(@lang)
+      visit language_path(@lang)
     end
 
     it 'should contains links to tasks' do
@@ -42,7 +42,7 @@ describe LanguagesController do
 
       click_link task.name
 
-      current_path.should eq(url_for [@lang, task])
+      current_path.should eq(language_task_path(@lang, task))
     end
   end
 

@@ -9,6 +9,7 @@ TasteOCodeWeb::Application.routes.draw do
 
   resources :languages, :only => [:index, :show] do
     post 'buy', :on => :collection
+    resources :tasks
   end
 
   resource :settings, :only => [:show, :update]

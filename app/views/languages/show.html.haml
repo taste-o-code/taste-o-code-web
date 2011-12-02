@@ -7,3 +7,9 @@
     %p.title Useful links:
     - @lang.links.each do |link|
       %p.link= link_to link, link
+
+  - if user_signed_in? and current_user.has_language?(@lang)
+    %div.tasks
+      - @lang.tasks.each do |task|
+        %div.task
+          %p.name= link_to task.name, [@lang, task]

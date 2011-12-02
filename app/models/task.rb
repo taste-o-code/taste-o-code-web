@@ -13,5 +13,7 @@ class Task
 
   validates_uniqueness_of :slug, scope: :language_id
 
-
+  def to_param
+    slug
+  end
 end
