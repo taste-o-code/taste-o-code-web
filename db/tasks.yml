@@ -1,0 +1,84 @@
+- language_id: java
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: java
+  name: 2 + 2
+  slug: two-plus-two
+  position: 2
+  description: Calculate sum of two numbers.
+  award: 3
+
+- language_id: cpp
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: ruby
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: haskell
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: clojure
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: prolog
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: csharp
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: erlang
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: scala
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+- language_id: fortran
+  name: Hello, world.
+  slug: hello-world
+  position: 1
+  description: Write program, which prints "Hello, world." text to standard output.
+  award: 2
+
+
+
+
+
+
+
+
