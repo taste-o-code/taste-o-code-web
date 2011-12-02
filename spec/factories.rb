@@ -26,7 +26,16 @@ FactoryGirl.define do
 
 end
 
-Factory.define :task do; end
+FactoryGirl.define do
+
+  factory :task do |task|
+    sequence(:position) { |n| n }
+    sequence(:name) { |n| "Task no #{n}" }
+    sequence(:slug) { |n| "task_#{n}" }
+    description 'Task description goes here.'
+    award 10
+  end
+end
 
 FactoryGirl.define do
 
