@@ -51,5 +51,9 @@ $ ->
       moveLanguage lang, data.tasks_count
       removeBuyButtons data.available_points
     else
-      window.alert 'No :('
+      window.alert """You can't buy this language.\n
+                    May be we can't connect to server :|\n
+                    or you're out of points :(\n
+                    or you've already bought this language o_O\n
+                    or you're trying to break the system! >:O"""
 
