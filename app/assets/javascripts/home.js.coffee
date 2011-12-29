@@ -4,12 +4,18 @@ $ ->
     url = '/languages/' + this.id;
     window.location = url
 
+  showDialog = (dialog) ->
+    dialog_top = $(window).height() / 2 + dialog.height()
+    dialog.css {top: dialog_top}
+    dialog.reveal {animation: 'fade', closeOnBackgroundClick: false}
+
+
   $('#non_purchased_langs .buy').on 'click', ->
     lang = $(this).parent('.language')
     $('#lang_name').html lang.find('.name').html()
     $('#lang_price').html lang.find('.price').html()
     $('#buy_form #lang_id').val lang.attr('id')
-    $('#buy_dialog').reveal({animation: 'fade', closeOnBackgroundClick: false,})
+    showDialog $('#buy_dialog')
 
   $('.home-page #buy_button').on 'click', ->
     $(this).trigger 'reveal:close'
