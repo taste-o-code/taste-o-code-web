@@ -9,7 +9,7 @@ $ ->
     $('#lang_name').html lang.find('.name').html()
     $('#lang_price').html lang.find('.price').html()
     $('#buy_form #lang_id').val lang.attr('id')
-    $('#buy_dialog').reveal({animation: 'fade'})
+    $('#buy_dialog').reveal({animation: 'fade', closeOnBackgroundClick: false,})
 
   $('.home-page #buy_button').on 'click', ->
     $(this).trigger 'reveal:close'
