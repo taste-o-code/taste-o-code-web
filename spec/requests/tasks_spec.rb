@@ -21,6 +21,31 @@ describe TasksController do
 
       current_path.should eq(language_path @lang)
     end
+
+    it 'should submit solution', :js => true do
+      source =  'print "Hello, world!"'
+      submit_solution source
+      find('.submission[data-testing="true"]')
+
+      submission = Submission.first
+      submission.user_id.should eq(@user.id)
+      submission.task_id.should eq(@task.id)
+      submission.source.should eq(source)
+      submission.result.should eq(:testing)
+    end
+
+    it 'should not submit empty solution', :js => true do
+      submit_solution ''
+      lambda { find('.submission[data-testing="true"]') }.should raise_error
+
+      Submission.first.should be_nil
+    end
+
+    def submit_solution(source)
+      fill_in 'source', :with => source
+      click_button 'submit_button'
+    end
+
   end
 
   context 'user without access to task' do

@@ -7,6 +7,7 @@ module ApplicationHelper
       'about'     => { :controller => '/about',     :action => :show },
   }
 
+
   def navigation
     render :partial => 'layouts/navigation'
   end
@@ -24,6 +25,11 @@ module ApplicationHelper
       message = "#{field.to_s.humanize} #{model.errors[field].first}"
       content_tag('div', message, :class => 'field-error')
     end
+  end
+
+  def submission_image(submission)
+    ext = submission.result == :testing ? 'gif' : 'png'
+    image_tag("#{submission.result}.#{ext}")
   end
 
 end

@@ -3,4 +3,26 @@
     Back to
     =link_to @task.language.name, @task.language
   %h1.name= @task.name
+
   %div.description= @task.description
+
+  %h4 Your solution
+  = form_tag submit_language_task_path(@task.language, @task),
+    :remote => true, :id => 'submit_form', :format => :json do
+    = text_area_tag :source, nil, :rows => 30
+
+
+  %button.nice.radius.button#submit_button Submit
+
+  %div.submissions
+    %h4 Submissions
+    %div.submission#submission_header
+      %div.time Submission time
+      %div.source Source
+      %div.result Result
+    - current_user.submissions_for_task(@task).each do |submission|
+      %div.submission{ :id => submission.id, 'data-testing' => (submission.result == :testing).to_s }
+        %div.time= submission.time.strftime('%H:%M:%S %d %b')
+        %div.source #
+        %div.result= submission_image(submission)
+
