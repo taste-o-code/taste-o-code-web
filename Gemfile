@@ -14,6 +14,7 @@ gem 'capistrano', '~> 2.9.0'
 gem 'therubyracer', '~> 0.9.8'
 
 gem 'jquery-rails', '~> 1.0.16'
+gem 'gritter', '~> 1.0.0'
 
 gem 'rails3-generators', '~> 0.17.4'
 
@@ -28,7 +29,6 @@ group :assets do
   gem 'uglifier',     '~> 1.0.3'
 
   gem 'zurb-foundation', '~> 2.0.2'
-  gem 'gritter', '~> 1.0.0'
 end
 
 group :development do
