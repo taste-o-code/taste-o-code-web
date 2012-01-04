@@ -4,11 +4,10 @@ describe SessionsController do
 
   context 'login from login page' do
     it 'should login user with correct email and password' do
-      visit new_user_session_path
-      login_user
+      user = create_and_login_user
 
       current_path.should == root_path
-      page.should have_flash(:notice, 'Signed in successfully.')
+      should_be_logged_in user
     end
 
     it 'should not login user with incorrect password' do
@@ -18,7 +17,7 @@ describe SessionsController do
       login user.email, '654321'
 
       current_path.should == new_user_session_path
-      page.should have_flash(:alert, 'Invalid email or password.')
+      should_not_be_logged_in
     end
 
     it 'should not login user with incorrect email' do
@@ -26,7 +25,7 @@ describe SessionsController do
       login 'correct@example.com', '123456'
 
       current_path.should == new_user_session_path
-      page.should have_flash(:alert, 'Invalid email or password.')
+      should_not_be_logged_in
     end
 
     it 'should reject logged in user redirecting him to root' do
@@ -36,7 +35,6 @@ describe SessionsController do
       visit new_user_session_path
 
       current_path.should == root_path
-      page.should have_flash(:alert, 'You are already signed in.')
     end
   end
 
@@ -53,7 +51,7 @@ describe SessionsController do
       page.should have_content('Reloading')
 
       current_path.should == about_path
-      find('#user_bar .name').should have_content('Donald Duck')
+      should_be_logged_in user
     end
 
     it 'should not login user with incorrect password' do
@@ -75,14 +73,14 @@ describe SessionsController do
   context 'logout from user menu' do
     it 'should logout user', :js => true do
       visit new_user_session_path
-      login_user
+      user = create_and_login_user
 
       visit home_path
       find('#user_trigger').trigger(:hover)
       click_link 'Logout'
 
       current_path.should == root_path
-      page.should have_flash(:notice, 'Signed out successfully.')
+      should_not_be_logged_in
     end
   end
 

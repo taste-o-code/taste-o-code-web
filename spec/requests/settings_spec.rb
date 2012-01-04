@@ -13,7 +13,6 @@ describe SettingsController do
 
       user.reload.email.should == new_email
       find_field('user_email').value.should == new_email
-      page.should have_flash(:notice, 'Your settings were successfully updated.')
     end
 
     it 'should not allow to save empty email' do
@@ -72,7 +71,6 @@ describe SettingsController do
       try_change_password @old_pass, @new_pass, @new_pass
 
       @user.reload.valid_password?(@new_pass).should be_true
-      page.should have_flash(:notice, 'Your password was successfully changed.')
     end
 
     it 'should not accept blank password' do

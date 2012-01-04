@@ -42,7 +42,6 @@ describe UsersController do
       visit edit_user_path(owner)
 
       current_path.should == user_path(owner)
-      page.should have_flash(:alert, 'You can edit only your own profile.')
     end
   end
 
@@ -56,7 +55,6 @@ describe UsersController do
       click_button 'Save'
 
       current_path.should == user_path(user)
-      page.should have_flash(:notice, 'Your profile successfully updated.')
       user = user.reload
       new_info.each do |field, value|
         user[field].should == value

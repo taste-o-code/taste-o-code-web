@@ -17,4 +17,10 @@ class ApplicationController < ActionController::Base
     redirect_to :root unless user_signed_in?
   end
 
+  def notification(type, title, text, options = {})
+    notification = { :value => text, :title => title }
+    notification.merge! options
+    { type => notification }
+  end
+
 end

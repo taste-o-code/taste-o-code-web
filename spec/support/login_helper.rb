@@ -24,6 +24,14 @@ module LoginHelper
     end
   end
 
+  def should_be_logged_in(user)
+    find('#user_bar .name').should have_content(user.name)
+  end
+
+  def should_not_be_logged_in
+    page.should have_css('#signup')
+  end
+
   def openid_link(provider = :google)
     find("#content a[href='/users/auth/#{provider}']")
   end

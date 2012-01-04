@@ -9,8 +9,9 @@ describe OmniauthController do
         openid_link.click
       end.should change(User, :count).from(0).to(1)
 
-      User.first.omniauth_identities.size.should == 1
-      page.should have_flash(:notice, 'Successfully created new account.')
+      user = User.first
+      user.omniauth_identities.size.should == 1
+      should_be_logged_in user
     end
 
     it 'should sign in existing user' do
@@ -21,7 +22,7 @@ describe OmniauthController do
         openid_link.click
       end.should_not change(User, :count)
 
-      page.should have_flash(:notice, 'Signed in successfully.')
+      should_be_logged_in user
     end
 
     it 'should not allow openid identity with email that is already associated with a different account' do
@@ -34,7 +35,7 @@ describe OmniauthController do
       end.should_not change(User, :count)
 
       current_path.should == new_user_session_path
-      page.should have_flash(:alert, "Email #{email} is already taken.")
+      should_not_be_logged_in
     end
   end
 
@@ -48,7 +49,6 @@ describe OmniauthController do
       end.should change{ user.reload.omniauth_identities.size }.from(0).to(1)
 
       find('#user_bar .name').should have_content(user.name)
-      page.should have_flash(:notice, 'Successfully added openid identity.')
     end
 
     it "should not add identity if it's already attached to a different account" do
@@ -60,8 +60,7 @@ describe OmniauthController do
       openid_link.click
 
       second_user.reload.omniauth_identities.size.should == 0
-      find('#user_bar .name').should have_content('Second')
-      page.should have_flash(:alert, 'This openid identity is already attached to a different account.')
+      should_be_logged_in second_user
     end
   end
 

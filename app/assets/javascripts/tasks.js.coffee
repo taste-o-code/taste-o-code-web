@@ -4,19 +4,22 @@ $ ->
 
   $('.task-page #submit_button').on 'click', ->
     if $('#source').val().length == 0
-      window.alert("You cannot submit empty solution")
+      $.gritter.add {image: '/assets/warning.png', title: 'Empty solution', text: 'Your can\'t submit empty solution.'}
       return
     $('#submit_form').submit()
     $('#source').val('')
 
-
   updateSubmissionsByResponse = (submissions) ->
     $(submissions).each (ind, submission) ->
-      return if submission.result == 'testing'
+      result = submission.result
+      return if result == 'testing'
       div = $('#' + submission.id)
       div.removeAttr('data-testing')
-      image = '/assets/' + submission.result + '.png'
+      image = '/assets/' + result + '.png'
       div.find('.result img').attr('src', image)
+      title = result.substr(0, 1).toUpperCase() + result.substr(1)
+      message = if result == 'accepted' then 'Solution has been accepted.' else 'Solution has failed.'
+      $.gritter.add {image: image, title: title, text: message}
 
   checkSubmissions = ->
     ids = $('.submission[data-testing="true"]').map( -> this.id ).toArray()

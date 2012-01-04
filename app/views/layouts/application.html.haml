@@ -5,6 +5,7 @@
     %title Taste-o-Code
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
+    = gflash
     = csrf_meta_tags
   %body
 
@@ -13,7 +14,6 @@
     %div#main
       %div.row
         %div#content
-          = render :partial => 'layouts/flash', :locals => { :flash => flash }
 
           %div.row
             = yield

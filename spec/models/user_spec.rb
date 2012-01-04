@@ -85,9 +85,10 @@ describe User do
       solved_tasks = user.languages.map{ |l| l.tasks.first }
       user.solved_tasks = solved_tasks
       user.save
+
       goal_task = solved_tasks.first
       tasks_for_lang = user.solved_tasks_for_lang(goal_task.language)
-      tasks_for_lang.should eq([goal_task])
+      tasks_for_lang.map(&:id).should eq([goal_task.id])
     end
 
     it 'should return unsubdued tasks' do
@@ -95,9 +96,10 @@ describe User do
       unsubdued_tasks = user.languages.map{ |l| l.tasks.first }
       user.unsubdued_tasks = unsubdued_tasks
       user.save
+
       goal_task = unsubdued_tasks.first
       tasks_for_lang = user.unsubdued_tasks_for_lang(goal_task.language)
-      tasks_for_lang.should eq([goal_task])
+      tasks_for_lang.map(&:id).should eq([goal_task.id])
     end
 
     it 'should return percent tasks solved' do

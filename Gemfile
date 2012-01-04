@@ -28,6 +28,7 @@ group :assets do
   gem 'uglifier',     '~> 1.0.3'
 
   gem 'zurb-foundation', '~> 2.0.2'
+  gem 'gritter', '~> 1.0.0'
 end
 
 group :development do

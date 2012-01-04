@@ -1,7 +1,0 @@
-%div#flash.row
-  %div.five.columns.centered
-    - flash.each do |name, msg|
-      - unless msg.blank?
-        %div.alert-box{ :class => "flash-#{name}" }
-          = msg
-          %a.close &times;
