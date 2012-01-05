@@ -86,6 +86,22 @@ class User
     100 * (result.nan? ? 1 : result)
   end
 
+  def task_accepted(task)
+    return if solved_task_ids.include? task.id
+    self.solved_tasks << task
+    self.unsubdued_task_ids.delete task.id
+    self.available_points += task.award
+    self.total_points += task.award
+    save
+  end
+
+  def task_failed(task)
+    unless solved_task_ids.include? task.id or unsubdued_task_ids.include? task.id
+      self.unsubdued_tasks << task
+      save
+    end
+  end
+
   def clear_progress
     [solved_tasks, unsubdued_tasks, languages].map &:clear
     self.available_points = self.total_points = INITIAL_POINTS

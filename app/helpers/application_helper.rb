@@ -32,4 +32,14 @@ module ApplicationHelper
     image_tag("#{submission.result}.#{ext}")
   end
 
+  def task_style(task)
+    if current_user.solved_task_ids.include? task.id
+      'solved'
+    elsif current_user.unsubdued_task_ids.include? task.id
+      'unsubdued'
+    else
+      'not-tried'
+    end
+  end
+
 end

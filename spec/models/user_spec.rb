@@ -103,13 +103,78 @@ describe User do
     end
 
     it 'should return percent tasks solved' do
-      user = Factory(:user_with_languages)
+      user = Factory :user_with_languages
       solved_tasks = user.languages.map{ |l| l.tasks.first }
       user.solved_tasks = solved_tasks
       user.save
       lang = user.languages.first
       expected = 1.0 / lang.tasks.count * 100
       user.percent_solved_for_lang(lang).should be_within(1).of(expected)
+    end
+
+  end
+
+  describe 'solve/fail task methods' do
+
+    before(:each) do
+      @user = Factory :user_with_languages
+      @task = @user.languages.first.tasks.first
+    end
+
+    it "should process solved task, if wasn't solved yet" do
+      points = @user.available_points
+
+      @user.task_accepted @task
+      @user.reload
+
+      @user.available_points.should eq(points + @task.award)
+      @user.total_points.should eq(points + @task.award)
+      @user.solved_task_ids.should eq([@task.id])
+    end
+
+    it 'should ignore already solved task' do
+      @user.task_accepted @task
+      points = @user.available_points
+
+      @user.task_accepted @task
+      @user.reload
+
+      @user.available_points.should eq(points)
+      @user.total_points.should eq(points)
+      @user.solved_task_ids.should eq([@task.id])
+    end
+
+    it 'should remove task from unsubdued when you solve it' do
+      @user.task_failed @task
+
+      @user.task_accepted @task
+      @user.reload
+
+      @user.unsubdued_tasks.should be_empty
+    end
+
+    it 'should add failed task to unsubdued' do
+      @user.task_failed @task
+      @user.reload
+
+      @user.unsubdued_task_ids.should eq([@task.id])
+    end
+
+    it "should ignore failed tasks if it's already solved" do
+      @user.task_accepted @task
+
+      @user.task_failed @task
+      @user.reload
+
+      @user.unsubdued_tasks.should be_empty
+      @user.solved_task_ids.should eq([@task.id])
+    end
+
+    it 'should not duplicate unsubdued tasks' do
+      @user.task_failed @task
+      @user.task_failed @task
+
+      @user.unsubdued_task_ids.should eq([@task.id])
     end
   end
 end

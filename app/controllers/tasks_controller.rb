@@ -24,6 +24,11 @@ class TasksController < ApplicationController
       if elapsed > 10
         submission.result = (rand 2).even? ? :accepted : :failed
         submission.save
+        if submission.result == :accepted
+          submission.user.task_accepted submission.task
+        else
+          submission.user.task_failed submission.task
+        end
       end
       result = { :result => submission.result, :id => id }
       if submission.result == :failed

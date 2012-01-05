@@ -44,7 +44,22 @@ describe LanguagesController do
 
       current_path.should eq(language_task_path(@lang, task))
     end
-  end
 
+    it 'should highlight solved tasks' do
+      task = @lang.tasks.first
+      @user.solve_task task
+      visit language_path(@lang)
+
+      find('.solved').should have_content(task.name)
+    end
+
+    it 'should highlight unsubdued tasks' do
+      task = @lang.tasks.first
+      @user.fail_task task
+      visit language_path(@lang)
+
+      find('.unsubdued').should have_content(task.name)
+    end
+  end
 
 end
