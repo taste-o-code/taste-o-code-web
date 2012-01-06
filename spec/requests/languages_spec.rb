@@ -47,7 +47,7 @@ describe LanguagesController do
 
     it 'should highlight solved tasks' do
       task = @lang.tasks.first
-      @user.solve_task task
+      @user.task_accepted task
       visit language_path(@lang)
 
       find('.solved').should have_content(task.name)
@@ -55,7 +55,7 @@ describe LanguagesController do
 
     it 'should highlight unsubdued tasks' do
       task = @lang.tasks.first
-      @user.fail_task task
+      @user.task_failed task
       visit language_path(@lang)
 
       find('.unsubdued').should have_content(task.name)

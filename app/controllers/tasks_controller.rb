@@ -2,7 +2,11 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.where(language_id: params['language_id'], slug: params['id']).first
-    redirect_to :root unless has_access?(@task)
+    if has_access? @task
+      @submissions = current_user.submissions_for_task(@task).page(params['page']).per(5)
+    else
+      redirect_to :root
+    end
   end
 
   def submit

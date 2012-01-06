@@ -1,0 +1,11 @@
+%div#submissions
+  %div.submission#submission_header
+    %div.time Submission time
+    %div.source Source
+    %div.result Result
+  - @submissions.each do |submission|
+    %div.submission{ :id => submission.id, 'data-testing' => (submission.result == :testing).to_s }
+      %div.time= submission.time.strftime('%H:%M:%S %d %b')
+      %div.source #
+      %div.result= submission_image(submission)
+  %div#pagination= paginate @submissions, :remote => true

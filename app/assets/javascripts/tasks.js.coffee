@@ -40,19 +40,11 @@ $ ->
 
 
   $('.task-page #submit_form').on 'ajax:success', (evt, data) ->
-    submission = $('<div/>')
-      .addClass('submission')
-      .attr('id', data.submission_id)
-      .attr('data-testing', 'true')
-      .append($('<div/>')
-        .addClass('time')
-        .text(data.time))
-      .append($('<div/>')
-        .addClass('source')
-        .text('#'))
-      .append($('<div/>')
-        .addClass('result')
-        .append($('<img/>')
-          .attr('src', '/assets/testing.gif')
-          .attr('alt', 'Testing')))
-    $('#submission_header').after submission
+    current_page = $('.task-page #pagination .current').text().trim()
+    # Refresh div with submissions.
+    $.ajax {
+      url: window.location.href,
+      data: {page: current_page},
+      beforeSend: (xhr, settings) ->
+        xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script)
+    }
