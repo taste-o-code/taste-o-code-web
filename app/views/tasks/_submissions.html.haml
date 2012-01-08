@@ -8,4 +8,4 @@
       %div.time= submission.time.strftime('%H:%M:%S %d %b')
       %div.source #
       %div.result= submission_image(submission)
-  %div#pagination= paginate @submissions, :remote => true
+  %div#pagination= paginate @submissions, :remote => true, :window => 1
