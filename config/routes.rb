@@ -10,7 +10,7 @@ TasteOCodeWeb::Application.routes.draw do
 
   resources :languages, :only => [:index, :show] do
     post 'buy', :on => :collection
-    resources :tasks do
+    resources :tasks, :only => [:show] do
       post 'submit', :on => :member
     end
   end
