@@ -4,13 +4,6 @@ describe LanguagesController do
 
   describe 'unauthenticated user' do
 
-    it 'should list all languages' do
-      languages = (1..5).map { Factory(:language) }
-
-      visit languages_path
-      languages.each { |l| page.should have_content(l.name) }
-    end
-
     it 'should display language info' do
       lang = Factory :language
 
