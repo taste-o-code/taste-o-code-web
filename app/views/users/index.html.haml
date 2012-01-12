@@ -1,3 +1,9 @@
-Users page.
-- @users.each do |user|
-  %p= link_to user.name, user
+%div.users-page
+  - @users.each do |user|
+    %div.user
+      %div.avatar= image_tag user.gravatar(45), :size => '45x45', :alt => 'avatar'
+      %div.name= link_to user.name, user
+      %div.points= user.total_points
+
+      %div.langs
+        = raw user.languages.map { |lang| link_to lang.name, lang }.join(",")
