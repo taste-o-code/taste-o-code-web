@@ -18,6 +18,8 @@ gem 'gritter', '~> 1.0.0'
 
 gem 'kaminari', '~> 0.13.0'
 
+gem 'styx'
+
 gem 'rails3-generators', '~> 0.17.4'
 
 gem 'devise', '~> 1.5.0'

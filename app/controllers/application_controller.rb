@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Styx::Initializer
 
   protect_from_forgery
 

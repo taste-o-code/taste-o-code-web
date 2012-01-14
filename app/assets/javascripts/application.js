@@ -8,4 +8,5 @@
 //= require jquery_ujs
 //= require foundation
 //= require gritter
+//= require styx
 //= require_tree .
