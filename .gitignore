@@ -5,6 +5,7 @@ tmp/
 .sass-cache/
 config/mongoid.yml
 config/omniauth.yml
+config/email.yml
 .rvmrc
 .idea
 .*.swp

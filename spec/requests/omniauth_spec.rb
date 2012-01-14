@@ -37,6 +37,14 @@ describe OmniauthController do
       current_path.should == new_user_session_path
       should_not_be_logged_in
     end
+
+    it 'should not send confirmation to new users' do
+      visit new_user_session_path
+      openid_link.click
+
+      ActionMailer::Base.deliveries.should be_empty
+    end
+
   end
 
   context 'if user is logged in' do

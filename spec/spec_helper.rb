@@ -41,6 +41,7 @@ Spork.prefork do
 
     config.before(:each) do
       DatabaseCleaner.clean
+      ActionMailer::Base.deliveries = []
     end
   end
 

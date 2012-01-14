@@ -18,7 +18,7 @@ class User
   has_and_belongs_to_many :solved_tasks, :class_name => 'Task', :inverse_of => nil
   has_and_belongs_to_many :unsubdued_tasks, :class_name => 'Task', :inverse_of => nil
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable, :confirmable
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :location, :about, :current_password
 
