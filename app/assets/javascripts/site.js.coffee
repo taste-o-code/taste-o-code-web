@@ -19,8 +19,12 @@ $('body').live 'click', (event) -> $('#header .dropdown-trigger.click-trigger').
 # Login form response handler
 $('form#login_form').live 'ajax:success', (evt, data, status, xhr) ->
   $(this).siblings('.alert-box').remove()
-  if data.success
-    $(this).parent().html $('<div/>', { class: 'alert-box success', }).html(data.message)
-    setTimeout (-> window.location.reload()), 1000
-  else
-    $('<div/>', { class: 'alert-box error' }).html(data.message).insertBefore this
+  $(this).parent().html $('<div/>', { class: 'alert-box success', }).html(data.message)
+  setTimeout (-> window.location.reload()), 1000
+
+
+$('form#login_form').live 'ajax:error', (xhr, status, error) ->
+  $(this).siblings('.alert-box').remove()
+  error = $.parseJSON(status.responseText).error
+  $('<div/>', { class: 'alert-box error' }).html(error).insertBefore this
+

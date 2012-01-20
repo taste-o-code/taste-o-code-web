@@ -15,6 +15,23 @@ describe SettingsController do
       find_field('user_email').value.should == new_email
     end
 
+    it 'should send confirmation after email change' do
+      user = create_and_login_user :email => 'old@example.com'
+      new_email = 'new@example.com'
+
+      visit settings_path
+      fill_in 'Email', :with => new_email
+      click_button 'Save'
+
+      user.reload
+
+      mail = ActionMailer::Base.deliveries.last
+      mail.to.should include(new_email)
+      mail.body.should include(user.name)
+      mail.body.should include(user.confirmation_token)
+
+    end
+
     it 'should not allow to save empty email' do
       user = create_and_login_user
       email = user.email

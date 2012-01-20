@@ -20,9 +20,22 @@ describe SessionsController do
       should_not_be_logged_in
     end
 
+
     it 'should not login user with incorrect email' do
       visit new_user_session_path
       login 'correct@example.com', '123456'
+
+      current_path.should == new_user_session_path
+      should_not_be_logged_in
+    end
+
+    it 'should not login expired unconfirmed users' do
+      user = Factory :user
+      user.confirmation_sent_at -= 1.year
+      user.save
+
+      visit new_user_session_path
+      login_user user
 
       current_path.should == new_user_session_path
       should_not_be_logged_in
@@ -67,6 +80,17 @@ describe SessionsController do
       login 'correct@example.com', '123456', open_ajax_login_form
 
       page.should have_content('Invalid email or password.')
+    end
+
+    it 'should now login expired unconfirmed user' do
+      user = Factory :user
+      user.confirmation_sent_at -= 1.year
+      user.save
+
+      visit root_path
+      login_user user, :form => open_ajax_login_form
+
+      page.should have_content('You have to confirm your account before continuing.')
     end
   end
 

@@ -24,6 +24,9 @@ class User
 
   attr_writer :identity_url
 
+  before_update :generate_confirmation_token, :if => :email_changed?
+  after_update  :send_confirmation_instructions, :if => :email_changed?
+
   validates :name, :presence => true, :length => { :maximum => 30 },
             :format => {
                 :with => /^[\w\-' ]+$/,
