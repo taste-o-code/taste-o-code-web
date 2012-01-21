@@ -18,7 +18,7 @@ gem 'gritter', '~> 1.0.0'
 
 gem 'kaminari', '~> 0.13.0'
 
-gem 'styx'
+gem 'styx', '~> 0.1.0'
 
 gem 'rails3-generators', '~> 0.17.4'
 
@@ -45,8 +45,8 @@ end
 gem 'rspec-rails', :group => [:test, :development]
 
 group :test do
-  gem 'factory_girl_rails'
-  gem 'capybara'
+  gem 'factory_girl_rails', '~> 1.4.0'
+  gem 'capybara', '~> 1.1.2'
   gem 'capybara-webkit'
   gem 'launchy'
 
@@ -56,8 +56,9 @@ group :test do
   gem 'simplecov', :require => false
   gem 'fuubar',    :require => false
 
-  gem 'guard-rspec',   :require => false
-  gem 'guard-spork',   :require => false
-  gem 'guard-bundler', :require => false
-  gem 'rb-inotify',    :require => false
+  gem 'guard', '~> 0.10.0', :require => false
+  gem 'guard-rspec',        :require => false
+  gem 'guard-spork',        :require => false
+  gem 'guard-bundler',      :require => false
+  gem 'rb-inotify',         :require => false
 end
