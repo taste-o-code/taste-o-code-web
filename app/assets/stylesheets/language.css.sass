@@ -29,25 +29,27 @@
       margin-left: 10px
 
   .tasks
-    .task
+    a.task
+      display: block
+      font-size: 18px
+      font-weight: bold
+      color: #666464
       width: 200px
       height: 50px
+      line-height: 52px
       margin: 10px auto
+      text-align: center
+      border: 1px solid gray
 
-      .name
-        line-height: 50px
-        vertical-align: middle
-        font-size: 18px
+      &:hover
+        color: #434343
 
-        a
-          color: black
+      &.not-tried
+        background-color: #DEDEDE
 
-    .not-tried
-      background-color: #DEDEDE
+      &.solved
+        background-color: #a0fea0
 
-    .solved
-      background-color: #75FF75
-
-    .unsubdued
-      background-color: #FF7575
+      &.unsubdued
+        background-color: #fdc2c2
 

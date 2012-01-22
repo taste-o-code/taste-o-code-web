@@ -11,5 +11,4 @@
   - if user_signed_in? and current_user.has_language?(@lang)
     %div.tasks
       - @lang.tasks.each do |task|
-        %div.task{ :class => task_style(task) }
-          %p.name= link_to task.name, [@lang, task]
+        = link_to task.name, [@lang, task], :class => "task #{task_style(task)}"
