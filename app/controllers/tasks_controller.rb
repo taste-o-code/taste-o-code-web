@@ -27,25 +27,17 @@ class TasksController < ApplicationController
   end
 
   def check_submissions
-    ids = params['ids'] || []
-    response = ids.map do |id|
+    response = params[:ids].map do |id|
       submission = Submission.find(id)
-      elapsed = ((DateTime.now - submission.time) * 24 * 60 * 60).to_i
-      if elapsed > 10
-        submission.result = (rand 2).even? ? :accepted : :failed
-        submission.save
-        if submission.result == :accepted
-          submission.user.task_accepted submission.task
-        else
-          submission.user.task_failed submission.task
-        end
-      end
+
+      # stub testing services
+      fake_submission_testing submission
+
       result = { :result => submission.result, :id => id }
-      if submission.result == :failed
-        result.merge!({ :reason => submission.fail_cause })
-      end
+      result.merge!(:reason => submission.fail_cause) if submission.result == :failed
       result
     end
+
     render :json => response
   end
 
@@ -54,4 +46,20 @@ class TasksController < ApplicationController
   def has_access?(task)
     current_user && current_user.has_language?(task.language)
   end
+
+  # Stubs submission testing by testing services
+  #
+  def fake_submission_testing(submission)
+    elapsed = ((DateTime.now - submission.time) * 24 * 60 * 60).to_i
+    if elapsed > 5
+      submission.result = (rand 2).even? ? :accepted : :failed
+      submission.save
+      if submission.result == :accepted
+        submission.user.task_accepted submission.task
+      else
+        submission.user.task_failed submission.task
+      end
+    end
+  end
+
 end
