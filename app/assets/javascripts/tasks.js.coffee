@@ -13,7 +13,7 @@
         }
       )
 
-      $('#source_container').height 300
+      $('#source_container').css visibility: 'visible'
 
       $('#submit_button').on 'click', ->
         window.sourceEditor.save()
