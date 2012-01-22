@@ -3,12 +3,11 @@ require 'spec_helper'
 describe Devise::RegistrationsController do
 
   it 'should send confirmation email' do
-
     user = Factory.build :user
 
     visit new_user_registration_path
 
-    form = find('form#user_new')
+    form = find('form#new_user')
     form.fill_in 'user_name', :with => user.name
     form.fill_in 'user_email', :with => user.email
     form.fill_in 'user_password', :with => '123456'

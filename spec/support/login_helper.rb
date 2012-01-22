@@ -6,7 +6,7 @@ module LoginHelper
   end
 
   def login(email, password, form = nil)
-    form ||= find('form#user_new')
+    form ||= find('form#new_user')
     form.fill_in 'user_email', :with => email
     form.fill_in 'user_password', :with => password
     form.click_button 'Login'

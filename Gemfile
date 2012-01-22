@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1.1'
+gem 'rails', '~> 3.2.0'
 
-gem 'mongoid',  '~> 2.3.1'
+gem 'mongoid',  '~> 2.4.0'
 gem 'mongoid_auto_increment', '~> 0.0.8'
 gem 'bson_ext'
 
@@ -28,11 +28,11 @@ gem 'omniauth-twitter'
 gem 'omniauth-openid'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier',     '~> 1.0.3'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier',     '~> 1.2.2'
 
-  gem 'zurb-foundation', '~> 2.0.2'
+  gem 'zurb-foundation', '~> 2.1.4'
 end
 
 group :development do
