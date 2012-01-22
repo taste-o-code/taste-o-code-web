@@ -1,5 +1,6 @@
 - id: java
   name: Java
+  cm_mode: text/x-java
   price: 10
   description: >
     Java is a programming language originally developed by James Gosling at Sun Microsystems (which is now a subsidiary of Oracle Corporation) and released in 1995 as a core component of Sun Microsystems' Java platform. The language derives much of its syntax from C and C++ but has a simpler object model and fewer low-level facilities. Java applications are typically compiled to bytecode (class file) that can run on any Java Virtual Machine (JVM) regardless of computer architecture. Java is a general-purpose, concurrent, class-based, object-oriented language that is specifically designed to have as few implementation dependencies as possible. It is intended to let application developers "write once, run anywhere." Java is currently one of the most popular programming languages in use, particularly for client-server web applications.
@@ -11,6 +12,7 @@
 
 - id: cpp
   name: C++
+  cm_mode: text/x-c++src
   price: 10
   description: >
     C++ is one of the most popular programming languages with application domains including systems software (such as Microsoft Windows), application software, device drivers, embedded software, high-performance server and client applications, and entertainment software such as video games. Several groups provide both free and proprietary C++ compiler software, including the GNU Project, Microsoft, Intel and Embarcadero Technologies. C++ has greatly influenced many other popular programming languages, most notably C# and Java.
@@ -22,6 +24,7 @@
 
 - id: ruby
   name: Ruby
+  cm_mode: text/x-ruby
   price: 20
   description: >
     Ruby is a dynamic, reflective, general-purpose object-oriented programming language that combines syntax inspired by Perl with Smalltalk-like features. Ruby originated in Japan during the mid-1990s and was first developed and designed by Yukihiro "Matz" Matsumoto. It was influenced primarily by Perl, Smalltalk, Eiffel, and Lisp. Ruby supports multiple programming paradigms, including functional, object oriented, imperative and reflective. It also has a dynamic type system and automatic memory management; it is therefore similar in varying respects to Smalltalk, Python, Perl, Lisp, Dylan, Pike, and CLU.
@@ -34,6 +37,7 @@
 
 - id: haskell
   name: Haskell
+  cm_mode: text/x-haskell
   price: 30
   description: Haskell
   links:
@@ -41,6 +45,7 @@
 
 - id: clojure
   name: Clojure
+  cm_mode: text/x-clojure
   price: 20
   description: Clojure
   links:
@@ -48,6 +53,7 @@
 
 - id: prolog
   name: Prolog
+  cm_mode:
   price: 30
   description: Prolog
   links:
@@ -55,6 +61,7 @@
 
 - id: csharp
   name: C#
+  cm_mode:
   price: 10
   description: C#
   links:
@@ -62,6 +69,7 @@
 
 - id: erlang
   name: Erlang
+  cm_mode:
   price: 30
   description: Erlang
   links:
@@ -69,6 +77,7 @@
 
 - id: scala
   name: Scala
+  cm_mode:
   price: 20
   description: Scala
   links:
@@ -76,8 +85,8 @@
 
 - id: fortran
   name: Fortran
+  cm_mode:
   price: 20
   description: Fortranx
   links:
     - a
-

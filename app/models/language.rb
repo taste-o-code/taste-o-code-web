@@ -9,6 +9,7 @@ class Language
   field :links,       type: Array
   field :price,       type: Integer
   field :name,        type: String
+  field :cm_mode,     type: String
 
 end
 

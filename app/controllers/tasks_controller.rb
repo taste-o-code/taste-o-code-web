@@ -1,23 +1,29 @@
 class TasksController < ApplicationController
 
   def show
-    @task = Task.where(language_id: params['language_id'], slug: params['id']).first
+    @lang = Language.find(params[:language_id])
+    @task = @lang.tasks.where(slug: params[:id]).first
+
     if has_access? @task
-      @submissions = current_user.submissions_for_task(@task).page(params['page']).per(5)
+      @submissions = current_user.submissions_for_task(@task).page(params[:page]).per(5)
+      styx_initialize_with :cm_mode => @lang.cm_mode.presence
     else
       redirect_to :root
     end
   end
 
   def submit
-    task = Task.where(language_id: params['language_id'], slug: params['id']).first
-    source = params['source']
-    submission = Submission.create(:task => task, :user => current_user,
-                                   :result => :testing, :source => source,
-                                   :time => DateTime.now)
-    time = submission.time.strftime('%H:%M:%S %d %b')
-    response = { :submission_id => submission.id, :time => time }
-    render :json => response
+    task = Task.where(language_id: params[:language_id], slug: params[:id]).first
+
+    submission = Submission.create(
+        :task   => task,
+        :user   => current_user,
+        :result => :testing,
+        :source => params[:source],
+        :time   => DateTime.now
+    )
+
+    render :json => { :submission_id => submission.id, :time => submission.time.strftime('%H:%M:%S %d %b') }
   end
 
   def check_submissions

@@ -42,7 +42,7 @@ describe TasksController do
     end
 
     def submit_solution(source)
-      fill_in 'source', :with => source
+      page.execute_script "window.sourceEditor.setValue('#{source}')"
       click_button 'submit_button'
     end
 
