@@ -1,15 +1,17 @@
 @Styx.Initializers.Tasks =
 
   show: -> $ ->
-
     CHECK_INTERVAL = 5000
 
+    editor = CodeMirror.fromTextArea document.getElementById('source'), { theme: 'cobalt', lineNumbers: true }
+    $('#source_container').height 300
+
     $('#submit_button').on 'click', ->
-      if $('#source').val().length == 0
+      editor.save()
+      if $('#source').val().length > 0
+        $('#submit_form').submit()
+      else
         $.gritter.add {image: '/assets/warning.png', title: 'Empty solution', text: 'Your can\'t submit empty solution.'}
-        return
-      $('#submit_form').submit()
-      $('#source').val('')
 
     updateSubmissionsByResponse = (submissions) ->
       $(submissions).each (ind, submission) ->
@@ -24,7 +26,7 @@
         $.gritter.add {image: image, title: title, text: message}
 
     checkSubmissions = ->
-      ids = $('.submission[data-testing="true"]').map( -> this.id ).toArray()
+      ids = $('.submission[data-testing="true"]').map(-> this.id).toArray()
       if ids.length == 0
         window.setTimeout checkSubmissions, CHECK_INTERVAL
       else
@@ -37,9 +39,7 @@
             window.setTimeout checkSubmissions, CHECK_INTERVAL
         }
 
-
     window.setTimeout checkSubmissions, CHECK_INTERVAL
-
 
     $('#submit_form').on 'ajax:success', (evt, data) ->
       current_page = $('#pagination .current').text().trim()
