@@ -45,6 +45,8 @@ end
 gem 'rspec-rails', :group => [:test, :development]
 
 group :test do
+  gem 'rake'
+
   gem 'factory_girl_rails', '~> 1.4.0'
   gem 'capybara', '~> 1.1.2'
   gem 'capybara-webkit'
@@ -56,9 +58,9 @@ group :test do
   gem 'simplecov', :require => false
   gem 'fuubar',    :require => false
 
-  gem 'guard', '~> 0.10.0', :require => false
-  gem 'guard-rspec',        :require => false
-  gem 'guard-spork',        :require => false
-  gem 'guard-bundler',      :require => false
-  gem 'rb-inotify',         :require => false
+  gem 'guard',         :require => false
+  gem 'guard-rspec',   :require => false
+  gem 'guard-spork',   :require => false
+  gem 'guard-bundler', :require => false
+  gem 'rb-inotify',    :require => false
 end
