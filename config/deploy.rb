@@ -44,3 +44,5 @@ end
 
 after "deploy:finalize_update", "deploy:symlink_configs"
 after "deploy", "deploy:cleanup"
+after "deploy:update_code", "resque:restart"
+after "deploy:rollback", "resque:restart
