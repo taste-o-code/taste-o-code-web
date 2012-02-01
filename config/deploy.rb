@@ -39,10 +39,14 @@ namespace :deploy do
     end
   end
 
+  desc "Restart workers"
+  task :restart_workers, :roles => :app  do
+    run "cd #{current_path} && /usr/bin/env bundle exec rake resque:restart RAILS_ENV=production"
+  end
 end
 
 
 after "deploy:finalize_update", "deploy:symlink_configs"
 after "deploy", "deploy:cleanup"
-after "deploy:update_code", "resque:restart"
-after "deploy:rollback", "resque:restart
+after "deploy:symlink", "deploy:restart_workers"
+after "deploy:rollback", "deploy:restart_workers"
