@@ -1,5 +1,9 @@
 class TasksController < ApplicationController
 
+  SUBMISSION_QUEUE = "submissions"
+  CHECKER_CLASS = "worker.SubmissionChecker"
+  REDIS_PYRES = "localhost:6380"
+
   def show
     @lang = Language.find(params[:language_id])
     @task = @lang.tasks.where(slug: params[:id]).first
@@ -22,6 +26,7 @@ class TasksController < ApplicationController
         :source => params[:source],
         :time   => DateTime.now
     )
+    enqueue_submission submission
 
     render :json => { :submission_id => submission.id, :time => submission.time.strftime('%H:%M:%S %d %b') }
   end
@@ -31,7 +36,7 @@ class TasksController < ApplicationController
       submission = Submission.find(id)
 
       # stub testing services
-      fake_submission_testing submission
+      # fake_submission_testing submission
 
       result = { :result => submission.result, :id => id }
       result.merge!(:reason => submission.fail_cause) if submission.result == :failed
@@ -45,6 +50,17 @@ class TasksController < ApplicationController
 
   def has_access?(task)
     current_user && current_user.has_language?(task.language)
+  end
+
+  def enqueue_submission(submission)
+    job = {
+      :source => submission.source,
+      :task => submission.task.position,
+      :lang => submission.task.language.id,
+      :id => submission.id
+    }
+    Resque.redis = REDIS_PYRES
+    Resque.push(SUBMISSION_QUEUE, :class => CHECKER_CLASS, :args => [job])
   end
 
   # Stubs submission testing by testing services
