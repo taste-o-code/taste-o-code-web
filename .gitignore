@@ -6,6 +6,7 @@ tmp/
 config/mongoid.yml
 config/omniauth.yml
 config/email.yml
+config/resque.yml
 .rvmrc
 .idea
 .*.swp
