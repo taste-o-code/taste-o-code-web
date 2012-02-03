@@ -130,6 +130,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.7.0)
     mime-types (1.17.2)
+    mock_redis (0.3.0)
     mongo (1.5.2)
       bson (= 1.5.2)
     mongoid (2.4.2)
@@ -321,6 +322,7 @@ DEPENDENCIES
   jquery-rails (~> 1.0.16)
   kaminari (~> 0.13.0)
   launchy
+  mock_redis
   mongoid (~> 2.4.0)
   mongoid-rspec
   mongoid_auto_increment (~> 0.0.8)

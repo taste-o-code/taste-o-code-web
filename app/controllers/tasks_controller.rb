@@ -1,9 +1,5 @@
 class TasksController < ApplicationController
 
-  SUBMISSION_QUEUE = "submissions"
-  CHECKER_CLASS = "worker.SubmissionChecker"
-  REDIS_PYRES = "localhost:6380"
-
   def show
     @lang = Language.find(params[:language_id])
     @task = @lang.tasks.where(slug: params[:id]).first
@@ -59,8 +55,9 @@ class TasksController < ApplicationController
       :lang => submission.task.language.id,
       :id => submission.id
     }
-    Resque.redis = REDIS_PYRES
-    Resque.push(SUBMISSION_QUEUE, :class => CHECKER_CLASS, :args => [job])
+    queue = Rails.configuration.resque[:queue_pyres]
+    worker_class = Rails.configuration.resque[:worker_pyres]
+    Resque.push(queue, :class => worker_class, :args => [job])
   end
 
   # Stubs submission testing by testing services

@@ -3,6 +3,9 @@ require 'spec_helper'
 describe TasksController do
 
   before(:each) do
+    @mock_redis = MockRedis.new
+    Resque.redis = @mock_redis
+
     @lang = Factory :language, price: 0
     @task = @lang.tasks.first
     @url = language_task_path @lang, @task
@@ -27,11 +30,8 @@ describe TasksController do
       submit_solution source
       find('.submission[data-testing="true"]')
 
-      submission = Submission.first
-      submission.user_id.should eq(@user.id)
-      submission.task_id.should eq(@task.id)
-      submission.source.should eq(source)
-      submission.result.should eq(:testing)
+      should_save_submission source
+      should_enqueue_job
     end
 
     it 'should not submit empty solution', :js => true do
@@ -45,6 +45,28 @@ describe TasksController do
       page.execute_script "window.sourceEditor.setValue('#{source}')"
       click_button 'submit_button'
     end
+
+    def should_save_submission(source)
+      submission = Submission.first
+      submission.user_id.should eq(@user.id)
+      submission.task_id.should eq(@task.id)
+      submission.source.should eq(source)
+      submission.result.should eq(:testing)
+    end
+
+    def should_enqueue_job()
+      job = Resque.pop Rails.configuration.resque[:queue_pyres]
+      submission = Submission.first
+      expected_args = {
+        'id' => submission.id.to_s,
+        'source' => submission.source,
+        'task' => submission.task.position,
+        'lang' => submission.task.language.id
+      }
+      job['class'].should eq(Rails.configuration.resque[:worker_pyres])
+      job['args'].should eq([expected_args])
+    end
+
 
   end
 

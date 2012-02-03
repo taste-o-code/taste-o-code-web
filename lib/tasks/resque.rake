@@ -1,25 +1,27 @@
 require 'resque/tasks'
 
-task "resque:setup" => :environment
-
-QUEUE = 'submission_results'
 LOG = Rails.root.to_s + "/log/resque_worker.log"
-
 
 namespace :resque do
 
-  desc "Stop all resque workers processing queue '#{ QUEUE }'"
-  task :stop do
-    workers = Resque.workers.select{ |w| w.queues.include?(QUEUE) }
+  desc "Setup resque"
+  task :setup => :environment do
+    Resque.redis = Rails.configuration.resque[:redis_resque]
+  end
+
+  desc "Stop all resque workers processing."
+  task :stop => :setup do
+    workers = Resque.workers
     puts "Killing workers: #{ workers }"
     pids = workers.map(&:pid)
 
     `kill -s QUIT #{pids.join(' ')}` unless pids.empty?
   end
 
-  desc "Start one worker on queue '#{QUEUE}' in background"
-  task :start do
-    cmd = "QUEUE='#{ QUEUE }' nohup rake resque:work"
+  desc "Start one resque worker in background"
+  task :start => :environment do
+    queue = Rails.configuration.resque[:queue_resque]
+    cmd = "QUEUE='#{ queue }' nohup rake resque:work"
     puts cmd
     `sh -c '#{ cmd } > #{ LOG } &'`
   end

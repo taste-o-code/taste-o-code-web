@@ -55,6 +55,7 @@ group :test do
   gem 'launchy'
 
   gem 'mongoid-rspec'
+  gem 'mock_redis'
   gem 'database_cleaner'
 
   gem 'simplecov', :require => false
