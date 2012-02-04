@@ -31,11 +31,8 @@ class TasksController < ApplicationController
     response = params[:ids].map do |id|
       submission = Submission.find(id)
 
-      # stub testing services
-      # fake_submission_testing submission
-
       result = { :result => submission.result, :id => id }
-      result.merge!(:reason => submission.fail_cause) if submission.result == :failed
+      result.merge!(:fail_cause => submission.fail_cause) if submission.result == :failed
       result
     end
 
@@ -58,21 +55,6 @@ class TasksController < ApplicationController
     queue = Rails.configuration.resque[:queue_pyres]
     worker_class = Rails.configuration.resque[:worker_pyres]
     Resque.push(queue, :class => worker_class, :args => [job])
-  end
-
-  # Stubs submission testing by testing services
-  #
-  def fake_submission_testing(submission)
-    elapsed = ((DateTime.now - submission.time) * 24 * 60 * 60).to_i
-    if elapsed > 5
-      submission.result = (rand 2).even? ? :accepted : :failed
-      submission.save
-      if submission.result == :accepted
-        submission.user.task_accepted submission.task
-      else
-        submission.user.task_failed submission.task
-      end
-    end
   end
 
 end
