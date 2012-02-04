@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 3.2.0'
+gem 'rake',  '~> 0.9.2.2'
 
 gem 'mongoid',  '~> 2.4.0'
 gem 'mongoid_auto_increment', '~> 0.0.8'
@@ -47,11 +48,9 @@ end
 gem 'rspec-rails', :group => [:test, :development]
 
 group :test do
-  gem 'rake'
-
   gem 'factory_girl_rails', '~> 1.4.0'
-  gem 'capybara', '~> 1.1.2'
-  gem 'capybara-webkit'
+  gem 'capybara',           '~> 1.1.2'
+  gem 'capybara-webkit',    '~> 0.8.0'
   gem 'launchy'
 
   gem 'mongoid-rspec'

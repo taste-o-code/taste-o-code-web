@@ -1,20 +1,24 @@
-unless Rails.env.production?
-  require 'launchy'
-
+namespace :spec do
   desc 'Run tests coverage with simplecov'
-  task :scov => [:set_scov_env, :spec_without_drb] do
+  task :scov => [:scov_env, :spec] do
+    require 'launchy'
     Launchy.open 'coverage/index.html'
   end
 
-  desc 'Run specs with --no-drb option'
-  RSpec::Core::RakeTask.new(:spec_without_drb) do |t|
-    t.spec_opts = ['--no-drb']
-  end
-
-  desc 'Remove coverage reports and set SCOV env variable to true'
-  task :set_scov_env do
+  task :scov_env do
     puts 'Cleaning up coverage reports'
     rm_rf 'coverage'
-    ENV['SCOV'] = "true"
+
+    ENV['SCOV']      = 'true'
+    ENV['SPEC_OPTS'] = '--no-drb'
+  end
+
+  desc 'Run test on CI'
+  task :ci => [:ci_env, :spec]
+
+  task :ci_env do
+    %w[mongoid.yml omniauth.yml resque.yml].each { |file| `ln -s #{file}.example config/#{file}` }
+
+    ENV['SPEC_OPTS'] = '--no-drb --format doc'
   end
 end

@@ -3,13 +3,9 @@ rvm:
   - 1.9.2
 bundler_args: --without development
 before_script:
-  - "ln -s mongoid.yml.example config/mongoid.yml"
-  - "ln -s omniauth.yml.example config/omniauth.yml"
-  - "ln -s resque.yml.example config/resque.yml"
-  - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - "export SPEC_OPTS='--no-drb --format doc'"
+script: "RAILS_ENV=test bundle exec rake spec:ci --trace DISPLAY=:99.0"
 branches:
   only:
     - master
-    - stable
+    - production
