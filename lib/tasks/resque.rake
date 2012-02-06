@@ -5,9 +5,7 @@ LOG = Rails.root.to_s + "/log/resque_worker.log"
 namespace :resque do
 
   desc "Setup resque"
-  task :setup => :environment do
-    Resque.redis = Rails.configuration.resque[:redis_resque]
-  end
+  task :setup => :environment
 
   desc "Stop all resque workers processing."
   task :stop => :setup do
