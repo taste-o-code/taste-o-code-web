@@ -3,7 +3,6 @@ class SubmissionResultHandler
   @queue = :submission_results
 
   def self.perform(result)
-    puts result
     submission = Submission.find result['id']
     submission.result = result['result'].to_sym
     if submission.result == :accepted
