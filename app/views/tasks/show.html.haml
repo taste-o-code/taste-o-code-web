@@ -1,12 +1,20 @@
 %div.task-page
   %p.language
     Back to
-    =link_to @task.language.name, @task.language
+    = link_to @task.language.name, @task.language
   %h1.name= @task.name
 
   %div.description= @task.description
 
-  %h4 Your solution
+  %h4.source-header
+    Your solution
+
+  %div.cm-theme-selector
+    %span High-lighting theme:
+    = select_tag :theme, options_for_select([])
+
+  %div.clearfix
+
   = form_tag submit_language_task_path(@task.language, @task),
     :remote => true, :id => 'submit_form', :format => :json do
     %div#source_container= text_area_tag :source, nil, :rows => 30
