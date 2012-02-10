@@ -1,6 +1,7 @@
 class Task
 
   include Mongoid::Document
+  include ActiveAdmin::Mongoid::Patches
 
   belongs_to :language
   has_many   :submissions

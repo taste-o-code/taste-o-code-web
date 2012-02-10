@@ -1,6 +1,7 @@
 class User
 
   include Mongoid::Document
+  include ActiveAdmin::Mongoid::Patches
 
   INITIAL_POINTS = 30
 

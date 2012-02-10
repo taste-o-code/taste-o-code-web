@@ -1,5 +1,9 @@
 TasteOCodeWeb::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   match '/users/auth/:provider/callback' => 'omniauth#callback'
   match '/check_submissions' => 'tasks#check_submissions'
   devise_for :users, :controllers => { :sessions => :sessions }
