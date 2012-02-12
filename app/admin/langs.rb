@@ -11,7 +11,7 @@ ActiveAdmin.register Language do
       end
     end
     column :price
-    column :cm_mode
+    column :syntax_mode
     default_actions
   end
 

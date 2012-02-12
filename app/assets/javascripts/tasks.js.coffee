@@ -21,7 +21,7 @@
       window.sourceEditor = CodeMirror.fromTextArea(
         document.getElementById('source'),
         {
-          mode: data.cm_mode || 'text/plain',
+          mode: data.syntax_mode || 'text/plain',
           theme: theme,
           lineNumbers: true
         }
