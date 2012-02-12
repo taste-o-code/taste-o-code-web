@@ -36,6 +36,7 @@ module ActiveAdmin
     def search(chain)
       chain
     end
+
   end
 
   module Mongoid
@@ -70,6 +71,7 @@ module ActiveAdmin
       end
     end
   end
+
 end
 
 
@@ -79,7 +81,7 @@ require 'sass/rails/importer'
 
 if defined?(Sass::Rails::VERSION) && Sass::Rails::VERSION[0..3] >= '3.1.'
   Rails.logger.warn ' == MONKEY == Patching sass-rails: https://github.com/rails/sass-rails/pull/70'
-  Rails.logger.warn " == MONKEY == Please remove #{__FILE__} once Sass::Rails upstream has pulled in the fix"
+  Rails.logger.warn " == MONKEY == Please update #{__FILE__} once Sass::Rails upstream has pulled in the fix"
   # monkey patch to incorporate https://github.com/rails/sass-rails/pull/70
   module Sass
     module Rails
