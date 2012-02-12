@@ -17,4 +17,17 @@ ActiveAdmin.register User do
     end
     default_actions
   end
+
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :email
+      f.input :total_points
+      f.input :available_points
+      f.input :location
+      f.input :password
+      f.input :about, :as => :text
+    end
+    f.buttons
+  end
 end
