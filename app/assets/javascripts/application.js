@@ -9,4 +9,5 @@
 //= require foundation
 //= require gritter
 //= require styx
-//= require_tree .
+//= require_tree ./vendor
+//= require_directory .
