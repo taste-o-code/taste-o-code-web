@@ -1,0 +1,18 @@
+= semantic_form_for [:admin, @language] do |f|
+  = f.inputs  do
+    = f.input :id
+    = f.input :name
+    = f.input :price
+    = f.input :cm_mode
+    = f.input :description, :as => :text
+    %li
+      %label.label Links
+      %div.links
+        - unless @language.links.blank?
+          - @language.links.each do |link|
+            = text_field_tag "language[links][]", link
+            %button.delete_link Delete
+        %button#add_link Add
+
+  = f.buttons :commit
+

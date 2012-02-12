@@ -127,5 +127,5 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   config.clear_javascripts!
-  config.register_stylesheet 'admin/active_admin'
+  config.register_javascript 'admin/active_admin'
 end
