@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def submit
-    task = Task.where(language_id: params[:language_id], slug: params[:id]).first
+    task = Task.find_by_slug params[:id], params[:language_id]
 
     submission = Submission.create(
         :task   => task,

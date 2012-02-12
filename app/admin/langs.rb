@@ -12,6 +12,9 @@ ActiveAdmin.register Language do
     end
     column :price
     column :syntax_mode
+    column :tasks do |lang|
+      link_to "Tasks", [:admin, lang, :tasks]
+    end
     default_actions
   end
 

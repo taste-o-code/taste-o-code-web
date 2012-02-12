@@ -1,0 +1,8 @@
+= semantic_form_for [:admin, @language, @task] do |f|
+  = f.inputs do
+    = f.input :name
+    = f.input :slug
+    = f.input :position
+    = f.input :award
+    = f.input :description, :as => :text
+  = f.buttons :commit

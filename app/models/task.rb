@@ -2,6 +2,10 @@ class Task
 
   include Mongoid::Document
 
+  def self.find_by_slug(slug, lang)
+    where(language_id: lang, slug: slug).first
+  end
+
   belongs_to :language
   has_many   :submissions
 
