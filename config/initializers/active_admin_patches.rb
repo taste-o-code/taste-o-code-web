@@ -1,3 +1,6 @@
+# Patches to make ActiveAdmin work with Mongoid.
+# For more information see https://github.com/gregbell/active_admin/issues/26 and https://gist.github.com/1809524.
+
 require "active_admin"
 require "active_admin/resource_controller"
 require 'ostruct'
@@ -45,15 +48,13 @@ module Mongoid
   module ActiveAdmin
 
     ACTIVE_ADMIN_HIDDEN_COLUMNS = %w(_id _type)
-
-    ACTIVE_ADMIN_COLUMN_TYPES = { Bignum => :integer, Array => :string }
+    ACTIVE_ADMIN_COLUMN_TYPES   = { Bignum => :integer, Array => :string }
 
     def column_for_attribute(attr)
       self.class.columns.detect { |c| c.name == attr.to_s }
     end
 
     module ClassMethods
-
       def content_columns
         fields.map do |name, field|
           next if ACTIVE_ADMIN_HIDDEN_COLUMNS.include?(name)
@@ -67,7 +68,6 @@ module Mongoid
       def columns
         content_columns
       end
-
     end
 
   end
