@@ -6,6 +6,7 @@ TasteOCodeWeb::Application.routes.draw do
 
   match '/users/auth/:provider/callback' => 'omniauth#callback'
   match '/check_submissions' => 'tasks#check_submissions'
+  match '/get_submission_source' => 'tasks#get_submission_source'
   devise_for :users, :controllers => { :sessions => :sessions }
 
   root :to => "home#show"

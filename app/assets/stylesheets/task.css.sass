@@ -1,4 +1,7 @@
 .task-page
+  .CodeMirror-scroll
+    height: 100%
+
   .name
     margin: auto
     text-align: center
@@ -49,6 +52,8 @@
 
       .source
         width: 20%
+        img
+          cursor: pointer
 
       .result
         width: 30%
@@ -69,3 +74,13 @@
 
     span
       float: left
+
+  #submission_source
+    width: 800px
+    max-height: 500px
+    padding: 30px 10px 10px 10px
+
+    .CodeMirror-scroll
+      height: 100%
+      max-height: 500px
+

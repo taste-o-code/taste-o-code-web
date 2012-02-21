@@ -39,6 +39,11 @@ class TasksController < ApplicationController
     render :json => response
   end
 
+  def get_submission_source
+    submission = Submission.find params[:id]
+    render :json => { source: submission.source }
+  end
+
   private
 
   def has_access?(task)

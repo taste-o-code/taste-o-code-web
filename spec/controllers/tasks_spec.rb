@@ -16,6 +16,15 @@ describe TasksController do
     end
   end
 
+  it 'should return submission source' do
+    submission = Submission.create :source => 'Bla-bla-bla'
+
+    get :get_submission_source, :id => submission.id
+
+    resp = JSON.parse response.body
+    resp['source'].should eq(submission.source)
+  end
+
   def to_hash(submission)
     hash = { 'id' => submission.id.to_s, 'result' => submission.result.to_s }
     hash['fail_cause'] = submission.fail_cause if submission.result == :failed

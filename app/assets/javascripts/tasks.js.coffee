@@ -18,19 +18,26 @@
       storeTheme theme
       themeSelector.val theme
 
-      window.sourceEditor = CodeMirror.fromTextArea(
-        document.getElementById('source'),
-        {
-          mode: data.syntax_mode || 'text/plain',
-          theme: theme,
-          lineNumbers: true
-        }
-      )
+      createCodeMirror = (textArea) ->
+        CodeMirror.fromTextArea(
+          textArea,
+          {
+            mode: data.syntax_mode || 'text/plain',
+            theme: theme,
+            lineNumbers: true
+          }
+        )
+
+      window.sourceEditor = createCodeMirror $('#source')[0]
+      window.submissionSourceViewer = createCodeMirror $('#submission_source textarea')[0]
+      window.submissionSourceViewer.setOption 'readOnly', true
+
 
       themeSelector.change ->
         theme = $(this).val()
         storeTheme theme
         window.sourceEditor.setOption 'theme', theme
+        window.submissionSourceViewer.setOption 'theme', theme
 
       $('#source_container').css visibility: 'visible'
 
@@ -40,6 +47,19 @@
           $('#submit_form').submit()
         else
           $.gritter.add {image: '/assets/warning.png', title: 'Empty solution', text: 'Your can\'t submit empty solution.'}
+
+      # Show submission source
+      $('#submissions').on 'click', '.source img', (evt) ->
+        id = $(evt.currentTarget).parents('.submission').attr('id')
+        evt.currentTarget.src = '/assets/testing.gif'
+        $.ajax {
+          url: '/get_submission_source',
+          data: {id: id},
+          success: (data) ->
+            window.submissionSourceViewer.setValue data.source
+            $('#submission_source').reveal {animation: 'none'}
+            evt.currentTarget.src = '/assets/source.png'
+        }
 
       setCheckSubmissionsTimer = -> window.setTimeout checkSubmissions, CHECK_INTERVAL
 
@@ -52,7 +72,7 @@
           image = '/assets/' + result + '.png'
           div.find('.result img').attr('src', image)
           title = result.substr(0, 1).toUpperCase() + result.substr(1)
-          message = if result == 'accepted' then 'Solution has been accepted.' else 'Solution has failed.'
+          message = if result == 'accepted' then 'Solution has been accepted.' else submission.fail_cause
           $.gritter.add { image: image, title: title, text: message }
 
       checkSubmissions = ->
