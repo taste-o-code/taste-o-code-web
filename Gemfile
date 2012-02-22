@@ -60,7 +60,7 @@ group :test do
   gem 'mock_redis'
   gem 'database_cleaner'
 
-  gem 'simplecov', :require => false
+  gem 'simplecov', '~> 0.5.4', :require => false
   gem 'fuubar',    :require => false
 
   gem 'guard',         :require => false
