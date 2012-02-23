@@ -11,8 +11,9 @@ namespace :resque do
   task :stop => :setup do
     workers = Resque.workers
     puts "Killing workers: #{ workers }"
-    pids = workers.map(&:pid)
+    pids = workers.map { |w| w.id.split(':')[1] }
 
+    puts "kill -s QUIT #{pids.join(' ')}"
     `kill -s QUIT #{pids.join(' ')}` unless pids.empty?
   end
 
