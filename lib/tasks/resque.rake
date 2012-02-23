@@ -9,11 +9,13 @@ namespace :resque do
 
   desc "Stop all resque workers processing."
   task :stop => :setup do
-    workers = Resque.workers
+    queue = Rails.configuration.resque[:queue_resque]
+    workers = Resque.workers.find_all { |w| w.queues.include?(queue) }
     puts "Killing workers: #{ workers }"
+
     pids = workers.map { |w| w.id.split(':')[1] }
 
-    puts "kill -s QUIT #{pids.join(' ')}"
+    puts "kill -s QUIT #{pids.join(' ')}" unless pids.empty?
     `kill -s QUIT #{pids.join(' ')}` unless pids.empty?
   end
 
