@@ -19,6 +19,6 @@ namespace :spec do
   task :ci_env do
     %w[mongoid.yml omniauth.yml resque.yml].each { |file| `ln -s #{file}.example config/#{file}` }
 
-    ENV['SPEC_OPTS'] = '--no-drb --format doc'
+    ENV['SPEC_OPTS'] = '--no-drb --tag ~ci:skip --format doc'
   end
 end
