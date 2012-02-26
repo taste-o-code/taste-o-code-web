@@ -42,6 +42,23 @@ module ActiveAdmin
 
   end
 
+  # We use mongoid and it's Criteria class doesn't have reorder method. So just remove it.
+  # We can have problems with https://github.com/gregbell/active_admin/issues/994, I don't know exactly.
+  module Views
+    module Pages
+      class Index < Base
+        def items_in_collection?
+          # Was
+          # collection.reorder("").limit(1).exists?
+
+          # Now
+          collection.limit(1).exists?
+        end
+      end
+    end
+  end
+
+
 end
 
 module Mongoid
