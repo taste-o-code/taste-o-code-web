@@ -30,6 +30,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-openid'
 
+gem 'redcarpet', '~> 2.1.0'
+
 gem 'activeadmin'
 gem 'meta_search',    '>= 1.1.0.pre'
 

@@ -5,4 +5,7 @@
     = f.input :position
     = f.input :award
     = f.input :description, :as => :text
+    %li
+      %label.label &nbsp;
+      = link_to 'Online markdown editor', 'http://daringfireball.net/projects/markdown/dingus', :target => "_blank"
   = f.buttons :commit

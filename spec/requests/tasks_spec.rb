@@ -8,6 +8,8 @@ describe TasksController do
 
     @lang = Factory :language, price: 0
     @task = @lang.tasks.first
+    @task.description = '*Description*'
+    @task.save
     @url = language_task_path @lang, @task
   end
 
@@ -17,6 +19,10 @@ describe TasksController do
       @user = create_and_login_user
       @user.buy_language @lang
       visit @url
+    end
+
+    it 'should render markdown in description' do
+      page.find('.description p em').should have_content('Description')
     end
 
     it 'should contain link to language page' do

@@ -4,7 +4,7 @@
     = link_to @task.language.name, @task.language
   %h1.name= @task.name
 
-  %div.description= @task.description
+  %div.description= markdown @task.description
 
   %h4.source-header
     Your solution

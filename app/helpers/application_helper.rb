@@ -6,6 +6,8 @@ module ApplicationHelper
       'about'     => { :controller => '/about',     :action => :show },
   }
 
+  MARKDOWN = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+
 
   def navigation
     render :partial => 'layouts/navigation'
@@ -39,6 +41,10 @@ module ApplicationHelper
     else
       'not-tried'
     end
+  end
+
+  def markdown(source)
+    MARKDOWN.render(source).html_safe
   end
 
 end
