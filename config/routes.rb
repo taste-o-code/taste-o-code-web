@@ -1,3 +1,5 @@
+require 'resque/server'
+
 TasteOCodeWeb::Application.routes.draw do
 
   ActiveAdmin.routes(self)
@@ -26,5 +28,12 @@ TasteOCodeWeb::Application.routes.draw do
 
   match '/about', :to => 'about#show', :as => :about
 
+  admin_constraint = lambda do |request|
+    request.env['warden'].authenticate? and request.env['warden'].user.class == AdminUser
+  end
+
+  constraints admin_constraint do
+    mount Resque::Server, :at => "/admin/resque"
+  end
 
 end

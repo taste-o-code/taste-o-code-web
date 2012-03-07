@@ -1,5 +1,11 @@
 ActiveAdmin::Dashboards.build do
 
+
+  section "Resque" do
+    div :id => 'resque_panel' do
+      link_to "Go to resque admin", "/admin/resque"
+    end
+  end
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.
