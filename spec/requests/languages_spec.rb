@@ -4,13 +4,14 @@ describe LanguagesController do
 
   describe 'unauthenticated user' do
 
-    it 'should display language info' do
+    it 'should display language info', :js => true do
       lang = Factory :language
 
       visit language_path(lang)
 
       page.should have_content(lang.name)
       page.should have_content(lang.description)
+      page.should have_content(lang.code_example)
       lang.links.map { |link| page.should have_content(link) }
     end
 
@@ -53,6 +54,7 @@ describe LanguagesController do
 
       find('.unsubdued').should have_content(task.name)
     end
+
   end
 
 end

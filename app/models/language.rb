@@ -10,5 +10,6 @@ class Language
   field :price,       type: Integer
   field :name,        type: String
   field :syntax_mode, type: String
+  field :code_example,type: String
 
 end

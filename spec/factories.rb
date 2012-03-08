@@ -43,6 +43,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Language #{n}" }
     sequence(:id) { |n| "lang_#{n}" }
     description 'Description and some interesting facts about language.'
+    code_example 'print "Hello, world"'
     links { |l| ["example.org/wiki/#{l.name}", "example.org/languages/#{l.name.parameterize}"] }
     lang.after_create { |l| 2.times { Factory(:task, language: l) } }
   end
