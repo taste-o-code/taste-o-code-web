@@ -12,7 +12,7 @@ describe LanguagesController do
       page.should have_content(lang.name)
       page.should have_content(lang.description)
       page.should have_content(lang.code_example)
-      lang.links.map { |link| page.should have_content(link) }
+      lang.links.map { |link| page.should have_content(CGI.unescape(link)) }
     end
 
   end

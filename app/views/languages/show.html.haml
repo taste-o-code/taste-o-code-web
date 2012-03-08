@@ -8,7 +8,7 @@
   %div.links
     %p.title Useful links:
     - @lang.links.each do |link|
-      %p.link= link_to link, link
+      %p.link= link_to CGI.unescape(link), link
 
   - if user_signed_in? and current_user.has_language?(@lang)
     %div.tasks
