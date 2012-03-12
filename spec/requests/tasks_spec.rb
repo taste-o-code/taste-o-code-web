@@ -26,7 +26,6 @@ describe TasksController do
     end
 
     it 'should replace <pre><code> with CodeMirror in description', :js => true do
-      save_and_open_page
       page.should have_css('.description .CodeMirror')
     end
 
