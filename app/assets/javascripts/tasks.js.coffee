@@ -18,8 +18,9 @@
       storeTheme theme
       themeSelector.val theme
 
+      editors = []
       createCodeMirror = (textArea) ->
-        CodeMirror.fromTextArea(
+        editor = CodeMirror.fromTextArea(
           textArea,
           {
             mode: data.syntax_mode || 'text/plain',
@@ -27,17 +28,29 @@
             lineNumbers: true
           }
         )
+        editors.push editor
+        editor
 
       window.sourceEditor = createCodeMirror $('#source')[0]
       window.submissionSourceViewer = createCodeMirror $('#submission_source textarea')[0]
       window.submissionSourceViewer.setOption 'readOnly', true
 
 
+      # Replace all <pre><code>...</code></pre> blocks with CodeMirror.
+      $('.description pre code').each((_, el) ->
+        el = $(el)
+        textarea = $('<textarea/>').val(el.text())
+        el.parent().replaceWith textarea
+        editor = createCodeMirror textarea[0]
+        editor.setOption 'readOnly', true
+        editor.setOption 'lineNumbers', false
+      )
+
       themeSelector.change ->
         theme = $(this).val()
         storeTheme theme
-        window.sourceEditor.setOption 'theme', theme
-        window.submissionSourceViewer.setOption 'theme', theme
+        changeTheme = (editor) -> editor.setOption 'theme', theme
+        changeTheme editor for editor in editors
 
       $('#source_container').css visibility: 'visible'
 

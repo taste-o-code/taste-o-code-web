@@ -48,6 +48,7 @@ group :development do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'pry'
   gem 'pry-rails'
+  gem 'pry-doc'
 end
 
 gem 'rspec-rails', :group => [:test, :development]

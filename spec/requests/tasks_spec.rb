@@ -8,7 +8,7 @@ describe TasksController do
 
     @lang = Factory :language, price: 0
     @task = @lang.tasks.first
-    @task.description = '*Description*'
+    @task.description = "*Description*  \n\n    print(hello)\n    print(world)"
     @task.save
     @url = language_task_path @lang, @task
   end
@@ -23,6 +23,11 @@ describe TasksController do
 
     it 'should render markdown in description' do
       page.find('.description p em').should have_content('Description')
+    end
+
+    it 'should replace <pre><code> with CodeMirror in description', :js => true do
+      save_and_open_page
+      page.should have_css('.description .CodeMirror')
     end
 
     it 'should contain link to language page' do
