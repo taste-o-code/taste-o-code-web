@@ -1,0 +1,14 @@
+%div.greeting-page
+
+  %div.langs
+    - @langs.each do |lang|
+      %div.lang{ id: lang.id }
+        = link_to lang.name, lang
+        %div.code
+
+  %div.introduction
+    %p Do you know these 3 languages?
+    %p
+      = link_to 'Sign up', new_user_registration_path
+      to try them all.
+    %p Solve language-specific tasks to taste different languages.

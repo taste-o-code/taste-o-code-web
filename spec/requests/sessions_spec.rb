@@ -103,7 +103,7 @@ describe SessionsController do
       find('#user_trigger').trigger(:hover)
       click_link 'Logout'
 
-      current_path.should == root_path
+      current_path.should eq(greeting_path)
       should_not_be_logged_in
     end
   end

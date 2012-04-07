@@ -25,7 +25,7 @@ TasteOCodeWeb::Application.routes.draw do
   resource :settings, :only => [:show, :update]
 
   match '/home', :to => 'home#show', :as => :home
-
+  match '/greeting', :to => 'home#greeting', :as => :greeting
   match '/about', :to => 'about#show', :as => :about
 
   admin_constraint = lambda do |request|

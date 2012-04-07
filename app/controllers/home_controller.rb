@@ -1,11 +1,20 @@
 class HomeController < ApplicationController
 
+
   def show
-    @langs = Language.all(sort: [[:price, :asc], [:name, :asc]])
-    if user_signed_in?
+    if user_signed_in? then
       @user_langs = current_user.languages
-      @langs -= @user_langs
+      @langs = Language.all(sort: [[:price, :asc], [:name, :asc]]) - @user_langs
+    else
+      redirect_to :greeting
     end
+  end
+
+  def greeting
+    @langs = Language.all(sort: [[:name, :asc]]).take(3)
+    langs_json = @langs.map { |lang| { syntax_mode: lang.syntax_mode.presence, code: lang.code_example, name: lang.id } }
+    styx_initialize_with langs: langs_json
+
   end
 
 end

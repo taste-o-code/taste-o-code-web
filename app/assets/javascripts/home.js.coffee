@@ -58,3 +58,17 @@
                       or you've already bought this language o_O\n
                       or you're trying to break the system! >:O"""
 
+  greeting: (data) -> $ ->
+    $(data.langs).each (ind, lang) ->
+      div = $('#' + lang.name).children('.code')[0];
+      CodeMirror(
+        div,
+        {
+          mode: lang.syntax_mode || 'text/plain',
+          theme: 'default',
+          readOnly: true,
+          lineWrapping: true,
+          value: lang.code
+        }
+      )
+
