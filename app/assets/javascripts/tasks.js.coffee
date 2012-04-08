@@ -91,7 +91,7 @@
           $.ajax {
             url: '/check_submissions',
             data: { ids: ids },
-            success: (data) -> updateSubmissionsByResponse(data)
+            success: updateSubmissionsByResponse
             complete: setCheckSubmissionsTimer
           }
         else
@@ -101,9 +101,9 @@
 
       $('#submit_form').on 'ajax:success', (evt, data) ->
         current_page = $('#pagination .current').text().trim()
+        url = window.location.href + '/submissions.js'
         # Refresh div with submissions.
         $.ajax {
-          url: window.location.href,
+          url: url,
           data: { page: current_page },
-          beforeSend: (xhr, settings) -> xhr.setRequestHeader('accept', '*/*;q=0.5, ' + settings.accepts.script)
         }

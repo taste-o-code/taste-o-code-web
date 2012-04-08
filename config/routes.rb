@@ -19,6 +19,7 @@ TasteOCodeWeb::Application.routes.draw do
     post 'buy', :on => :collection
     resources :tasks, :only => [:show] do
       post 'submit', :on => :member
+      get 'submissions', :on => :member
     end
   end
 

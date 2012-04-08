@@ -12,6 +12,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def submissions
+    if user_signed_in?
+      lang = Language.find(params[:language_id])
+      task = lang.tasks.where(slug: params[:id]).first
+      @submissions = current_user.submissions_for_task(task).page(params[:page]).per(5)
+    else
+      head :ok
+    end
+  end
+
   def submit
     task = Task.find_by_slug params[:id], params[:language_id]
 
