@@ -11,9 +11,13 @@ class HomeController < ApplicationController
   end
 
   def greeting
-    @langs = Language.all(sort: [[:name, :asc]]).take(3)
-    langs_json = @langs.map { |lang| { syntax_mode: lang.syntax_mode.presence, code: lang.code_example, name: lang.id } }
-    styx_initialize_with langs: langs_json
+    if user_signed_in? then
+      redirect_to :home
+    else
+      @langs = Language.all(sort: [[:name, :asc]]).take(3)
+      langs_json = @langs.map { |lang| { syntax_mode: lang.syntax_mode.presence, code: lang.code_example, name: lang.id } }
+      styx_initialize_with langs: langs_json
+    end
 
   end
 

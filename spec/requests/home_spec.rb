@@ -29,6 +29,12 @@ describe HomeController do
       @user.reload.has_language?(@lang).should be_true
       page.should have_selector("#purchased_langs ##{@lang.id}")
     end
+
+    it 'should redirect to home from greeting page' do
+      visit greeting_path
+
+      current_path.should eq(home_path)
+    end
   end
 
   context 'Not authenticated user' do

@@ -34,6 +34,7 @@
       window.sourceEditor = createCodeMirror $('#source')[0]
       window.submissionSourceViewer = createCodeMirror $('#submission_source textarea')[0]
       window.submissionSourceViewer.setOption 'readOnly', true
+      window.submissionSourceViewer.setOption 'lineWrapping', true
 
 
       # Replace all <pre><code>...</code></pre> blocks with CodeMirror.
