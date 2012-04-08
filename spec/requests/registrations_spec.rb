@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Devise::RegistrationsController do
 
   it 'should send confirmation email' do
-    user = Factory.build :user
+    user = FactoryGirl.build :user
 
     visit new_user_registration_path
 
