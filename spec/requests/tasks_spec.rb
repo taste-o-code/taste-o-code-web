@@ -2,100 +2,87 @@ require 'spec_helper'
 
 describe TasksController do
 
-  before(:each) do
-    @mock_redis = MockRedis.new
-    Resque.redis = @mock_redis
+  let(:lang) { Factory(:language, price: 0) }
+  let(:task) { lang.tasks.first }
+  let(:task_page) { language_task_path(lang, task) }
 
-    @lang = Factory :language, price: 0
-    @task = @lang.tasks.first
-    @task.description = "*Description*  \n\n    print(hello)\n    print(world)"
-    @task.save
-    @url = language_task_path @lang, @task
-  end
+  context 'when user has access to the task' do
+    let(:user) { create_and_login_user }
 
-  context 'user with access to task' do
+    before(:all) { Resque.redis = MockRedis.new }
 
     before(:each) do
-      @user = create_and_login_user
-      @user.buy_language @lang
-      visit @url
+      user.buy_language lang
+      visit task_page
     end
 
-    it 'should render markdown in description' do
-      page.find('.description p em').should have_content('Description')
+    it 'allows user to see visit the task page' do
+      current_path.should == task_page
     end
 
-    it 'should replace <pre><code> with CodeMirror in description', :js => true do
+    it 'renders markdown in description' do
+      find('.description p em').should have_content('Description')
+    end
+
+    it 'replaces <pre><code> with CodeMirror in description', :js => true do
       page.should have_css('.description .CodeMirror')
     end
 
-    it 'should contain link to language page' do
-      click_link @lang.name
-
-      current_path.should eq(language_path @lang)
+    it 'contains link to language page' do
+      click_link lang.name
+      current_path.should == language_path(lang)
     end
 
     # TODO: why does it fail on travis-ci (http://travis-ci.org/#!/taste-o-code/taste-o-code-web/builds/747131)?
-    it 'should submit solution', :js => true, :ci => 'skip' do
-      source =  'print "Hello, world!"'
+    it "submits user's solution'", :js => true, :ci => 'skip' do
+      source = 'print "Hello, world!"'
       submit_solution source
+
       find('.submission[data-testing="true"]')
 
-      should_save_submission source
-      should_enqueue_job
+      submission = Submission.first
+
+      submission.user_id.should == user.id
+      submission.task_id.should == task.id
+      submission.source.should  == source
+      submission.result.should  == :testing
+
+      job = Resque.pop(Rails.configuration.resque[:queue_pyres])
+
+      job['class'].should == Rails.configuration.resque[:worker_pyres]
+      job['args'].should  == [{
+          'id'     => submission.id.to_s,
+          'source' => submission.source,
+          'task'   => submission.task.position,
+          'lang'   => submission.task.language.id
+      }]
     end
 
-    it 'should not submit empty solution', :js => true do
+    it 'does not allow user to submit an empty solution', :js => true do
       submit_solution ''
       lambda { find('.submission[data-testing="true"]') }.should raise_error
 
       Submission.first.should be_nil
     end
 
-    def submit_solution(source)
-      page.execute_script "window.sourceEditor.setValue('#{source}')"
-      click_button 'submit_button'
-    end
-
-    def should_save_submission(source)
-      submission = Submission.first
-      submission.user_id.should eq(@user.id)
-      submission.task_id.should eq(@task.id)
-      submission.source.should eq(source)
-      submission.result.should eq(:testing)
-    end
-
-    def should_enqueue_job()
-      job = Resque.pop Rails.configuration.resque[:queue_pyres]
-      submission = Submission.first
-      expected_args = {
-        'id' => submission.id.to_s,
-        'source' => submission.source,
-        'task' => submission.task.position,
-        'lang' => submission.task.language.id
-      }
-      job['class'].should eq(Rails.configuration.resque[:worker_pyres])
-      job['args'].should eq([expected_args])
-    end
-
-
   end
 
-  context 'user without access to task' do
-
-    it 'should not show task for unauthenticated user' do
-      visit @url
-
-      current_path.should_not eq(@url)
+  context 'when the user has no acces to the task' do
+    it 'does not show the task to a user that is not authenticated' do
+      visit task_page
+      current_path.should_not == task_page
     end
 
-    it "should not show task for user, who didn't buy language" do
+    it "does not show the task to the user who didn't buy it'" do
       create_and_login_user
-
-      visit @url
-
-      current_path.should_not eq(@url)
+      visit task_page
+      current_path.should_not == task_page
     end
+  end
+
+  def submit_solution(source)
+    page.execute_script "window.sourceEditor.setValue('#{source}')"
+    click_button 'submit_button'
   end
 
 end
