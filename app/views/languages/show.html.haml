@@ -3,7 +3,8 @@
 
   %div.description= @lang.description
 
-  %div#code_example
+  - if @lang.code_example.present?
+    %div#code_example
 
   %div.links
     %p.title Useful links:

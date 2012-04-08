@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
     if has_access? @task
       @submissions = current_user.submissions_for_task(@task).page(params[:page]).per(5)
-      styx_initialize_with :syntax_mode => @lang.syntax_mode.presence
+      styx_initialize_with :syntax_mode => @lang.syntax_mode
     else
       redirect_to :root
     end

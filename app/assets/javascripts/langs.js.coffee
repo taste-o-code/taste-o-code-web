@@ -2,15 +2,14 @@
 
   show: (data) ->
     $ ->
-      CODE_MIRROR_THEME_COOKIE = 'cm-theme'
-      theme = $.cookie(CODE_MIRROR_THEME_COOKIE) ? 'default'
-      CodeMirror(
-        $('#code_example')[0],
-        {
-          mode: data.syntax_mode || 'text/plain',
-          theme: theme,
-          readOnly: true,
-          value: data.code
-        }
-      )
-
+      codeExample = $('#code_example')
+      if (data.code && codeExample.length > 0)
+        CodeMirror(
+          codeExample[0],
+          {
+            mode: data.syntax_mode || CodeMirror.DEFAULT_SYNTAX_MODE,
+            theme: $.cookie(CodeMirror.COOKIE) ? 'default',
+            readOnly: true,
+            value: data.code
+          }
+        )

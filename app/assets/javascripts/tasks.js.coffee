@@ -4,16 +4,12 @@
     $ ->
       CHECK_INTERVAL = 3000
 
-      CODE_MIRROR_THEMES = ['default', 'cobalt', 'eclipse', 'elegant', 'monokai', 'neat', 'night', 'rubyblue']
-
-      CODE_MIRROR_THEME_COOKIE = 'cm-theme'
-
-      storeTheme = (theme) -> $.cookie CODE_MIRROR_THEME_COOKIE, theme, { path: '/', expires: 30 }
+      storeTheme = (theme) -> $.cookie CodeMirror.COOKIE, theme, { path: '/', expires: 30 }
 
       themeSelector = $('.cm-theme-selector select')
-      themeSelector.append $('<option>').val(theme).text(theme) for theme in CODE_MIRROR_THEMES
+      themeSelector.append $('<option>').val(theme).text(theme) for theme in CodeMirror.THEMES
 
-      theme = $.cookie(CODE_MIRROR_THEME_COOKIE) ? 'default'
+      theme = $.cookie(CodeMirror.COOKIE) ? 'default'
 
       storeTheme theme
       themeSelector.val theme
@@ -23,7 +19,7 @@
         editor = CodeMirror.fromTextArea(
           textArea,
           {
-            mode: data.syntax_mode || 'text/plain',
+            mode: data.syntax_mode || CodeMirror.DEFAULT_SYNTAX_MODE,
             theme: theme,
             lineNumbers: true
           }

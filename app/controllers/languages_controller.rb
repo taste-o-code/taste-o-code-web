@@ -4,7 +4,7 @@ class LanguagesController < ApplicationController
 
   def show
     @lang = Language.find(params[:id])
-    styx_initialize_with :syntax_mode => @lang.syntax_mode.presence, :code => @lang.code_example
+    styx_initialize_with :syntax_mode => @lang.syntax_mode, :code => @lang.code_example
   end
 
   def buy

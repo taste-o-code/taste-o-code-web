@@ -28,3 +28,7 @@ $('form#login_form').live 'ajax:error', (xhr, status, error) ->
   error = $.parseJSON(status.responseText).error
   $('<div/>', { class: 'alert-box error' }).html(error).insertBefore this
 
+
+CodeMirror.THEMES = ['default', 'cobalt', 'eclipse', 'elegant', 'monokai', 'neat', 'night', 'rubyblue']
+CodeMirror.COOKIE = 'cm-theme'
+CodeMirror.DEFAULT_SYNTAX_MODE = 'text/plain'
