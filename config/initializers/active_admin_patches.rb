@@ -1,11 +1,11 @@
 # Patches to make ActiveAdmin work with Mongoid.
 # For more information see https://github.com/gregbell/active_admin/issues/26 and https://gist.github.com/1809524.
 
-require "active_admin"
-require "active_admin/resource_controller"
+require 'active_admin'
 require 'ostruct'
 
 module ActiveAdmin
+
   class Namespace
     # Disable comments
     def comments?
@@ -21,25 +21,6 @@ module ActiveAdmin
     # Disable filters
     def add_default_sidebar_sections
     end
-  end
-
-  class ResourceController
-    # Use #desc and #asc for sorting.
-    def sort_order(chain)
-      params[:order] ||= active_admin_config.sort_order
-      table_name = active_admin_config.resource_table_name
-      if params[:order] && params[:order] =~ /^([\w\_\.]+)_(desc|asc)$/
-        chain.send($2, $1)
-      else
-        chain # just return the chain
-      end
-    end
-
-    # Disable filters
-    def search(chain)
-      chain
-    end
-
   end
 
   # We use mongoid and it's Criteria class doesn't have reorder method. So just remove it.
@@ -58,8 +39,34 @@ module ActiveAdmin
     end
   end
 
-
 end
+
+# For some reason this part causes "undefined local variable or method `gflash'" error while running tests on Spork.
+unless Rails.env.test?
+  require 'active_admin/resource_controller'
+
+  module ActiveAdmin
+
+    class ResourceController
+      # Use #desc and #asc for sorting.
+      def sort_order(chain)
+        params[:order] ||= active_admin_config.sort_order
+        if params[:order] && params[:order] =~ /^([\w\_\.]+)_(desc|asc)$/
+          chain.send($2, $1)
+        else
+          chain # just return the chain
+        end
+      end
+
+      # Disable filters
+      def search(chain)
+        chain
+      end
+    end
+
+  end
+end
+
 
 module Mongoid
   module ActiveAdmin
