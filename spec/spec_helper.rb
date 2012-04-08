@@ -8,11 +8,11 @@ if ENV['SCOV']
 end
 
 Spork.prefork do
-
   ENV['RAILS_ENV'] ||= 'test'
 
   require 'rails/application'
   require 'rails/mongoid'
+
   Spork.trap_class_method(Rails::Mongoid, :load_models)
   Spork.trap_method(Rails::Application, :reload_routes!)
   Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
@@ -50,7 +50,6 @@ Spork.prefork do
   OmniAuth.config.test_mode = true
   # We can delete :info hash when https://github.com/intridea/omniauth/commit/885bb1639e0ec0b1b268338891b11b17929ffaef released.
   OmniAuth.config.add_mock :google, :uid => '123456', :info => { :name => 'Bob Example', :email => 'bob@example.com' }
-
 end
 
 Spork.each_run do

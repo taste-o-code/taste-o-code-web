@@ -15,7 +15,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :user_with_omniauth_identity, :parent => :user do |user|
+  factory :user_with_omniauth_identity, :parent => :user do
     omniauth_identities [FactoryGirl.build(:omniauth_identity)]
     password nil
   end
@@ -24,20 +24,13 @@ FactoryGirl.define do
     user.after_create { |u| u.languages = [Factory(:language), Factory(:language)] }
   end
 
-end
-
-FactoryGirl.define do
-
-  factory :task do |task|
+  factory :task do
     sequence(:position) { |n| n }
     sequence(:name) { |n| "Task no #{n}" }
     sequence(:slug) { |n| "task_#{n}" }
-    description 'Task description goes here.'
+    description "*Description*  \n\n    print(hello)\n    print(world)"
     award 10
   end
-end
-
-FactoryGirl.define do
 
   factory :language do |lang|
     sequence(:name) { |n| "Language #{n}" }
