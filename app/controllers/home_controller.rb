@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
 
   def show
-    if user_signed_in? then
+    if user_signed_in?
       @user_langs = current_user.languages
       @langs = Language.all(sort: [[:price, :asc], [:name, :asc]]) - @user_langs
     else
