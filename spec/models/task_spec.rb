@@ -6,7 +6,8 @@ describe Task do
     lang = FactoryGirl.create :language
     task = lang.tasks.first
 
-    found_task = Task.find_by_slug(task.slug, lang.id)
+    found_task = Task.find_by_slug(lang.id, task.slug)
     found_task.id.should eq(task.id)
   end
+
 end

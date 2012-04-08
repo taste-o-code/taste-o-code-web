@@ -2,12 +2,9 @@ class Task
 
   include Mongoid::Document
 
-  def self.find_by_slug(slug, lang)
-    where(language_id: lang, slug: slug).first
-  end
-
   belongs_to :language
   has_many   :submissions
+  has_many   :comments
 
   field :name, type: String
   field :slug, type: String
@@ -16,6 +13,10 @@ class Task
   field :award, type: Integer
 
   validates_uniqueness_of :slug, scope: :language_id
+
+  def self.find_by_slug(language_id, slug)
+    where(language_id: language_id, slug: slug).first
+  end
 
   def to_param
     slug

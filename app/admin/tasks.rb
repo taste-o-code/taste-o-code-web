@@ -4,7 +4,7 @@ ActiveAdmin.register Task do
 
   controller do
     def resource
-      @task ||= Task.find_by_slug params[:id], params[:language_id]
+      @task ||= Task.find_by_slug params[:language_id], params[:id]
     end
   end
 

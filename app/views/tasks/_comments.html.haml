@@ -1,0 +1,7 @@
+%div#comments
+  %h4 Comments
+
+  - if @task.comments.empty?
+    %span No comments
+  - else
+    %ul{ class: 'comments' }= render partial: 'comment', collection: @task.comments

@@ -11,24 +11,25 @@ describe TasksController do
 
     before(:all) { Resque.redis = MockRedis.new }
 
-    before(:each) do
-      user.buy_language lang
-      visit task_page
-    end
+    before(:each) { user.buy_language(lang) }
 
     it 'allows user to see visit the task page' do
+      visit task_page
       current_path.should == task_page
     end
 
     it 'renders markdown in description' do
+      visit task_page
       find('.description p em').should have_content('Description')
     end
 
     it 'replaces <pre><code> with CodeMirror in description', :js => true do
+      visit task_page
       page.should have_css('.description .CodeMirror')
     end
 
     it 'contains link to language page' do
+      visit task_page
       click_link lang.name
       current_path.should == language_path(lang)
     end
@@ -36,6 +37,8 @@ describe TasksController do
     # TODO: why does it fail on travis-ci (http://travis-ci.org/#!/taste-o-code/taste-o-code-web/builds/747131)?
     it "submits user's solution'", :js => true, :ci => 'skip' do
       source = 'print "Hello, world!"'
+
+      visit task_page
       submit_solution source
 
       find('.submission[data-testing="true"]')
@@ -59,15 +62,35 @@ describe TasksController do
     end
 
     it 'does not allow user to submit an empty solution', :js => true do
+      visit task_page
+
       submit_solution ''
       lambda { find('.submission[data-testing="true"]') }.should raise_error
 
       Submission.first.should be_nil
     end
 
+    it 'shows comments section' do
+      visit task_page
+      find('#comments h4').should have_content('Comments')
+    end
+
+    it "says 'No comments' when there are no comments" do
+      visit task_page
+      find('#comments').should have_content('No comments')
+    end
+
+    it 'shows comments when there are some' do
+      task.comments.create(body: 'First comment')
+
+      visit task_page
+
+      find('#comments').should have_content(task.comments.first.body)
+    end
+
   end
 
-  context 'when the user has no acces to the task' do
+  context 'when the user has no access to the task' do
     it 'does not show the task to a user that is not authenticated' do
       visit task_page
       current_path.should_not == task_page

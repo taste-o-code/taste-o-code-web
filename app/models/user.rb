@@ -14,6 +14,7 @@ class User
 
   embeds_many             :omniauth_identities
   has_many                :submissions
+  has_many                :comments
   has_and_belongs_to_many :languages, :inverse_of => nil
   has_and_belongs_to_many :solved_tasks, :class_name => 'Task', :inverse_of => nil
   has_and_belongs_to_many :unsubdued_tasks, :class_name => 'Task', :inverse_of => nil

@@ -22,7 +22,7 @@ class TasksController < ApplicationController
   end
 
   def submit
-    task = Task.find_by_slug params[:id], params[:language_id]
+    task = Task.find_by_slug params[:language_id], params[:id]
 
     submission = Submission.create(
         user:   current_user,
