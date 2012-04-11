@@ -59,16 +59,21 @@
                       or you're trying to break the system! >:O"""
 
   greeting: (data) -> $ ->
-    $(data.langs).each (ind, lang) ->
-      div = $('#' + lang.name).children('.code')[0];
+      # Replace all <pre><code>...</code></pre> blocks with CodeMirror.
+    $('pre code').each( ->
+      el = $(this)
+      parent = el.parents('.lang')[0]
+      mode = el.attr('class') || CodeMirror.DEFAULT_SYNTAX_MODE
       CodeMirror(
-        div,
+        parent,
         {
-          mode: lang.syntax_mode || 'text/plain',
+          mode: mode,
           theme: 'default',
           readOnly: true,
           lineWrapping: true,
-          value: lang.code
+          value: el.text()
         }
       )
+      el.parent().remove()
+    )
 

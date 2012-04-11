@@ -2,9 +2,10 @@
 
   %div.langs
     - @langs.each do |lang|
-      %div.lang{ id: lang.id }
+      %div.lang
         = link_to lang.name, lang
-        %div.code
+        %pre.code
+          %code{ class: lang.syntax_mode }= find_and_preserve lang.code_example
 
   %div.introduction
     %p Do you know these 3 languages?
