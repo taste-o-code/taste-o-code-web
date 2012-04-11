@@ -5,6 +5,8 @@
 
   - if @lang.code_example.present?
     %div#code_example
+      %pre
+        %code{ class: @lang.syntax_mode }= find_and_preserve @lang.code_example
 
   %div.links
     %p.title Useful links:
