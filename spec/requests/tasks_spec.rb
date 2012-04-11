@@ -53,7 +53,7 @@ describe TasksController do
       job['args'].should  == [{
           'id'     => submission.id.to_s,
           'source' => submission.source,
-          'task'   => submission.task.position,
+          'task'   => submission.task.slug,
           'lang'   => submission.task.language.id
       }]
     end

@@ -63,7 +63,7 @@ class TasksController < ApplicationController
   def enqueue_submission(submission)
     job = {
       :source => submission.source,
-      :task => submission.task.position,
+      :task => submission.task.slug,
       :lang => submission.task.language.id,
       :id => submission.id
     }
