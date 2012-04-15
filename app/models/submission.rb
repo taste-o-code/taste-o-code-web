@@ -24,7 +24,7 @@ class Submission
   end
 
   def fail_cause
-    self['fail_cause'] if result == FAILED
+    self['fail_cause'] || 'Unknown error.' if result == FAILED
   end
 
   def to_hash

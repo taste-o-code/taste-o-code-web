@@ -63,8 +63,7 @@
         id = $(evt.currentTarget).parents('.submission').attr('id')
         evt.currentTarget.src = '/assets/testing.gif'
         $.ajax {
-          url: '/get_submission_source',
-          data: {id: id},
+          url: '/submissions/' + id + '/source',
           success: (data) ->
             window.submissionSourceViewer.setValue data.source
             $('#submission_source').reveal {animation: 'none'}
@@ -89,7 +88,7 @@
         ids = $('.submission[data-testing="true"]').map(-> this.id).toArray()
         if ids.length > 0
           $.ajax {
-            url: '/check_submissions',
+            url: '/submissions',
             data: { ids: ids },
             success: updateSubmissionsByResponse
             complete: setCheckSubmissionsTimer

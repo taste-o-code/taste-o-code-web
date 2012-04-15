@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 
+
+
   def show
     @lang = Language.find(params[:language_id])
     @task = @lang.tasks.where(slug: params[:id]).first
@@ -17,8 +19,6 @@ class TasksController < ApplicationController
       lang = Language.find(params[:language_id])
       task = lang.tasks.where(slug: params[:id]).first
       @submissions = current_user.submissions_for_task(task).page(params[:page]).per(5)
-    else
-      head :ok
     end
   end
 
@@ -35,14 +35,6 @@ class TasksController < ApplicationController
     enqueue_submission submission
 
     render :json => { :submission_id => submission.id, :created_at => submission.pretty_submission_time }
-  end
-
-  def check_submissions
-    render :json => Submission.criteria.for_ids(params[:ids]).map(&:to_hash)
-  end
-
-  def get_submission_source
-    render :json => { source: Submission.find(params[:id]).source }
   end
 
   private

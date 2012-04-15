@@ -16,6 +16,10 @@ describe Submission do
       Submission.new(result: Submission::FAILED, fail_cause: 'cause').fail_cause.should == 'cause'
     end
 
+    it 'returns default message for failed submission if no fail cause specified' do
+      Submission.new(result: Submission::FAILED).fail_cause.should == 'Unknown error.'
+    end
+
     it "returns nil if submission didn't fail" do
       Submission.new(result: Submission::ACCEPTED, fail_cause: 'Wat?').fail_cause.should be_nil
     end
