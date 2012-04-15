@@ -1,11 +1,12 @@
 namespace :spec do
+
   desc 'Run tests coverage with simplecov'
-  task :scov => [:scov_env, :spec] do
+  task :cov => [:coverage_env, :spec] do
     require 'launchy'
     Launchy.open 'coverage/index.html'
   end
 
-  task :scov_env do
+  task :coverage_env do
     puts 'Cleaning up coverage reports'
     rm_rf 'coverage'
 
@@ -21,4 +22,5 @@ namespace :spec do
 
     ENV['SPEC_OPTS'] = '--no-drb --tag ~ci:skip --format doc'
   end
+
 end

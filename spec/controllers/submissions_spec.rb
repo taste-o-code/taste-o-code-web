@@ -20,9 +20,9 @@ describe SubmissionsController do
 
   describe '#source' do
     it 'returns submission source' do
-      submission = Submission.create(source: 'Bla-bla-bla')
+      submission = Submission.create(source: 'Bla-bla-bla', result: Submission::ACCEPTED)
 
-      get :submission_source, id: submission.id
+      get :source, id: submission.id
 
       JSON.parse(response.body)['source'].should == submission.source
     end

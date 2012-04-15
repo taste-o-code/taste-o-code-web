@@ -1,7 +1,7 @@
 class SubmissionsController < ApplicationController
 
   def index
-    render :json => Submission.criteria.for_ids(params[:ids]).map(&:to_hash)
+    render :json => Submission.any_in(_id: params[:ids]).map(&:to_hash)
   end
 
   def source
