@@ -113,7 +113,7 @@ class User
   end
 
   def submissions_for_task(task)
-    Submission.where(user_id: id, task_id: task.id).desc(:time)
+    Submission.where(user_id: id, task_id: task.id).desc(:created_at)
   end
 
   def apply_omniauth(omniauth)

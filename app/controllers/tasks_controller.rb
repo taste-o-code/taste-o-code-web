@@ -30,11 +30,11 @@ class TasksController < ApplicationController
         :user   => current_user,
         :result => :testing,
         :source => params[:source],
-        :time   => DateTime.now
     )
+
     enqueue_submission submission
 
-    render :json => { :submission_id => submission.id, :time => submission.time.strftime('%H:%M:%S %d %b') }
+    render :json => { :submission_id => submission.id, :created_at => submission.pretty_submission_time }
   end
 
   def check_submissions
