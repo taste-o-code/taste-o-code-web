@@ -29,8 +29,7 @@ module ApplicationHelper
   end
 
   def submission_image(submission)
-    ext = submission.result == :testing ? 'gif' : 'png'
-    image_tag("#{submission.result}.#{ext}")
+    image_tag("#{submission.result}.#{submission.testing? ? 'gif' : 'png'}")
   end
 
   def task_style(task)

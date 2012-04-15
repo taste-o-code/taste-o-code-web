@@ -28,7 +28,7 @@ class TasksController < ApplicationController
     submission = Submission.create(
         :task   => task,
         :user   => current_user,
-        :result => :testing,
+        :result => Submission::TESTING,
         :source => params[:source],
     )
 
@@ -38,20 +38,11 @@ class TasksController < ApplicationController
   end
 
   def check_submissions
-    response = params[:ids].map do |id|
-      submission = Submission.find(id)
-
-      result = { :result => submission.result, :id => id }
-      result.merge!(:fail_cause => submission.fail_cause) if submission.result == :failed
-      result
-    end
-
-    render :json => response
+    render :json => Submission.criteria.for_ids(params[:ids]).map(&:to_hash)
   end
 
   def get_submission_source
-    submission = Submission.find params[:id]
-    render :json => { source: submission.source }
+    render :json => { source: Submission.find(params[:id]).source }
   end
 
   private

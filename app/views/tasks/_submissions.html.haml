@@ -4,7 +4,7 @@
     %div.source Source
     %div.result Result
   - @submissions.each do |submission|
-    %div.submission{ :id => submission.id, 'data-testing' => (submission.result == :testing).to_s }
+    %div.submission{ :id => submission.id, 'data-testing' => submission.testing?.to_s }
       %div.time= submission.pretty_submission_time
       %div.source= image_tag 'source.png'
       %div.result= submission_image(submission)

@@ -5,7 +5,7 @@ class SubmissionResultHandler
   def self.perform(result)
     submission = Submission.find result['id']
     submission.result = result['result'].to_sym
-    if submission.result == :accepted
+    if submission.accepted?
       submission.user.task_accepted submission.task
     else
       submission.user.task_failed submission.task

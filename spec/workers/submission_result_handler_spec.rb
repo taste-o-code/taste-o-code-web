@@ -14,7 +14,7 @@ describe SubmissionResultHandler do
     SubmissionResultHandler.perform result_to_handle
 
     @submission.reload
-    @submission.result.should eq(:accepted)
+    @submission.result.should eq(Submission::ACCEPTED)
     @submission.fail_cause.should be_blank
   end
 
@@ -26,7 +26,7 @@ describe SubmissionResultHandler do
     SubmissionResultHandler.perform result_to_handle
 
     @submission.reload
-    @submission.result.should eq(:failed)
+    @submission.result.should eq(Submission::FAILED)
     @submission.fail_cause.should eq(fail_cause)
   end
 

@@ -45,7 +45,7 @@ describe TasksController do
       submission.user_id.should == user.id
       submission.task_id.should == task.id
       submission.source.should  == source
-      submission.result.should  == :testing
+      submission.result.should  == Submission::TESTING
 
       job = Resque.pop(Rails.configuration.resque[:queue_pyres])
 
