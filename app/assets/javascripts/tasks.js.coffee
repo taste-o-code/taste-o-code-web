@@ -63,7 +63,7 @@
         id = $(evt.currentTarget).parents('.submission').attr('id')
         evt.currentTarget.src = '/assets/testing.gif'
         $.ajax {
-          url: '/submissions/' + id + '/source',
+          url: Routes.source_submission_path(id),
           success: (data) ->
             window.submissionSourceViewer.setValue data.source
             $('#submission_source').reveal {animation: 'none'}
@@ -88,7 +88,7 @@
         ids = $('.submission[data-testing="true"]').map(-> this.id).toArray()
         if ids.length > 0
           $.ajax {
-            url: '/submissions',
+            url: Routes.submissions_path(),
             data: { ids: ids },
             success: updateSubmissionsByResponse
             complete: setCheckSubmissionsTimer
@@ -98,11 +98,8 @@
 
       setCheckSubmissionsTimer()
 
-      $('#submit_form').on 'ajax:success', (evt, data) ->
-        current_page = $('#pagination .current').text().trim()
-        url = window.location.href + '/submissions.js'
-        # Refresh div with submissions.
+      $('#submit_form').on 'ajax:success', ->
         $.ajax {
-          url: url,
-          data: { page: current_page },
+          url: Routes.submissions_language_task_path(data.language, data.task, {format: 'js'}),
+          data: { page: $('#pagination .current').text().trim() },
         }

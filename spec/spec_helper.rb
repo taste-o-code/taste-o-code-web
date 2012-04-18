@@ -12,10 +12,12 @@ Spork.prefork do
 
   require 'rails/application'
   require 'rails/mongoid'
+  require 'js-routes'
 
   Spork.trap_class_method(Rails::Mongoid, :load_models)
   Spork.trap_method(Rails::Application, :reload_routes!)
   Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
+  Spork.trap_method(JsRoutes, :generate!)
 
   Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each { |f| require f }
 

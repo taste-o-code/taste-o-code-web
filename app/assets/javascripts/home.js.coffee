@@ -1,9 +1,7 @@
 @Styx.Initializers.Home =
   show: -> $ ->
     $('.language').on 'click', (event) ->
-      return if $(event.target).hasClass 'buy'
-      url = '/languages/' + this.id;
-      window.location = url
+      window.location = Routes.language_path(this.id) unless $(event.target).hasClass('buy')
 
     showDialog = (dialog) ->
       dialog_top = $(window).height() / 2 + dialog.height()
@@ -59,8 +57,8 @@
                       or you're trying to break the system! >:O"""
 
   greeting: (data) -> $ ->
-      # Replace all <pre><code>...</code></pre> blocks with CodeMirror.
-    $('pre code').each( ->
+    # Replace all <pre><code>...</code></pre> blocks with CodeMirror.
+    $('pre code').each ->
       el = $(this)
       parent = el.parents('.lang')[0]
       mode = el.attr('class') || CodeMirror.DEFAULT_SYNTAX_MODE
@@ -75,5 +73,4 @@
         }
       )
       el.parent().remove()
-    )
 
