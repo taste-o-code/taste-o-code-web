@@ -35,7 +35,7 @@ TasteOCodeWeb::Application.routes.draw do
   match '/about',    to: 'about#show',    as: :about
 
   admin_constraint = lambda do |request|
-    request.env['warden'].authenticate? and request.env['warden'].user.class == AdminUser
+    request.env['warden'].authenticated? :admin_user
   end
 
   constraints admin_constraint do
