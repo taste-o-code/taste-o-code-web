@@ -1,9 +1,9 @@
 module ApplicationHelper
 
   NAVIGATION_ITEMS = {
-      'home'      => { :controller => '/home',      :action => :show },
-      'users'     => { :controller => '/users',     :action => :index },
-      'about'     => { :controller => '/about',     :action => :show },
+      'home'      => { :controller => :'/home',  :action => :show },
+      'users'     => { :controller => :'/users', :action => :index },
+      'about'     => { :controller => :'/about', :action => :show },
   }
 
   MARKDOWN = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
