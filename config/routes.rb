@@ -28,6 +28,8 @@ TasteOCodeWeb::Application.routes.draw do
     get :source, on: :member
   end
 
+  resources :comments, only: :create
+
   resource :settings, only: [:show, :update]
 
   match '/home',     to: 'home#show',     as: :home

@@ -1,7 +1,13 @@
-%div#comments
+%div
   %h4 Comments
 
-  - if @task.comments.empty?
-    %span No comments
+  - if comments.empty?
+    %div.no-comments No comments
   - else
-    %ul{ class: 'comments' }= render partial: 'comment', collection: @task.comments
+    %ul{ class: 'comments' }= render partial: 'comment', collection: comments
+
+  %div#comment_form
+    = form_tag comments_path(task_id: task_id), format: :json do
+      = text_area_tag :body
+
+    %button.nice.radius.button Comment

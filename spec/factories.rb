@@ -41,4 +41,10 @@ FactoryGirl.define do
     lang.after_create { |l| 2.times { Factory(:task, language: l) } }
   end
 
+  factory :comment do
+    body 'Some body'
+    task { Task.first || Factory(:task) }
+    user { User.first || Factory(:user) }
+  end
+
 end

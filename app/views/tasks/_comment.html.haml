@@ -1,2 +1,10 @@
 %li
-  = comment.body
+  %table
+    %tr
+      %td.avatar{rowspan: 2}= image_tag(comment.user.gravatar(35), size: '35x35', alt: 'avatar')
+      %td.header
+        %div
+          %span.author by #{link_to(comment.user.name, comment.user, { target: '_blank' })}
+          %span.time #{time_ago_in_words(comment.created_at)} ago
+    %tr
+      %td.body= comment.body

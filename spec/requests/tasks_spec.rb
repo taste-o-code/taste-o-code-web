@@ -72,20 +72,23 @@ describe TasksController do
 
     it 'shows comments section' do
       visit task_page
-      find('#comments h4').should have_content('Comments')
+      page.should have_content('Comments')
     end
 
     it "says 'No comments' when there are no comments" do
       visit task_page
-      find('#comments').should have_content('No comments')
+      page.should have_content('No comments')
     end
 
     it 'shows comments when there are some' do
-      task.comments.create(body: 'First comment')
+      comment = Factory(:comment)
 
       visit task_page
 
-      find('#comments').should have_content(task.comments.first.body)
+      comments_tab = find('#commentsTab')
+
+      comments_tab.should have_content(comment.body)
+      comments_tab.should have_content(comment.user.name)
     end
 
   end

@@ -34,14 +34,13 @@
 
 
       # Replace all <pre><code>...</code></pre> blocks with CodeMirror.
-      $('.description pre code').each((_, el) ->
+      $('.description pre code').each (_, el) ->
         el = $(el)
         textarea = $('<textarea/>').val(el.text())
         el.parent().replaceWith textarea
         editor = createCodeMirror textarea[0]
         editor.setOption 'readOnly', true
         editor.setOption 'lineNumbers', false
-      )
 
       themeSelector.change ->
         theme = $(this).val()
@@ -103,3 +102,21 @@
           url: Routes.submissions_language_task_path(data.language, data.task, {format: 'js'}),
           data: { page: $('#pagination .current').text().trim() },
         }
+
+      # remove anchor behavior from comments/submissions tabs
+      $('dl.tabs').each ->
+        $(this).children('dd').children('a').click (e) -> e.preventDefault()
+
+      comment_form = $('#comment_form')
+
+      comment_form.find('button').on 'click', ->
+        if comment_form.find('textarea').val().length > 0
+          form = comment_form.find('form')
+          $.post form.attr('action'), form.serialize(), (data) ->
+            if data.comment
+              form.find('textarea').val('')
+              $('#commentsTab ul').append data.comment
+            else
+              $.gritter.add {image: '/assets/error.png', title: 'Error', text: data.error }
+        else
+          $.gritter.add {image: '/assets/warning.png', title: 'Empty comment', text: 'Your can\'t submit empty comment.'}
