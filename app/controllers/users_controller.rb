@@ -24,6 +24,7 @@ class UsersController < ApplicationController
 
   def check_edit_permission
     if params[:id] == current_user.id.to_s
+      Mongoid::IdentityMap.clear # for @user to be an independent copy of current_user
       @user = User.find(current_user.id)
     else
       redirect_to user_path(params[:id]), :gflash => notification(:error, "Don't cheat!", 'You can edit only your own profile.')

@@ -33,7 +33,7 @@ describe UsersController do
 
     it "should not allow user to edit somebody else's profile" do
       owner = Factory :user, :name => 'owner'
-      user = create_and_login_user
+      create_and_login_user
 
       visit user_path(owner)
 
@@ -68,6 +68,7 @@ describe UsersController do
       user_name = user.name
 
       visit edit_user_path(user)
+
       fill_in 'Name', :with => ''
       click_button 'Save'
 

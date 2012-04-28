@@ -1,7 +1,9 @@
 development:
   host: localhost
   database: toc_dev
+  identity_map_enabled: true
 
 test:
   host: localhost
   database: toc_test
+  identity_map_enabled: true
