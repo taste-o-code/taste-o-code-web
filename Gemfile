@@ -41,7 +41,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier',     '~> 1.2.2'
 
-  gem 'zurb-foundation', '~> 2.1.4'
+  gem 'zurb-foundation', '~> 2.2.1'
 end
 
 group :development do
