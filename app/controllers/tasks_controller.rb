@@ -1,12 +1,14 @@
 class TasksController < ApplicationController
 
+  SUBMISSIONS_PAGE_SIZE = 10
+
   def show
     @lang = Language.find(params[:language_id])
     @task = @lang.tasks.where(slug: params[:id]).first
 
     return redirect_to(:root) unless has_access?(@task)
 
-    @submissions = current_user.submissions_for_task(@task).page(params[:page]).per(5)
+    @submissions = current_user.submissions_for_task(@task).page(params[:page]).per(SUBMISSIONS_PAGE_SIZE)
     @comments = @task.comments.includes(:user).order(:created_at)
 
     styx_initialize_with syntax_mode: @lang.syntax_mode, language: @lang.id, task: @task.slug
@@ -17,7 +19,7 @@ class TasksController < ApplicationController
       lang = Language.find(params[:language_id])
       task = lang.tasks.where(slug: params[:id]).first
 
-      @submissions = current_user.submissions_for_task(task).page(params[:page]).per(5)
+      @submissions = current_user.submissions_for_task(task).page(params[:page]).per(SUBMISSIONS_PAGE_SIZE)
     end
   end
 
