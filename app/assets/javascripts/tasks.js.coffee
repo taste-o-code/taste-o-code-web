@@ -55,7 +55,7 @@
         if $('#source').val().length > 0
           $('#submit_form').submit()
         else
-          $.gritter.add {image: '/assets/warning.png', title: 'Empty solution', text: 'Your can\'t submit empty solution.'}
+          TOC.warning 'Empty solution', "Your can't submit empty solution."
 
       # Show submission source
       $('#submissions').on 'click', '.source img', (evt) ->
@@ -77,11 +77,10 @@
           return if result == 'testing'
           div = $('#' + submission.id)
           div.removeAttr('data-testing')
-          image = '/assets/' + result + '.png'
-          div.find('.result img').attr('src', image)
+          div.find('.result img').attr('src', '/assets/' + result + '.png')
           title = result.substr(0, 1).toUpperCase() + result.substr(1)
           message = if result == 'accepted' then 'Solution has been accepted.' else submission.fail_cause
-          $.gritter.add { image: image, title: title, text: message }
+          TOC.notify title, message, result
 
       checkSubmissions = ->
         ids = $('.submission[data-testing="true"]').map(-> this.id).toArray()
@@ -110,17 +109,17 @@
       comment_form = $('#comment_form')
 
       comment_form.find('button').on 'click', ->
-        if comment_form.find('textarea').val().length > 0
+        if comment_form.find('#body').val().trim().length > 0
           form = comment_form.find('form')
           $.post form.attr('action'), form.serialize(), (data) ->
             if data.comment
-              form.find('textarea').val('')
+              form.find('#body').val('')
               list = $('#commentsTab ul')
               if list.length == 0
                 $('#commentsTab .no-comments').remove()
                 list = $('<ul>', { class: 'comments' }).insertAfter('#commentsTab div h4')
               list.append data.comment
             else
-              $.gritter.add {image: '/assets/error.png', title: 'Error', text: data.error }
+              TOC.error 'Error', data.error
         else
-          $.gritter.add {image: '/assets/warning.png', title: 'Empty comment', text: 'Your can\'t submit empty comment.'}
+          TOC.warning 'Empty comment', "Your can't submit empty comment."

@@ -32,3 +32,16 @@ $('form#login_form').live 'ajax:error', (xhr, status, error) ->
 CodeMirror.THEMES = ['default', 'cobalt', 'eclipse', 'elegant', 'monokai', 'neat', 'night', 'rubyblue']
 CodeMirror.COOKIE = 'cm-theme'
 CodeMirror.DEFAULT_SYNTAX_MODE = 'text/plain'
+
+
+# Global Taste-O-Code object hosting utility functions
+window.TOC =
+  NOTIFICATIONS: ['success', 'notice', 'warning', 'error']
+
+  notify: (title, message, notificationType) ->
+    $.gritter.add { image: '/assets/' + notificationType + '.png', title: title, text: message }
+
+# Define notification functions like TOC.alert('Title', 'Message')
+for notification in TOC.NOTIFICATIONS
+  do (notification) ->
+    TOC[notification] = (title, message) -> TOC.notify title, message, notification
