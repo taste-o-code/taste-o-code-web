@@ -113,10 +113,10 @@
           $.post form.attr('action'), form.serialize(), (data) ->
             if data.comment
               form.find('#body').val('')
-              list = $('#commentsTab ul')
+              list = $('#comments ul')
               if list.length == 0
-                $('#commentsTab .no-comments').remove()
-                list = $('<ul>', { class: 'comments' }).insertAfter('#commentsTab div h4')
+                $('#comments .no-content').remove()
+                list = $('<ul>', { class: 'comments' }).prependTo('#comments')
               list.append data.comment
             else
               TOC.error 'Error', data.error

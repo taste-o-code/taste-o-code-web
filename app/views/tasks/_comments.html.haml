@@ -1,8 +1,6 @@
-%div
-  %h4 Comments
-
+%div#comments
   - if comments.empty?
-    %div.no-comments No comments
+    %div.no-content No comments.
   - else
     %ul{ class: 'comments' }= render partial: 'comment', collection: comments
 

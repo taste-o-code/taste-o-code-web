@@ -39,9 +39,10 @@ describe TasksController do
       source = 'print "Hello, world!"'
 
       visit task_page
+
       submit_solution source
 
-      find('.submission[data-testing="true"]')
+      find('#submissions tr[data-testing="true"]')
 
       submission = Submission.first
 
@@ -65,7 +66,7 @@ describe TasksController do
       visit task_page
 
       submit_solution ''
-      lambda { find('.submission[data-testing="true"]') }.should raise_error
+      lambda { find('#submissions tr[data-testing="true"]') }.should raise_error
 
       Submission.first.should be_nil
     end
@@ -85,10 +86,10 @@ describe TasksController do
 
       visit task_page
 
-      comments_tab = find('#commentsTab')
+      comments_block = find('#comments')
 
-      comments_tab.should have_content(comment.body)
-      comments_tab.should have_content(comment.user.name)
+      comments_block.should have_content(comment.body)
+      comments_block.should have_content(comment.user.name)
     end
 
     it 'allows user to leave a comment', js: true do
@@ -99,7 +100,8 @@ describe TasksController do
       fill_in 'body', with: body
       click_button 'Comment'
 
-      page.should have_content body
+      page.should have_content(body)
+      page.should_not have_content('No comments')
     end
 
   end
