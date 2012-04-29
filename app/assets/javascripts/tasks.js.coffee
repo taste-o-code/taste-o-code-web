@@ -115,7 +115,11 @@
           $.post form.attr('action'), form.serialize(), (data) ->
             if data.comment
               form.find('textarea').val('')
-              $('#commentsTab ul').append data.comment
+              list = $('#commentsTab ul')
+              if list.length == 0
+                $('#commentsTab .no-comments').remove()
+                list = $('<ul>', { class: 'comments' }).insertAfter('#commentsTab div h4')
+              list.append data.comment
             else
               $.gritter.add {image: '/assets/error.png', title: 'Error', text: data.error }
         else

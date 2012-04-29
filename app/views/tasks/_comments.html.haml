@@ -10,4 +10,4 @@
     = form_tag comments_path(task_id: task_id), format: :json do
       = text_area_tag :body
 
-    %button.nice.radius.button Comment
+    %button.nice.radius.button{ value: 'Comment' } Comment

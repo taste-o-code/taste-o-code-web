@@ -23,7 +23,7 @@ describe TasksController do
       find('.description p em').should have_content('Description')
     end
 
-    it 'replaces <pre><code> with CodeMirror in description', :js => true do
+    it 'replaces <pre><code> with CodeMirror in description', js: true do
       visit task_page
       page.should have_css('.description .CodeMirror')
     end
@@ -35,7 +35,7 @@ describe TasksController do
     end
 
     # TODO: why does it fail on travis-ci (http://travis-ci.org/#!/taste-o-code/taste-o-code-web/builds/747131)?
-    it "submits user's solution'", :js => true, :ci => 'skip' do
+    it "submits user's solution'", js: true, ci: 'skip' do
       source = 'print "Hello, world!"'
 
       visit task_page
@@ -61,7 +61,7 @@ describe TasksController do
       }]
     end
 
-    it 'does not allow user to submit an empty solution', :js => true do
+    it 'does not allow user to submit an empty solution', js: true do
       visit task_page
 
       submit_solution ''
@@ -89,6 +89,17 @@ describe TasksController do
 
       comments_tab.should have_content(comment.body)
       comments_tab.should have_content(comment.user.name)
+    end
+
+    it 'allows user to leave a comment', js: true do
+      body = 'Hello, kitty!'
+
+      visit task_page
+
+      fill_in 'body', with: body
+      click_button 'Comment'
+
+      page.should have_content body
     end
 
   end
