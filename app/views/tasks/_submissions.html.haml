@@ -1,8 +1,10 @@
 %div#submissions
   %h4 Your submissions
-  %div.submission#submission_header
-    %div.time Submission time
-    %div.source Source
-    %div.result Result
-    = render partial: 'submission', collection: @submissions
+  %table
+    %thead
+      %th Submission time
+      %th Source
+      %th Result
+    %tbody
+      = render partial: 'submission', collection: @submissions
   %div#pagination= paginate @submissions, params: { action: :submissions }, remote: true, window: 1

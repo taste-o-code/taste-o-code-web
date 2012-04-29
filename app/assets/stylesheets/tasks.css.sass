@@ -42,33 +42,39 @@
 
   #submissions
     margin-top: 20px
-    font-size: 18px
     clear: both
+    font-size: 18px
 
-    #submission_header
-      font-weight: bold
-      border-top: 0px
-
-    .submission
+    table
       width: 600px
       margin: 20px auto
-      padding-top: 10px
-      border-top: 1px solid #DDD
+      border: none
+      background: none
+      font-size: 16px
       text-align: center
 
-      .time, .source, .result
-        display: inline-block
+      tr
+        border-bottom: 1px solid #DDD
 
-      .time
-        width: 40%
+      thead th
+        padding-bottom: 20px
 
-      .source
+      tbody td
+        vertical-align: middle
+        padding: 15px 0
+
+      thead, tr
+        background: none
+
+      td, th
+        text-align: inherit
+        font-size: inherit
+
+      .source, .result
         width: 20%
-        img
-          cursor: pointer
 
-      .result
-        width: 30%
+      .source img
+        cursor: pointer
 
     #pagination
       text-align: center

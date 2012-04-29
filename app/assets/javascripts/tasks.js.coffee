@@ -58,32 +58,31 @@
           TOC.warning 'Empty solution', "Your can't submit empty solution."
 
       # Show submission source
-      $('#submissions').on 'click', '.source img', (evt) ->
-        id = $(evt.currentTarget).parents('.submission').attr('id')
-        evt.currentTarget.src = '/assets/testing.gif'
+      $('#submissions').on 'click', '.source img', (e) ->
+        sourceIcon = $(e.currentTarget)
+        sourceIcon.attr { src: '/assets/loader.gif' }
         $.ajax {
-          url: Routes.source_submission_path(id),
+          url: Routes.source_submission_path(sourceIcon.closest('tr').data('submissionId')),
           success: (data) ->
             window.submissionSourceViewer.setValue data.source
-            $('#submission_source').reveal {animation: 'none'}
-            evt.currentTarget.src = '/assets/source.png'
+            $('#submission_source').reveal { animation: 'none' }
+            sourceIcon.attr src: '/assets/source.png'
         }
 
       setCheckSubmissionsTimer = -> window.setTimeout checkSubmissions, CHECK_INTERVAL
 
       updateSubmissionsByResponse = (submissions) ->
         $(submissions).each (ind, submission) ->
-          result = submission.result
-          return if result == 'testing'
-          div = $('#' + submission.id)
-          div.removeAttr('data-testing')
-          div.find('.result img').attr('src', '/assets/' + result + '.png')
-          title = result.substr(0, 1).toUpperCase() + result.substr(1)
-          message = if result == 'accepted' then 'Solution has been accepted.' else submission.fail_cause
-          TOC.notify title, message, result
+          return if submission.result == 'testing'
+
+          submissionBlock = $('#submissions [data-submission-id="' + submission.id + '"]').removeAttr('data-testing')
+          submissionBlock.find('.result img').attr('src', '/assets/' + submission.result + '.png')
+
+          message = if submission.result == 'accepted' then 'Solution has been accepted.' else submission.fail_cause
+          TOC.notify submission.result, message, submission.result
 
       checkSubmissions = ->
-        ids = $('.submission[data-testing="true"]').map(-> this.id).toArray()
+        ids = $('#submissions [data-testing="true"]').map(-> $(this).data('submissionId')).toArray()
         if ids.length > 0
           $.ajax {
             url: Routes.submissions_path(),

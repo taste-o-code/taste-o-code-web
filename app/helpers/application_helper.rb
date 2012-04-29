@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def submission_image(submission)
-    image_tag("#{submission.result}.#{submission.testing? ? 'gif' : 'png'}")
+    image_tag(submission.testing? ? 'loader.gif' : "#{submission.result}.png")
   end
 
   def task_style(task)

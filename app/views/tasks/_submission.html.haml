@@ -1,4 +1,4 @@
-%div.submission{ :id => submission.id, 'data-testing' => submission.testing?.to_s }
-  %div.time #{time_ago_in_words(submission.created_at)} ago
-  %div.source= image_tag 'source.png'
-  %div.result= submission_image(submission)
+%tr{ 'data-submission-id' => submission.id, 'data-testing' => submission.testing?.to_s }
+  %td.time #{time_ago_in_words(submission.created_at)} ago
+  %td.source= image_tag('source.png')
+  %td.result= submission_image(submission)

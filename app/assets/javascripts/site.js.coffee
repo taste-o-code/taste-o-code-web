@@ -39,7 +39,14 @@ window.TOC =
   NOTIFICATIONS: ['success', 'notice', 'warning', 'error']
 
   notify: (title, message, notificationType) ->
-    $.gritter.add { image: '/assets/' + notificationType + '.png', title: title, text: message }
+    $.gritter.add {
+      image: '/assets/' + notificationType + '.png',
+      title: this.capitalize(title),
+      text:  this.capitalize(message)
+    }
+
+  capitalize: (string) ->
+    string.substr(0, 1).toUpperCase() + string.substr(1)
 
 # Define notification functions like TOC.alert('Title', 'Message')
 for notification in TOC.NOTIFICATIONS
