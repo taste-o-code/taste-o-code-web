@@ -80,6 +80,7 @@
 
           message = if submission.result == 'accepted' then 'Solution has been accepted.' else submission.fail_cause
           TOC.notify submission.result, message, submission.result
+          TOC.points submission.points if submission.result == 'accepted'
 
       checkSubmissions = ->
         ids = $('#submissions [data-testing="true"]').map(-> $(this).data('submissionId')).toArray()

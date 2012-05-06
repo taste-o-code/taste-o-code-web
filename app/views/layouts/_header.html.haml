@@ -9,7 +9,9 @@
         %div#user_bar.logged-in
           %div#user_trigger.dropdown-trigger.hover-trigger
             %div.avatar= image_tag current_user.gravatar(45), :size => '45x45', :alt => 'avatar'
-            %div.name= current_user.name
+            %div.wrapper
+              %div.name= current_user.name
+              %div.points= current_user.points_to_str
             %div.header-dropdown
               %ul
                 %li= link_to 'Profile', user_path(current_user)

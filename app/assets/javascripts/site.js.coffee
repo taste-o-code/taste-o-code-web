@@ -48,6 +48,9 @@ window.TOC =
   capitalize: (string) ->
     string.substr(0, 1).toUpperCase() + string.substr(1)
 
+  points: (points) ->
+    $('#user_bar .points').text points
+
 # Define notification functions like TOC.alert('Title', 'Message')
 for notification in TOC.NOTIFICATIONS
   do (notification) ->
