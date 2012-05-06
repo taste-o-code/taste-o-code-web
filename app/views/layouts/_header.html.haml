@@ -8,7 +8,7 @@
       - if user_signed_in?
         %div#user_bar.logged-in
           %div#user_trigger.dropdown-trigger.hover-trigger
-            %div.avatar= image_tag current_user.gravatar(35), :size => '35x35', :alt => 'avatar'
+            %div.avatar= image_tag current_user.gravatar(45), :size => '45x45', :alt => 'avatar'
             %div.name= current_user.name
             %div.header-dropdown
               %ul
