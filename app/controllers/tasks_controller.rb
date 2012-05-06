@@ -42,11 +42,11 @@ class TasksController < ApplicationController
   private
 
   def can_submit?(task)
-    signed_in? && current_user.has_language?(task.language)
+    user_signed_in? && current_user.has_language?(task.language)
   end
 
   def no_access_message(lang)
-    signed_in? ? "Buy #{lang} to submit your solution." :  "Sign in and buy #{lang} to submit your solution."
+    user_signed_in? ? "Buy #{lang} to submit your solution." :  "Sign in and buy #{lang} to submit your solution."
   end
 
   def enqueue_submission(submission)
