@@ -40,11 +40,13 @@ describe Submission do
 
     context 'submission is not failed' do
       it 'returns submission info as a hash of string without fail cause' do
-        submission = Submission.new(result: Submission::ACCEPTED, fail_cause: 'Wat?')
+        user = Factory :user
+        submission = Submission.new(result: Submission::ACCEPTED, fail_cause: 'Wat?', user: user)
 
         submission.to_hash.should == {
             id:         submission.id.to_s,
-            result:     Submission::ACCEPTED.to_s
+            result:     Submission::ACCEPTED.to_s,
+            points:     user.points_to_str
         }
       end
     end

@@ -5,7 +5,7 @@ describe SubmissionsController do
   describe '#index' do
     it 'returns submissions results' do
       testing  = Submission.create(result: Submission::TESTING)
-      accepted = Submission.create(result: Submission::ACCEPTED)
+      accepted = Submission.create(result: Submission::ACCEPTED, user: Factory(:user))
       failed   = Submission.create(result: Submission::FAILED, fail_cause: 'A-ta-ta')
 
       get :index, ids: Submission.all.map(&:id)
