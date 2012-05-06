@@ -19,7 +19,10 @@
     %div#source_container= text_area_tag :source, nil, :rows => 30
 
   %div.clearfix
-    %button.nice.large.radius.button#submit_button Submit
+    - if @can_submit
+      %button.nice.large.radius.button#submit_button Submit
+    - else
+      %div#no_access= @no_access_message
 
   %dl.tabs
     %dd

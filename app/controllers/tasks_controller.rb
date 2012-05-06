@@ -6,9 +6,10 @@ class TasksController < ApplicationController
     @lang = Language.find(params[:language_id])
     @task = @lang.tasks.where(slug: params[:id]).first
 
-    return redirect_to(:root) unless has_access?(@task)
+    @can_submit = can_submit? @task
+    @no_access_message = no_access_message(@lang.name) unless @can_submit
 
-    @submissions = current_user.submissions_for_task(@task).page(params[:page]).per(SUBMISSIONS_PAGE_SIZE)
+    @submissions = current_user.submissions_for_task(@task).page(params[:page]).per(SUBMISSIONS_PAGE_SIZE) if @can_submit
     @comments = @task.comments.includes(:user).order(:created_at)
 
     styx_initialize_with syntax_mode: @lang.syntax_mode, language: @lang.id, task: @task.slug
@@ -40,8 +41,12 @@ class TasksController < ApplicationController
 
   private
 
-  def has_access?(task)
-    current_user && current_user.has_language?(task.language)
+  def can_submit?(task)
+    signed_in? && current_user.has_language?(task.language)
+  end
+
+  def no_access_message(lang)
+    signed_in? ? "Buy #{lang} to submit your solution." :  "Sign in and buy #{lang} to submit your solution."
   end
 
   def enqueue_submission(submission)

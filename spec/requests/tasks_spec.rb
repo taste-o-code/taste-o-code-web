@@ -107,15 +107,15 @@ describe TasksController do
   end
 
   context 'when the user has no access to the task' do
-    it 'does not show the task to a user that is not authenticated' do
+    it 'does not show submit button to a user that is not authenticated' do
       visit task_page
-      current_path.should_not == task_page
+      page.should have_no_css('#submit_button')
     end
 
-    it "does not show the task to the user who didn't buy it'" do
+    it "does not show submit button to the user who didn't buy it'" do
       create_and_login_user
       visit task_page
-      current_path.should_not == task_page
+      page.should have_no_css('#submit_button')
     end
   end
 

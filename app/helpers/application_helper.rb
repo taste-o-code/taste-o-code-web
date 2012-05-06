@@ -33,7 +33,9 @@ module ApplicationHelper
   end
 
   def task_style(task)
-    if current_user.solved_task_ids.include? task.id
+    if not signed_in?
+      'not-tried'
+    elsif current_user.solved_task_ids.include? task.id
       'solved'
     elsif current_user.unsubdued_task_ids.include? task.id
       'unsubdued'
