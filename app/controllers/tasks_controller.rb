@@ -7,7 +7,6 @@ class TasksController < ApplicationController
     @task = @lang.tasks.where(slug: params[:id]).first
 
     @can_submit = can_submit? @task
-    @no_access_message = no_access_message(@lang.name) unless @can_submit
 
     @submissions = current_user.submissions_for_task(@task).page(params[:page]).per(SUBMISSIONS_PAGE_SIZE) if @can_submit
     @comments = @task.comments.includes(:user).order(:created_at)
@@ -43,10 +42,6 @@ class TasksController < ApplicationController
 
   def can_submit?(task)
     user_signed_in? && current_user.has_language?(task.language)
-  end
-
-  def no_access_message(lang)
-    user_signed_in? ? "Buy #{lang} to submit your solution." :  "Sign in and buy #{lang} to submit your solution."
   end
 
   def enqueue_submission(submission)

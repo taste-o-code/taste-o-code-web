@@ -44,6 +44,10 @@ module ApplicationHelper
     end
   end
 
+  def no_access_message(lang)
+    user_signed_in? ? "Buy #{lang.name} to submit your solution." :  "Sign in and buy #{lang.name} to submit your solution."
+  end
+
   def markdown(source)
     MARKDOWN.render(source).html_safe
   end

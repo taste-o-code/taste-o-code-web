@@ -22,7 +22,7 @@
     - if @can_submit
       %button.nice.large.radius.button#submit_button Submit
     - else
-      %div#no_access= @no_access_message
+      %div#no_access= no_access_message @lang
 
   %dl.tabs
     %dd
