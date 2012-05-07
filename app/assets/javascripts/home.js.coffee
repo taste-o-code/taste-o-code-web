@@ -47,7 +47,7 @@
       if data.success
         lang = $('#' + data.lang)
         $('#points').text data.available_points
-        TOC.points(TOC.points().replace(/^\d+/, data.available_points))
+        TOC.availablePoints data.available_points
         moveLanguage lang, data.tasks_count
         removeBuyButtons data.available_points
       else

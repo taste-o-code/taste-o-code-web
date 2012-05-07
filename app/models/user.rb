@@ -131,10 +131,6 @@ class User
     "http://www.gravatar.com/avatar/#{hash}?s=#{size}"
   end
 
-  def points_to_str
-    "#{available_points}/#{total_points}"
-  end
-
   def change_password(params={})
     current_password = params.delete(:current_password)
 

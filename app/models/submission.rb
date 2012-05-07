@@ -28,12 +28,10 @@ class Submission
   end
 
   def to_hash
-    result = HASH_ATTRIBUTES.each_with_object({}) do |attr, memo|
+    HASH_ATTRIBUTES.each_with_object({}) do |attr, memo|
       value = send(attr)
       memo[attr] = value.to_s unless value.nil?
     end
-    result[:points] = user.points_to_str if accepted?
-    result
   end
 
   RESULTS.each do |expected_result|

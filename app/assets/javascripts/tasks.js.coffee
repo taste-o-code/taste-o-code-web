@@ -71,8 +71,8 @@
 
       setCheckSubmissionsTimer = -> window.setTimeout checkSubmissions, CHECK_INTERVAL
 
-      updateSubmissionsByResponse = (submissions) ->
-        $(submissions).each (ind, submission) ->
+      updateSubmissionsByResponse = (response) ->
+        $(response.submissions).each (ind, submission) ->
           return if submission.result == 'testing'
 
           submissionBlock = $('#submissions [data-submission-id="' + submission.id + '"]').removeAttr('data-testing')
@@ -80,7 +80,9 @@
 
           message = if submission.result == 'accepted' then 'Solution has been accepted.' else submission.fail_cause
           TOC.notify submission.result, message, submission.result
-          TOC.points submission.points if submission.result == 'accepted'
+
+        TOC.availablePoints response.available_points
+        TOC.totalPoints response.total_points
 
       checkSubmissions = ->
         ids = $('#submissions [data-testing="true"]').map(-> $(this).data('submissionId')).toArray()

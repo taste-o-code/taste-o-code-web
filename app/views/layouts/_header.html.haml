@@ -11,7 +11,10 @@
             %div.avatar= image_tag current_user.gravatar(45), :size => '45x45', :alt => 'avatar'
             %div.wrapper
               %div.name= current_user.name
-              %div.points= current_user.points_to_str
+              %div.points
+                %span.available-points= current_user.available_points
+                %span /
+                %span.total-points= current_user.total_points
             %div.header-dropdown
               %ul
                 %li= link_to 'Profile', user_path(current_user)

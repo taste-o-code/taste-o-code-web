@@ -178,17 +178,4 @@ describe User do
     end
   end
 
-  it 'should have correct points_to_str method' do
-    # Prepare
-    user = Factory :user
-    user.available_points = 42
-    user.total_points = 84
-
-    # Run
-    result = user.points_to_str
-
-    # Validate
-    result.should eq('42/84')
-  end
-
 end
