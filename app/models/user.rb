@@ -126,11 +126,6 @@ class User
     omniauth_identities.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
-  def gravatar(size)
-    hash = Digest::MD5.hexdigest(email.strip.downcase)
-    "http://www.gravatar.com/avatar/#{hash}?s=#{size}"
-  end
-
   def change_password(params={})
     current_password = params.delete(:current_password)
 

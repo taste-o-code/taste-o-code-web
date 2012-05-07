@@ -1,7 +1,7 @@
 %li
   %table
     %tr
-      %td.avatar{rowspan: 2}= image_tag(comment.user.gravatar(35), size: '35x35', alt: 'avatar')
+      %td.avatar{rowspan: 2}= gravatar(comment.user, 35)
       %td.header
         %div
           %span.author by #{link_to(comment.user.name, comment.user, { target: '_blank' })}

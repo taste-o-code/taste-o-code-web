@@ -1,5 +1,5 @@
 %div.profile
-  %div.avatar= image_tag @user.gravatar(150), :alt => 'Avatar'
+  %div.avatar= gravatar(@user, 150)
   %div.info
     %div.headline
       %h3= @user.name

@@ -1,6 +1,6 @@
 %div.profile
   %div.avatar
-    = image_tag @user.gravatar(150), :alt => 'Avatar'
+    = gravatar(@user, 150)
     = link_to 'Change avatar', 'http://gravatar.com', :target => '_blank'
 
   %div.info

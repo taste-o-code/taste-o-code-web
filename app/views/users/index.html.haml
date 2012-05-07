@@ -1,7 +1,7 @@
 %div.users-page
   - @users.each do |user|
     %div.user
-      %div.avatar= image_tag user.gravatar(45), :size => '45x45', :alt => 'avatar'
+      %div.avatar= gravatar(user, 45)
       %div.name= link_to user.name, user
       %div.points= user.total_points
 
