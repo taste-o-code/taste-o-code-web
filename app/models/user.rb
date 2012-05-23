@@ -106,13 +106,6 @@ class User
     end
   end
 
-  def clear_progress
-    [solved_tasks, unsubdued_tasks, languages].map &:clear
-    self.available_points = self.total_points = INITIAL_POINTS
-    save
-    Submission.where(user_id: id).delete_all
-  end
-
   def submissions_for_task(task)
     Submission.where(user_id: id, task_id: task.id).desc(:created_at)
   end

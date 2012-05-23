@@ -13,7 +13,6 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
-      @user.clear_progress
       redirect_to @user
     else
       render :action => :edit
