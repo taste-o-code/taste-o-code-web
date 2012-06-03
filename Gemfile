@@ -20,13 +20,13 @@ gem 'gritter', '~> 1.0.0'
 gem 'kaminari', '~> 0.13.0'
 
 gem 'styx', '~> 0.1.0'
-gem 'js-routes', '~>0.8.0'
+gem 'js-routes', '~> 0.8.0'
 
 gem 'rails3-generators', '~> 0.17.4'
 
 gem 'resque', '~> 1.19'
 
-gem 'devise', '~> 2.0'
+gem 'devise', '~> 2.0.4'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-openid'
