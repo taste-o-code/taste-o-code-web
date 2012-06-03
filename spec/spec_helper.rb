@@ -10,7 +10,7 @@ end
 Spork.prefork do
   ENV['RAILS_ENV'] ||= 'test'
 
-  require 'rails/application'
+  require 'rails'
   require 'rails/mongoid'
   require 'js-routes'
 
