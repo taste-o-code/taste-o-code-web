@@ -71,6 +71,16 @@ describe TasksController do
       Submission.first.should be_nil
     end
 
+    it 'shows submission results in titles' do
+      accepted = Submission.create(user: user, task: task, result: :accepted)
+      failed = Submission.create(user: user, task: task, result: :failed, fail_cause: 'o_O')
+
+      visit task_page
+
+      page.should have_css("tr[data-submission-id='#{accepted.id}'] img[title='Accepted']")
+      page.should have_css("tr[data-submission-id='#{failed.id}'] img[title='o_O']")
+    end
+
     it "doesn't show comments section" do
       visit task_page
       page.should_not have_content('Comments')

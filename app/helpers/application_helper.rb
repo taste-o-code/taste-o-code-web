@@ -29,7 +29,10 @@ module ApplicationHelper
   end
 
   def submission_image(submission)
-    image_tag(submission.testing? ? 'loader.gif' : "#{submission.result}.png")
+    alt = submission.testing? ? 'Testing' : submission.result.to_s.humanize
+    title = submission.failed? ? submission.fail_cause : alt
+    image = submission.testing? ? 'loader.gif' : "#{submission.result}.png"
+    image_tag(image, alt: alt, title: title)
   end
 
   def gravatar(user, size, alt = 'Avatar')
