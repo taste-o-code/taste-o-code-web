@@ -71,37 +71,46 @@ describe TasksController do
       Submission.first.should be_nil
     end
 
-    it 'shows comments section' do
+    it "doesn't show comments section" do
       visit task_page
-      page.should have_content('Comments')
+      page.should_not have_content('Comments')
     end
 
-    it "says 'No comments' when there are no comments" do
-      visit task_page
-      page.should have_content('No comments')
-    end
+    context 'solved task' do
+      before(:each) { user.task_accepted(task) }
 
-    it 'shows comments when there are some' do
-      comment = Factory(:comment)
+      it 'shows comments section' do
+        visit task_page
+        page.should have_content('Comments')
+      end
 
-      visit task_page
+      it "says 'No comments' when there are no comments" do
+        visit task_page
+        page.should have_content('No comments')
+      end
 
-      comments_block = find('#comments')
+      it 'shows comments when there are some' do
+        comment = Factory(:comment)
 
-      comments_block.should have_content(comment.body)
-      comments_block.should have_content(comment.user.name)
-    end
+        visit task_page
 
-    it 'allows user to leave a comment', js: true do
-      body = 'Hello, kitty!'
+        comments_block = find('#comments')
 
-      visit task_page
+        comments_block.should have_content(comment.body)
+        comments_block.should have_content(comment.user.name)
+      end
 
-      fill_in 'body', with: body
-      click_button 'Comment'
+      it 'allows user to leave a comment', js: true do
+        body = 'Hello, kitty!'
 
-      page.should have_content(body)
-      page.should_not have_content('No comments')
+        visit task_page
+
+        fill_in 'body', with: body
+        click_button 'Comment'
+
+        page.should have_content(body)
+        page.should_not have_content('No comments')
+      end
     end
 
   end

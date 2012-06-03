@@ -9,7 +9,9 @@ class TasksController < ApplicationController
     @can_submit = can_submit? @task
 
     @submissions = current_user.submissions_for_task(@task).page(params[:page]).per(SUBMISSIONS_PAGE_SIZE) if @can_submit
-    @comments = @task.comments.includes(:user).order(:created_at)
+
+    @show_comments = user_signed_in? && current_user.solved_tasks.include?(@task)
+    @comments = @task.comments.includes(:user).order(:created_at) if @show_comments
 
     styx_initialize_with syntax_mode: @lang.syntax_mode, language: @lang.id, task: @task.slug
   end

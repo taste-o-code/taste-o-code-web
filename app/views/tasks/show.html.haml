@@ -25,15 +25,17 @@
       %div#no_access= no_access_message @lang
 
   %dl.tabs
+    - if @show_comments
+      %dd
+        %a.active{href: '#comments'} Comments
     %dd
-      %a.active{href: '#comments'} Comments
-    %dd
-      %a{href: '#submissions'} Submissions
+      %a{href: '#submissions', class: @show_comments ? '' : 'active'} Submissions
 
   %ul.tabs-content
-    %li.active#commentsTab
-      = render partial: 'comments', locals: { comments: @comments, task_id: @task.id }
-    %li#submissionsTab
+    - if @show_comments
+      %li.active#commentsTab
+        = render partial: 'comments', locals: { comments: @comments, task_id: @task.id }
+    %li#submissionsTab{class: @show_comments ? '' : 'active'}
       = render partial: 'submissions'
 
   %div#submission_source.reveal-modal
