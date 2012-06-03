@@ -1,7 +1,7 @@
 describe SubmissionResultHandler do
 
   before(:each) do
-    @user = Factory :user_with_languages
+    @user = create(:user_with_languages)
     @task = @user.languages.first.tasks.first
     @submission = Submission.create :user => @user, :task => @task
     Submission.stub :find => @submission

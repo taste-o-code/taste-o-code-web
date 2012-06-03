@@ -12,9 +12,9 @@ gem 'haml-rails', '~> 0.3.4'
 
 gem 'capistrano', '~> 2.12.0'
 
-gem 'therubyracer', '~> 0.9.8'
+gem 'therubyracer', '~> 0.10.1'
 
-gem 'jquery-rails', '~> 1.0.16'
+gem 'jquery-rails', '~> 2.0.2'
 gem 'gritter', '~> 1.0.0'
 
 gem 'kaminari', '~> 0.13.0'
@@ -58,17 +58,17 @@ end
 gem 'rspec-rails', :group => [:test, :development]
 
 group :test do
-  gem 'factory_girl_rails', '~> 1.4.0'
+  gem 'factory_girl_rails', '~> 3.3.0'
   gem 'capybara',           '~> 1.1.2'
-  gem 'capybara-webkit',    '~> 0.8.0'
+  gem 'capybara-webkit',    '~> 0.12.1'
   gem 'launchy'
 
   gem 'mongoid-rspec'
   gem 'mock_redis'
   gem 'database_cleaner'
 
-  gem 'simplecov', '~> 0.5.4', :require => false
-  gem 'fuubar',    :require => false
+  gem 'simplecov', '~> 0.6.4', :require => false
+  gem 'fuubar', :require => false
 
   gem 'guard',         :require => false
   gem 'guard-rspec',   :require => false

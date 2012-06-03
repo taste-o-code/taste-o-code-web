@@ -5,7 +5,7 @@ describe SubmissionsController do
   describe '#index' do
     it 'returns submissions results' do
       # Prepare
-      user = Factory(:user, available_points: 42, total_points: 84)
+      user = create(:user, available_points: 42, total_points: 84)
       sign_in user
       testing  = Submission.create(result: Submission::TESTING)
       accepted = Submission.create(result: Submission::ACCEPTED)

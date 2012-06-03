@@ -15,13 +15,13 @@ FactoryGirl.define do
     end
   end
 
-  factory :user_with_omniauth_identity, :parent => :user do
-    omniauth_identities [FactoryGirl.build(:omniauth_identity)]
+  factory :user_with_omniauth_identity, :parent => :user do |user|
+    user.before(:create) { |u| u.omniauth_identities = [build(:omniauth_identity)] }
     password nil
   end
 
   factory :user_with_languages, :parent => :user do |user|
-    user.after_create { |u| u.languages = [Factory(:language), Factory(:language)] }
+    user.after(:create) { |u| u.languages = [create(:language), create(:language)] }
   end
 
   factory :task do
@@ -38,13 +38,13 @@ FactoryGirl.define do
     description 'Description and some interesting facts about language.'
     code_example 'print "Hello, world"'
     links { |l| ["example.org/wiki/#{l.name}", "example.org/languages/#{l.name.parameterize}", "escaped.org/C%2B%2B"] }
-    lang.after_create { |l| 2.times { Factory(:task, language: l) } }
+    lang.after(:create) { |l| 2.times { create(:task, language: l) } }
   end
 
   factory :comment do
     body 'Some body'
-    task { Task.first || Factory(:task) }
-    user { User.first || Factory(:user) }
+    task { Task.first || create(:task) }
+    user { User.first || create(:user) }
   end
 
 end

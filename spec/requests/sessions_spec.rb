@@ -11,7 +11,7 @@ describe SessionsController do
     end
 
     it 'should not login user with incorrect password' do
-      user = Factory :user, :password => '123456'
+      user = create(:user, :password => '123456')
 
       visit new_user_session_path
       login user.email, '654321'
@@ -30,7 +30,7 @@ describe SessionsController do
     end
 
     it 'should not login expired unconfirmed users' do
-      user = Factory :user
+      user = create(:user)
       user.confirmation_sent_at -= 1.year
       user.save
 
@@ -53,7 +53,7 @@ describe SessionsController do
 
   context 'login from ajax form in header', :js => true do
     it 'should login user with correct email and password and reload current page' do
-      user = Factory :user, :name => 'Donald Duck'
+      user = create(:user, :name => 'Donald Duck')
 
       visit about_path
 
@@ -68,7 +68,7 @@ describe SessionsController do
     end
 
     it 'should not login user with incorrect password' do
-      user = Factory :user, :password => '123456'
+      user = create(:user, :password => '123456')
       visit root_path
       login user.email, '654321', open_ajax_login_form
 
@@ -83,7 +83,7 @@ describe SessionsController do
     end
 
     it 'should now login expired unconfirmed user' do
-      user = Factory :user
+      user = create(:user)
       user.confirmation_sent_at -= 1.year
       user.save
 
@@ -97,7 +97,7 @@ describe SessionsController do
   context 'logout from user menu' do
     it 'should logout user', :js => true do
       visit new_user_session_path
-      user = create_and_login_user
+      create_and_login_user
 
       visit home_path
       find('#user_trigger').trigger(:hover)

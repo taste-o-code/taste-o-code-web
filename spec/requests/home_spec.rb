@@ -6,7 +6,7 @@ describe HomeController do
 
     before(:each) do
       @user = create_and_login_user
-      @lang = Factory :language, :price => 0
+      @lang = create(:language, :price => 0)
 
       visit home_path
     end

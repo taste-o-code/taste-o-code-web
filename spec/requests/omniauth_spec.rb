@@ -15,7 +15,7 @@ describe OmniauthController do
     end
 
     it 'should sign in existing user' do
-      user = Factory :user_with_omniauth_identity
+      user = create(:user_with_omniauth_identity)
 
       lambda do
         visit new_user_session_path
@@ -27,7 +27,7 @@ describe OmniauthController do
 
     it 'should not allow openid identity with email that is already associated with a different account' do
       email = OmniAuth.config.mock_auth[:google]['info']['email']
-      first_user = Factory :user, :email => email
+      create(:user, :email => email)
 
       lambda do
         visit new_user_session_path
@@ -60,7 +60,7 @@ describe OmniauthController do
     end
 
     it "should not add identity if it's already attached to a different account" do
-      first_user = Factory :user_with_omniauth_identity, :name => 'First'
+      create(:user_with_omniauth_identity, :name => 'First')
 
       second_user = create_and_login_user :name => 'Second'
 

@@ -5,7 +5,7 @@ describe LanguagesController do
   describe 'unauthenticated user' do
 
     it 'should display language info', :js => true do
-      lang = Factory :language
+      lang = create(:language)
 
       visit language_path(lang)
 
@@ -21,7 +21,7 @@ describe LanguagesController do
 
     before(:each) do
       @user = create_and_login_user
-      @lang = Factory :language, price: 0
+      @lang = create(:language, price: 0)
       @user.buy_language @lang
     end
 
