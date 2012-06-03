@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe TasksController do
 
-  let(:lang) { Factory(:language, price: 0) }
+  let(:lang) { create(:language, price: 0) }
   let(:task) { lang.tasks.first }
   let(:task_page) { language_task_path(lang, task) }
 
@@ -100,7 +100,7 @@ describe TasksController do
       end
 
       it 'shows comments when there are some' do
-        comment = Factory(:comment)
+        comment = create(:comment)
 
         visit task_page
 

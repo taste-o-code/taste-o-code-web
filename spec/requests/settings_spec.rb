@@ -57,7 +57,7 @@ describe SettingsController do
     end
 
     it 'should not be displayed for user who registered via openid' do
-      user = Factory :user_with_omniauth_identity
+      user = create(:user_with_omniauth_identity)
       visit new_user_session_path
       openid_link.click
 

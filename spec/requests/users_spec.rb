@@ -3,7 +3,7 @@ require 'spec_helper'
 describe UsersController do
 
   it 'should lists all users' do
-    users = (1..5).map { Factory(:user) }
+    users = (1..5).map { create(:user) }
 
     visit users_path
 
@@ -14,7 +14,7 @@ describe UsersController do
 
   context 'profile page' do
     it "should display user info" do
-      user = Factory :user
+      user = create(:user)
 
       visit user_path(user)
 
@@ -32,7 +32,7 @@ describe UsersController do
     end
 
     it "should not allow user to edit somebody else's profile" do
-      owner = Factory :user, :name => 'owner'
+      owner = create(:user, :name => 'owner')
       create_and_login_user
 
       visit user_path(owner)

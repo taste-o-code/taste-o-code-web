@@ -1,7 +1,7 @@
 module LoginHelper
 
   def login_user(user = nil, options = {})
-    user ||= Factory(:user)
+    user ||= create(:user)
     login(user.email, user.password, options[:form])
   end
 
@@ -18,7 +18,7 @@ module LoginHelper
   end
 
   def create_and_login_user(options = {})
-    Factory(:user, options).tap do |user|
+    create(:user, options).tap do |user|
       visit new_user_session_path
       login_user user
     end

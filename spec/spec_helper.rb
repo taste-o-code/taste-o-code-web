@@ -10,7 +10,7 @@ end
 Spork.prefork do
   ENV['RAILS_ENV'] ||= 'test'
 
-  require 'rails/application'
+  require 'rails'
   require 'rails/mongoid'
   require 'js-routes'
 
@@ -29,6 +29,7 @@ Spork.prefork do
   RSpec.configure do |config|
     config.mock_with :rspec
 
+    config.include FactoryGirl::Syntax::Methods
     config.include Mongoid::Matchers,   :type => :model
     config.include Devise::TestHelpers, :type => :controller
     config.include LoginHelper,         :type => :request

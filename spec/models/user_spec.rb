@@ -19,7 +19,7 @@ describe User do
     it { should validate_confirmation_of(:password) }
 
     it 'should not validate password for omniauth only accounts' do
-      usr = Factory(:user, :password => nil, :omniauth_identities => [OmniauthIdentity.new])
+      usr = create(:user, :password => nil, :omniauth_identities => [OmniauthIdentity.new])
       usr.should be_valid
     end
 
@@ -34,23 +34,23 @@ describe User do
 
   describe 'has_language method' do
     it 'should has language' do
-      user = Factory(:user_with_languages)
+      user = create(:user_with_languages)
       present_lang = user.languages.first
       user.has_language?(present_lang).should be_true
     end
 
     it 'should not has language' do
-      user = Factory(:user_with_languages)
-      non_present_lang = Factory(:language)
+      user = create(:user_with_languages)
+      non_present_lang = create(:language)
       user.has_language?(non_present_lang).should be_false
     end
   end
 
   describe 'buy_language method' do
     it 'should buy language' do
-      user = Factory(:user_with_languages)
+      user = create(:user_with_languages)
       price = user.available_points - 10
-      lang = Factory(:language, price: price)
+      lang = create(:language, price: price)
       user.buy_language(lang).should be_true
       user.reload
       user.available_points.should eq(10)
@@ -58,7 +58,7 @@ describe User do
     end
 
     it 'should not buy repeated language' do
-      user = Factory(:user_with_languages)
+      user = create(:user_with_languages)
       points = user.available_points
       lang = user.languages.first
       lang.price = 0
@@ -69,9 +69,9 @@ describe User do
     end
 
     it 'should not buy expensive language' do
-      user = Factory(:user_with_languages)
+      user = create(:user_with_languages)
       points = user.available_points
-      lang = Factory(:language, price: points + 10)
+      lang = create(:language, price: points + 10)
       user.buy_language(lang).should be_false
       user.reload
       user.available_points.should eq(points)
@@ -81,7 +81,7 @@ describe User do
 
   describe 'tasks methods' do
     it 'should return solved tasks' do
-      user = Factory(:user_with_languages)
+      user = create(:user_with_languages)
       solved_tasks = user.languages.map{ |l| l.tasks.first }
       user.solved_tasks = solved_tasks
       user.save
@@ -92,7 +92,7 @@ describe User do
     end
 
     it 'should return unsubdued tasks' do
-      user = Factory(:user_with_languages)
+      user = create(:user_with_languages)
       unsubdued_tasks = user.languages.map{ |l| l.tasks.first }
       user.unsubdued_tasks = unsubdued_tasks
       user.save
@@ -103,7 +103,7 @@ describe User do
     end
 
     it 'should return percent tasks solved' do
-      user = Factory :user_with_languages
+      user = create(:user_with_languages)
       solved_tasks = user.languages.map{ |l| l.tasks.first }
       user.solved_tasks = solved_tasks
       user.save
@@ -117,7 +117,7 @@ describe User do
   describe 'solve/fail task methods' do
 
     before(:each) do
-      @user = Factory :user_with_languages
+      @user = create(:user_with_languages)
       @task = @user.languages.first.tasks.first
     end
 
