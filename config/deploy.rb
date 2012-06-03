@@ -19,9 +19,7 @@ set :deploy_via, :remote_cache
 
 set :normalize_asset_timestamps, false
 
-
 namespace :deploy do
-
   desc "Restart with restart.txt"
   task :restart, :roles => [:app] do
     run "touch #{current_path}/tmp/restart.txt"
@@ -48,5 +46,5 @@ end
 
 after "deploy:finalize_update", "deploy:symlink_configs"
 after "deploy", "deploy:cleanup"
-after "deploy:symlink", "deploy:restart_workers"
+after "deploy:create_symlink", "deploy:restart_workers"
 after "deploy:rollback", "deploy:restart_workers"

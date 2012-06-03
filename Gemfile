@@ -10,7 +10,7 @@ gem 'bson_ext'
 gem 'haml',       '~> 3.1.3'
 gem 'haml-rails', '~> 0.3.4'
 
-gem 'capistrano', '~> 2.9.0'
+gem 'capistrano', '~> 2.12.0'
 
 gem 'therubyracer', '~> 0.9.8'
 
