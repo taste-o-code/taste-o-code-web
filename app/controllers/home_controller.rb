@@ -14,7 +14,7 @@ class HomeController < ApplicationController
     if user_signed_in?
       redirect_to :home
     else
-      @langs = Language.all(sort: [[:name, :asc]]).take(3)
+      @langs = Language.all.shuffle.take(3)
     end
   end
 
