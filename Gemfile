@@ -26,7 +26,7 @@ gem 'rails3-generators', '~> 0.17.4'
 
 gem 'resque', '~> 1.19'
 
-gem 'devise', '~> 2.0.4'
+gem 'devise', '~> 2.0'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-openid'
