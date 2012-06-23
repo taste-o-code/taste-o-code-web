@@ -24,7 +24,7 @@ class OmniauthController < ApplicationController
 
   private
 
-  def back_url()
+  def back_url
     back_url = request.env['omniauth.origin']
     if  back_url.blank? or back_url == new_user_session_url
       root_path
