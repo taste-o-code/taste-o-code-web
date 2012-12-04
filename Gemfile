@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source :rubygems
 
 gem 'rails', '~> 3.2.0'
 gem 'rake',  '~> 0.9.2.2'
@@ -10,7 +10,8 @@ gem 'bson_ext'
 gem 'haml',       '~> 3.1.3'
 gem 'haml-rails', '~> 0.3.4'
 
-gem 'capistrano', '~> 2.12.0'
+gem 'capistrano',     '~> 2.12.0'
+gem 'rvm-capistrano', '~> 1.2.7'
 
 gem 'therubyracer', '~> 0.10.1'
 
