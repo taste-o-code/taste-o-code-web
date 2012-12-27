@@ -76,7 +76,11 @@
           return if submission.result == 'testing'
 
           submissionBlock = $('#submissions [data-submission-id="' + submission.id + '"]').removeAttr('data-testing')
-          submissionBlock.find('.result img').attr('src', '/assets/' + submission.result + '.png')
+          title = if submission.result == 'accepted' then 'Accepted' else submission.fail_cause
+          submissionBlock.find('.result img')
+            .attr('src', '/assets/' + submission.result + '.png')
+            .attr('title', title)
+            .attr('alt', title)
 
           message = if submission.result == 'accepted' then 'Solution has been accepted.' else submission.fail_cause
           TOC.notify submission.result, message, submission.result
