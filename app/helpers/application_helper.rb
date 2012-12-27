@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def gravatar(user, size, alt = 'Avatar')
-    hash = Digest::MD5.hexdigest(user.email.strip.downcase)
+    hash = Digest::MD5.hexdigest(user.email.to_s.strip.downcase)
     url = "http://www.gravatar.com/avatar/#{hash}?s=#{size}"
     image_tag url, size: "#{size}x#{size}", alt: alt
   end

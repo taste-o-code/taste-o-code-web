@@ -1,7 +1,10 @@
 language: ruby
 rvm:
   - 1.9.2
+  - 1.9.3
 bundler_args: --without development
 before_script:
   - "sh -e /etc/init.d/xvfb start"
 script: "RAILS_ENV=test bundle exec rake spec:ci --trace DISPLAY=:99.0"
+services:
+  - mongodb
