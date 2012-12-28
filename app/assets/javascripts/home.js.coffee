@@ -67,11 +67,10 @@
         parent,
         {
           mode: mode,
-          theme: 'default',
+          theme: $.cookie(CodeMirror.COOKIE) ? 'default',
           readOnly: true,
           lineWrapping: true,
           value: el.text()
         }
       )
       el.parent().remove()
-
