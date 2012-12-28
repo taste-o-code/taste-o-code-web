@@ -11,6 +11,7 @@ class Task
   field :position, type: Integer
   field :description, type: String
   field :award, type: Integer
+  field :template, type: String
 
   validates_uniqueness_of :slug, scope: :language_id
 

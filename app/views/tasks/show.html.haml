@@ -16,7 +16,7 @@
   %div.clearfix
 
   = form_tag submit_language_task_path(@task.language, @task), :remote => true, :id => 'submit_form', :format => :json do
-    %div#source_container= text_area_tag :source, nil, :rows => 30
+    %div#source_container= text_area_tag :source, @task.template, :rows => 30
 
   %div.clearfix
     - if @can_submit

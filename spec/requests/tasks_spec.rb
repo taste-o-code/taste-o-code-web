@@ -86,6 +86,13 @@ describe TasksController do
       page.should_not have_content('Comments')
     end
 
+    it 'shows solution template' do
+      visit task_page
+
+      template_on_page = find_field('source').value.strip
+      template_on_page.should eq(task.template)
+    end
+
     context 'solved task' do
       before(:each) { user.task_accepted(task) }
 

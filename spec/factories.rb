@@ -29,6 +29,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Task no #{n}" }
     sequence(:slug) { |n| "task_#{n}" }
     description "*Description*  \n\n    print(hello)\n    print(world)"
+    template "Solution template"
     award 10
   end
 
