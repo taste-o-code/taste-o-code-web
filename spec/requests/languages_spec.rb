@@ -55,6 +55,12 @@ describe LanguagesController do
       current_path.should == language_task_path(@lang, task)
     end
 
+    it 'should have language version' do
+      visit language_path(@lang)
+
+      find('.version').should have_content(@lang.version)
+    end
+
     it 'should highlight solved tasks' do
       task = @lang.tasks.first
       @user.task_accepted task

@@ -40,6 +40,7 @@ FactoryGirl.define do
     code_example 'print "Hello, world"'
     links { |l| ["example.org/wiki/#{l.name}", "example.org/languages/#{l.name.parameterize}", "escaped.org/C%2B%2B"] }
     lang.after(:create) { |l| 2.times { create(:task, language: l) } }
+    version 'Version 1.2.3'
   end
 
   factory :comment do
