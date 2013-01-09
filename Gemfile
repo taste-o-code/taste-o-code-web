@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '~> 3.2.0'
+gem 'rails', '~> 3.2.11'
 gem 'rake',  '~> 0.9.2.2'
 
 gem 'mongoid',  '~> 2.4.0'
@@ -49,10 +49,12 @@ group :assets do
 end
 
 group :development do
-  gem 'mongrel', '>= 1.2.0.pre2'
+  gem 'thin'
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-doc'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 gem 'rspec-rails', :group => [:test, :development]
