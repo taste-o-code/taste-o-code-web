@@ -14,7 +14,7 @@
 
   %div.section
     %p.title Useful links:
-    - @lang.links.each do |link|
+    - Array(@lang.links).each do |link|
       %p.link= link_to CGI.unescape(link), link
 
   %div.tasks
