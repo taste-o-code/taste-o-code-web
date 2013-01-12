@@ -4,7 +4,8 @@ class HomeController < ApplicationController
   def show
     if user_signed_in?
       @user_langs = current_user.languages
-      @langs = Language.all(sort: [[:price, :asc], [:name, :asc]]) - @user_langs
+      all_langs = Language.all(sort: [[:price, :asc], [:name, :asc]]).in(hidden: [nil, false])
+      @langs = all_langs - @user_langs
     else
       redirect_to :greeting
     end

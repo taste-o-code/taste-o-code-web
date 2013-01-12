@@ -15,6 +15,7 @@ ActiveAdmin.register Language do
     column :tasks do |lang|
       link_to "Tasks", [:admin, lang, :tasks]
     end
+    column :hidden
     default_actions
   end
 

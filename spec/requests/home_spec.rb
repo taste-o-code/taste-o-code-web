@@ -7,7 +7,7 @@ describe HomeController do
     before(:each) do
       @user = create_and_login_user
       @lang = create(:language, :price => 0)
-
+      @hidden_lang = create(:language, :price => 2, :hidden => true)
       visit home_path
     end
 
@@ -15,6 +15,10 @@ describe HomeController do
       find("##{@lang.id}").click
 
       current_path.should eq(language_path(@lang))
+    end
+
+    it 'should not display hidden language' do
+      page.should_not have_content(@hidden_lang.name)
     end
 
     it 'should buy language', :js => true do

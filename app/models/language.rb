@@ -12,5 +12,6 @@ class Language
   field :syntax_mode, type: String
   field :code_example,type: String
   field :version,     type: String
+  field :hidden,      type: Boolean
 
 end
