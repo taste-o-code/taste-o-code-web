@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     if user_signed_in?
       redirect_to :home
     else
-      @langs = Language.all.shuffle.take(3)
+      @langs = Language.all.in(hidden: [nil, false]).shuffle.take(3)
     end
   end
 
