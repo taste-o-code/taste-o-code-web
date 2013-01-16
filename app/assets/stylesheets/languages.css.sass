@@ -38,20 +38,36 @@
       font-size: 15px
 
   .tasks
-    a.task
-      display: block
-      font-size: 18px
-      font-weight: bold
-      color: #666464
+    .task
+      display: inline-block
+      position: relative
       width: 200px
-      height: 50px
-      line-height: 52px
-      margin: 10px auto
+      height: 60px
+      margin: 30px 40px
       text-align: center
       border: 1px solid gray
 
-      &:hover
-        color: #434343
+      *
+        font-size: 18px
+        font-weight: bold
+        color: #666464
+
+      a
+        line-height: 62px
+        height: 100%
+        width: 100%
+        display: inline-block
+
+        &:hover
+          color: #434343
+
+      div
+        position: absolute
+        top: 0
+        right: 0
+        padding: 5px
+        font-weight: normal
+
 
       &.not-tried
         background-color: #DEDEDE
