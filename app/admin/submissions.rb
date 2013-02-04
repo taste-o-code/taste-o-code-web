@@ -15,6 +15,8 @@ ActiveAdmin.register Submission do
       link_to task.name, [:admin, task.language, task]
     end
     column :created_at
+    column :result
+    column :fail_cause
     column "Actions" do |submission|
       link_to "View", [:admin, submission]
     end
