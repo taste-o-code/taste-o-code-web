@@ -4,7 +4,7 @@ ActiveAdmin.register Submission do
 
   index do
     column :user do |submission|
-      submission.user.name
+      submission.user && submission.user.name
     end
     column :language do |submission|
       lang = submission.task.language
