@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :check_edit_permission, :only => [:edit, :update]
 
   def index
-    @users = User.all(sort: [[:total_points, :desc]])
+    @users = User.all(sort: [[:total_points, :desc]]).in(hidden: [nil, false])
   end
 
   def show

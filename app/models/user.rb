@@ -4,11 +4,12 @@ class User
 
   INITIAL_POINTS = 30
 
-  field :name, type: String
-  field :location, type: String
-  field :about, type: String
-  field :total_points, type: Integer
+  field :name,             type: String
+  field :location,         type: String
+  field :about,            type: String
+  field :total_points,     type: Integer
   field :available_points, type: Integer
+  field :hidden,           type: Boolean
 
   ## Database authenticatable
   field :email,              type: String, null: false
@@ -44,7 +45,7 @@ class User
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable, :confirmable
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :location, :about, :current_password
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :location, :about, :current_password, :hidden
 
   attr_writer :identity_url
 

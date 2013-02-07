@@ -15,6 +15,7 @@ ActiveAdmin.register User do
     column :languages do |user|
       user.languages.map{ |l| l.name }.join(',')
     end
+    column :hidden
     default_actions
   end
 
@@ -26,6 +27,7 @@ ActiveAdmin.register User do
       f.input :available_points
       f.input :location
       f.input :password
+      f.input :hidden
       f.input :about, :as => :text
     end
     f.buttons

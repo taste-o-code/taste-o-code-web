@@ -2,14 +2,16 @@ require 'spec_helper'
 
 describe UsersController do
 
-  it 'should lists all users' do
+  it 'should lists all users except hidden' do
     users = (1..5).map { create(:user) }
+    hidden_user = create(:user, :hidden => true)
 
     visit users_path
 
     users.each do |u|
       page.should have_content(u.name)
     end
+    page.should_not have_content(hidden_user.name)
   end
 
   context 'profile page' do
