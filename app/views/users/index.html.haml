@@ -6,4 +6,4 @@
       %div.points= user.total_points
 
       %div.langs
-        = raw user.languages.delete_if(&:hidden).rmap { |lang| link_to lang.name, lang }.join(",")
+        = raw user.languages.delete_if(&:hidden).map { |lang| link_to lang.name, lang }.join(",")
