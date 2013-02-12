@@ -7,3 +7,5 @@
 
       %div.langs
         = raw user.languages.delete_if(&:hidden).map { |lang| link_to lang.name, lang }.join(",")
+
+  = paginate @users

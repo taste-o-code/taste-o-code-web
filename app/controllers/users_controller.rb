@@ -1,10 +1,15 @@
 class UsersController < ApplicationController
 
+  USERS_PER_PAGE = 10
+
   before_filter :ensure_user_authenticated, :except => [:show, :index]
   before_filter :check_edit_permission, :only => [:edit, :update]
 
   def index
-    @users = User.all(sort: [[:total_points, :desc]]).in(hidden: [nil, false])
+    @users = User.all(sort: [[:total_points, :desc]])
+                 .in(hidden: [nil, false])
+                 .page(params[:page])
+                 .per(USERS_PER_PAGE)
   end
 
   def show
