@@ -1,5 +1,5 @@
-Taste-o-Code
-============
+Taste-o-Code Web
+================
 
 Link to project: [Taste-o-Code](http://taste-o-code.com)  
 Project's description and goals: [about page](http://taste-o-code.com/about)
