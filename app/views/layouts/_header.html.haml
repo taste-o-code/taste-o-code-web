@@ -28,7 +28,7 @@
                 Login
                 %div.header-dropdown
                   With regular account
-                  = form_for :user, :url => session_path(:user, :format => :json), :remote => true,
+                  = form_for resource, :as => :user, :url => session_path(resource, :format => :json), :remote => true,
                              :html => { :class => 'nice', :id => 'login_form' } do |f|
                     = f.email_field :email, :class => 'input-text', :placeholder => 'Email'
                     = f.password_field :password, :class => 'input-text', :placeholder => 'Password'
