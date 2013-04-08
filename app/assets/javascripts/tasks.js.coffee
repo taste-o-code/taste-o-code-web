@@ -71,6 +71,12 @@
 
       setCheckSubmissionsTimer = -> window.setTimeout checkSubmissions, CHECK_INTERVAL
 
+      shorten = (message) ->
+        if message.length > 50
+          message[0..50] + "...\n\tSee more details in submissions table."
+        else
+          message
+
       updateSubmissionsByResponse = (response) ->
         $(response.submissions).each (ind, submission) ->
           return if submission.result == 'testing'
@@ -83,7 +89,7 @@
             .attr('alt', title)
 
           message = if submission.result == 'accepted' then 'Solution has been accepted.' else submission.fail_cause
-          TOC.notify submission.result, message, submission.result
+          TOC.notify submission.result, shorten(message), submission.result
 
         TOC.availablePoints response.available_points
         TOC.totalPoints response.total_points
