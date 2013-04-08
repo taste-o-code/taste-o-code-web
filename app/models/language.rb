@@ -2,7 +2,7 @@ class Language
 
   include Mongoid::Document
 
-  has_many :tasks,  order: [:position, :asc]
+  has_many :tasks,  order: [[:award, :asc], [:position, :asc]]
 
   field :_id,         type: String
   field :description, type: String
