@@ -8,6 +8,9 @@ module ApplicationHelper
 
   MARKDOWN = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 
+  def resource
+    @resource ||= User.new
+  end
 
   def navigation
     render :partial => 'layouts/navigation'
