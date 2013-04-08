@@ -16,7 +16,9 @@ ActiveAdmin.register Submission do
     end
     column :created_at
     column :result
-    column :fail_cause
+    column :fail_cause do |submission|
+      submission.fail_cause[0..50] unless submission.fail_cause.blank?
+    end
     column "Actions" do |submission|
       link_to "View", [:admin, submission]
     end
