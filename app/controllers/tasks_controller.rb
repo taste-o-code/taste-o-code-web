@@ -2,6 +2,8 @@ class TasksController < ApplicationController
 
   SUBMISSIONS_PAGE_SIZE = 10
 
+  before_filter :ensure_user_authenticated, :only => :submit
+
   def show
     @lang = Language.find(params[:language_id])
     @task = @lang.tasks.where(slug: params[:id]).first
